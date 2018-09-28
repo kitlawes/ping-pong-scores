@@ -19,9 +19,8 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 
-public class PingPongScores
+public class SpreadsheetReader
 {
-
     private static final String APPLICATION_NAME = "Ping Pong Scores";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
@@ -31,7 +30,7 @@ public class PingPongScores
 
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException
     {
-        InputStream in = PingPongScores.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream in = SpreadsheetReader.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
@@ -42,7 +41,7 @@ public class PingPongScores
         return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
     }
 
-    public static void main(String... args) throws IOException, GeneralSecurityException
+    public static List<List<Object>> readSpreadsheet(String... args) throws IOException, GeneralSecurityException
     {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1kafUYlL-1J22gWAfMh4XtOWCv41uaMU_eF8uP7QDXrk";
@@ -53,13 +52,6 @@ public class PingPongScores
         ValueRange response = service.spreadsheets().values()
                 .get(spreadsheetId, range)
                 .execute();
-        List<List<Object>> values = response.getValues();
-        if (values == null || values.isEmpty()) {
-            System.out.println("No data found.");
-        } else {
-            for (List row : values) {
-                System.out.println(row);
-            }
-        }
+        return response.getValues();
     }
 }
