@@ -148,22 +148,35 @@ public class ValueParser
         }
     }
 
+    public Date getEarliestDate()
+    {
+        Date earliestDate = scores.get(0).getDate();
+        for (Score score : scores)
+        {
+            if (score.getDate().before(earliestDate))
+            {
+                earliestDate = score.getDate();
+            }
+        }
+        return earliestDate;
+    }
+
+    public Date getLatestDate()
+    {
+        Date latestDate = scores.get(0).getDate();
+        for (Score score : scores)
+        {
+            if (score.getDate().after(latestDate))
+            {
+                latestDate = score.getDate();
+            }
+        }
+        return latestDate;
+    }
+
     public List<Score> getScores()
     {
         return scores;
-    }
-
-    public List<Score> getScoresForDate(List<Score> scores, Date date)
-    {
-        List<Score> scoresForDate = new ArrayList<Score>();
-        for (Score score : scores)
-        {
-            if (score.getDate().equals(date))
-            {
-                scoresForDate.add(score);
-            }
-        }
-        return scoresForDate;
     }
 
     public List<Score> getScoresForDateRange(List<Score> scores, Date start, Date end)
