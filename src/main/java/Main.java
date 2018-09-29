@@ -19,21 +19,21 @@ public class Main
         final Date earliestDate = parser.getEarliestDate();
         final Date latestDate = parser.getLatestDate();
         
-        System.out.println("numberOfGamesPlayedForDateForPlayer");
+        System.out.println("number of games played for date for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
                 Player.ANY));
-        System.out.println("numberOfGamesPlayedForDateRangeForPlayer");
+        System.out.println("number of games played for date range for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
                 Player.ANY));
-        System.out.println("numberOfGamesPlayedForPlayer");
+        System.out.println("number of games played for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.ANY,
                 earliestDate,
@@ -42,21 +42,21 @@ public class Main
                 Player.ANY));
         
         System.out.println();
-        System.out.println("numberOfGamesWonForDateForPlayer");
+        System.out.println("number of games won for date for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
                 Player.ANY));
-        System.out.println("numberOfGamesWonForDateRangeForPlayer");
+        System.out.println("number of games won for date range for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
                 Player.ANY));
-        System.out.println("numberOfGamesWonForPlayer");
+        System.out.println("number of games won for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.WIN,
                 earliestDate,
@@ -65,21 +65,21 @@ public class Main
                 Player.ANY));
         
         System.out.println();
-        System.out.println("numberOfGamesLostForDateForPlayer");
+        System.out.println("number of games lost for date for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
                 Player.ANY));
-        System.out.println("numberOfGamesLostForDateRangeForPlayer");
+        System.out.println("number of games lost for date range for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
                 Player.ANY));
-        System.out.println("numberOfGamesLostForPlayer");
+        System.out.println("number of games lost for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 earliestDate,
@@ -88,21 +88,21 @@ public class Main
                 Player.ANY));
         
         System.out.println();
-        System.out.println("numberOfGamesPlayedForDateForPlayerForOpponent");
+        System.out.println("number of games played for date for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
                 Player.KIT));
-        System.out.println("numberOfGamesPlayedForDateRangeForPlayerForOpponent");
+        System.out.println("number of games played for date range for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
                 Player.KIT));
-        System.out.println("numberOfGamesPlayedForPlayerForOpponent");
+        System.out.println("number of games played for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.ANY,
                 earliestDate,
@@ -111,21 +111,21 @@ public class Main
                 Player.KIT));
         
         System.out.println();
-        System.out.println("numberOfGamesWonForDateForPlayerForOpponent");
+        System.out.println("number of games won for date for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
                 Player.KIT));
-        System.out.println("numberOfGamesWonForDateRangeForPlayerForOpponent");
+        System.out.println("number of games won for date range for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
                 Player.KIT));
-        System.out.println("numberOfGamesWonForPlayerForOpponent");
+        System.out.println("number of games won for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.WIN,
                 earliestDate,
@@ -134,23 +134,43 @@ public class Main
                 Player.KIT));
         
         System.out.println();
-        System.out.println("numberOfGamesLostForDateForPlayerForOpponent");
+        System.out.println("number of games lost for date for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
                 Player.KIT));
-        System.out.println("numberOfGamesLostForDateRangeForPlayerForOpponent");
+        System.out.println("number of games lost for date range for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
                 Player.KIT));
-        System.out.println("numberOfGamesLostForPlayerForOpponent");
+        System.out.println("number of games lost for player for opponent");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                Player.ANTONIO,
+                Player.KIT));
+        
+        System.out.println();
+        System.out.println("winner for date for player for opponent");
+        System.out.println(analyzer.winner(
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANTONIO,
+                Player.KIT));
+        System.out.println("winner for date range for player for opponent");
+        System.out.println(analyzer.winner(
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANTONIO,
+                Player.KIT));
+        System.out.println("winner for player for opponent");
+        System.out.println(analyzer.winner(
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,

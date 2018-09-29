@@ -4,5 +4,6 @@ public enum Player
     KIT,
     HUNOR,
     JIPESH,
-    ANY
+    ANY,
+    NONE
 }

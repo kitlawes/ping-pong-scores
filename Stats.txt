@@ -16,12 +16,10 @@ number of games won for each player against each player
 number of games lost for each day for each player against each player
 number of games lost for each week for each player against each player
 number of games lost for each player against each player
-
-
-
 winner for each day for each player against each player
 winner for each week for each player against each player
 winner for each player against each player
+
 percentage of games won for each player
 percentage of games won for each day for each player
 percentage of games won for each week for each player

@@ -35,4 +35,11 @@ public class ScoresAnalyzer
         }
         return games;
     }
+
+    public Player winner(Date start, Date end, Player player, Player opponent)
+    {
+        int gamesWon = numberOfGames(GameOutcome.WIN, start, end, player, opponent);
+        int gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
+        return gamesWon > gamesLost ? player : gamesWon < gamesLost ? opponent : Player.NONE;
+    }
 }
