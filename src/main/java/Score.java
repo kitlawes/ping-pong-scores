@@ -3,10 +3,10 @@ import java.util.Date;
 public class Score
 {
     private Date date;
-    private Player player1;
-    private Player player2;
-    private int player1Wins;
-    private int player2Wins;
+    private Player player;
+    private Player opponent;
+    private int playerWins;
+    private int opponentWins;
 
     public Date getDate()
     {
@@ -18,53 +18,53 @@ public class Score
         this.date = date;
     }
 
-    public Player getPlayer1()
+    public Player getPlayer()
     {
-        return player1;
+        return player;
     }
 
-    public void setPlayer1(Player player1)
+    public void setPlayer(Player player)
     {
-        this.player1 = player1;
+        this.player = player;
     }
 
-    public Player getPlayer2()
+    public Player getOpponent()
     {
-        return player2;
+        return opponent;
     }
 
-    public void setPlayer2(Player player2)
+    public void setOpponent(Player opponent)
     {
-        this.player2 = player2;
+        this.opponent = opponent;
     }
 
-    public int getPlayer1Wins()
+    public int getPlayerWins()
     {
-        return player1Wins;
+        return playerWins;
     }
 
-    public void setPlayer1Wins(int player1Wins)
+    public void setPlayerWins(int playerWins)
     {
-        this.player1Wins = player1Wins;
+        this.playerWins = playerWins;
     }
 
-    public int getPlayer2Wins()
+    public int getOpponentWins()
     {
-        return player2Wins;
+        return opponentWins;
     }
 
-    public void setPlayer2Wins(int player2Wins)
+    public void setOpponentWins(int opponentWins)
     {
-        this.player2Wins = player2Wins;
+        this.opponentWins = opponentWins;
     }
 
     @Override
     public String toString()
     {
         return "date: " + date
-                + " player1: " + player1
-                + " player2: " + player2
-                + " player1Wins: " + player1Wins
-                + " player2Wins: " + player2Wins;
+                + " player: " + player
+                + " opponent: " + opponent
+                + " playerWins: " + playerWins
+                + " opponentWins: " + opponentWins;
     }
 }

@@ -13,7 +13,11 @@ public class Main
         List<List<Object>> values = reader.readSpreadsheet();
 
         ValueParser parser = new ValueParser(values);
-        System.out.println(parser.getScoresForDate(new GregorianCalendar(2018, Calendar.JULY, 16).getTime()).size());
-        System.out.println(parser.getScoresForPlayer(Player.ANTONIO).size());
+        
+        ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
+        analyzer.numberOfGamesWonForDateForPlayerForOpponent(
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANTONIO,
+                Player.KIT);
     }
 }

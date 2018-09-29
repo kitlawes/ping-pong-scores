@@ -22,62 +22,122 @@ public class ValueParser
                 {
                     Score score = new Score();
                     score.setDate(dateParser.parse(String.valueOf(row.get(0))));
-                    score.setPlayer1(Player.ANTONIO);
-                    score.setPlayer2(Player.KIT);
-                    String player1Wins = String.valueOf(row.get(2));
-                    score.setPlayer1Wins(Integer.valueOf(player1Wins.isEmpty() ? "0" : player1Wins));
-                    String player2Wins = String.valueOf(row.get(3));
-                    score.setPlayer2Wins(Integer.valueOf(player2Wins.isEmpty() ? "0" : player2Wins));
+                    score.setPlayer(Player.ANTONIO);
+                    score.setOpponent(Player.KIT);
+                    String playerWins = String.valueOf(row.get(2));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    String opponentWins = String.valueOf(row.get(3));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
+                    scores.add(score);
+                    
+                    score = new Score();
+                    score.setDate(dateParser.parse(String.valueOf(row.get(0))));
+                    score.setPlayer(Player.KIT);
+                    score.setOpponent(Player.ANTONIO);
+                    playerWins = String.valueOf(row.get(3));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(2));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
                     scores.add(score);
 
                     score = new Score();
                     score.setDate(dateParser.parse(String.valueOf(row.get(0))));
-                    score.setPlayer1(Player.KIT);
-                    score.setPlayer2(Player.HUNOR);
-                    player1Wins = String.valueOf(row.get(5));
-                    score.setPlayer1Wins(Integer.valueOf(player1Wins.isEmpty() ? "0" : player1Wins));
-                    player2Wins = String.valueOf(row.get(6));
-                    score.setPlayer2Wins(Integer.valueOf(player2Wins.isEmpty() ? "0" : player2Wins));
+                    score.setPlayer(Player.KIT);
+                    score.setOpponent(Player.HUNOR);
+                    playerWins = String.valueOf(row.get(5));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(6));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
                     scores.add(score);
 
                     score = new Score();
                     score.setDate(dateParser.parse(String.valueOf(row.get(0))));
-                    score.setPlayer1(Player.HUNOR);
-                    score.setPlayer2(Player.ANTONIO);
-                    player1Wins = String.valueOf(row.get(8));
-                    score.setPlayer1Wins(Integer.valueOf(player1Wins.isEmpty() ? "0" : player1Wins));
-                    player2Wins = String.valueOf(row.get(9));
-                    score.setPlayer2Wins(Integer.valueOf(player2Wins.isEmpty() ? "0" : player2Wins));
+                    score.setPlayer(Player.HUNOR);
+                    score.setOpponent(Player.KIT);
+                    playerWins = String.valueOf(row.get(6));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(5));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
                     scores.add(score);
 
                     score = new Score();
                     score.setDate(dateParser.parse(String.valueOf(row.get(0))));
-                    score.setPlayer1(Player.ANTONIO);
-                    score.setPlayer2(Player.JIPESH);
-                    player1Wins = String.valueOf(row.get(11));
-                    score.setPlayer1Wins(Integer.valueOf(player1Wins.isEmpty() ? "0" : player1Wins));
-                    player2Wins = String.valueOf(row.get(12));
-                    score.setPlayer2Wins(Integer.valueOf(player2Wins.isEmpty() ? "0" : player2Wins));
+                    score.setPlayer(Player.HUNOR);
+                    score.setOpponent(Player.ANTONIO);
+                    playerWins = String.valueOf(row.get(8));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(9));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
                     scores.add(score);
 
                     score = new Score();
                     score.setDate(dateParser.parse(String.valueOf(row.get(0))));
-                    score.setPlayer1(Player.KIT);
-                    score.setPlayer2(Player.JIPESH);
-                    player1Wins = String.valueOf(row.get(14));
-                    score.setPlayer1Wins(Integer.valueOf(player1Wins.isEmpty() ? "0" : player1Wins));
-                    player2Wins = String.valueOf(row.get(15));
-                    score.setPlayer2Wins(Integer.valueOf(player2Wins.isEmpty() ? "0" : player2Wins));
+                    score.setPlayer(Player.ANTONIO);
+                    score.setOpponent(Player.HUNOR);
+                    playerWins = String.valueOf(row.get(9));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(8));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
                     scores.add(score);
 
                     score = new Score();
                     score.setDate(dateParser.parse(String.valueOf(row.get(0))));
-                    score.setPlayer1(Player.HUNOR);
-                    score.setPlayer2(Player.JIPESH);
-                    player1Wins = String.valueOf(row.get(17));
-                    score.setPlayer1Wins(Integer.valueOf(player1Wins.isEmpty() ? "0" : player1Wins));
-                    player2Wins = String.valueOf(row.get(18));
-                    score.setPlayer2Wins(Integer.valueOf(player2Wins.isEmpty() ? "0" : player2Wins));
+                    score.setPlayer(Player.ANTONIO);
+                    score.setOpponent(Player.JIPESH);
+                    playerWins = String.valueOf(row.get(11));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(12));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
+                    scores.add(score);
+
+                    score = new Score();
+                    score.setDate(dateParser.parse(String.valueOf(row.get(0))));
+                    score.setPlayer(Player.JIPESH);
+                    score.setOpponent(Player.ANTONIO);
+                    playerWins = String.valueOf(row.get(12));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(11));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
+                    scores.add(score);
+
+                    score = new Score();
+                    score.setDate(dateParser.parse(String.valueOf(row.get(0))));
+                    score.setPlayer(Player.KIT);
+                    score.setOpponent(Player.JIPESH);
+                    playerWins = String.valueOf(row.get(14));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(15));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
+                    scores.add(score);
+
+                    score = new Score();
+                    score.setDate(dateParser.parse(String.valueOf(row.get(0))));
+                    score.setPlayer(Player.JIPESH);
+                    score.setOpponent(Player.KIT);
+                    playerWins = String.valueOf(row.get(15));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(14));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
+                    scores.add(score);
+
+                    score = new Score();
+                    score.setDate(dateParser.parse(String.valueOf(row.get(0))));
+                    score.setPlayer(Player.HUNOR);
+                    score.setOpponent(Player.JIPESH);
+                    playerWins = String.valueOf(row.get(17));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(18));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
+                    scores.add(score);
+
+                    score = new Score();
+                    score.setDate(dateParser.parse(String.valueOf(row.get(0))));
+                    score.setPlayer(Player.JIPESH);
+                    score.setOpponent(Player.HUNOR);
+                    playerWins = String.valueOf(row.get(18));
+                    score.setPlayerWins(Integer.valueOf(playerWins.isEmpty() ? "0" : playerWins));
+                    opponentWins = String.valueOf(row.get(17));
+                    score.setOpponentWins(Integer.valueOf(opponentWins.isEmpty() ? "0" : opponentWins));
                     scores.add(score);
                 }
                 catch (ParseException e)
@@ -88,7 +148,12 @@ public class ValueParser
         }
     }
 
-    public List<Score> getScoresForDate(Date date)
+    public List<Score> getScores()
+    {
+        return scores;
+    }
+
+    public List<Score> getScoresForDate(List<Score> scores, Date date)
     {
         List<Score> scoresForDate = new ArrayList<Score>();
         for (Score score : scores)
@@ -101,16 +166,29 @@ public class ValueParser
         return scoresForDate;
     }
 
-    public List<Score> getScoresForPlayer(Player player)
+    public List<Score> getScoresForPlayer(List<Score> scores, Player player)
     {
         List<Score> scoresForPlayer = new ArrayList<Score>();
         for (Score score : scores)
         {
-            if (score.getPlayer1() == player || score.getPlayer2() == player)
+            if (score.getPlayer() == player)
             {
                 scoresForPlayer.add(score);
             }
         }
         return scoresForPlayer;
+    }
+
+    public List<Score> getScoresForOpponent(List<Score> scores, Player opponent)
+    {
+        List<Score> scoresForOpponent = new ArrayList<Score>();
+        for (Score score : scores)
+        {
+            if (score.getOpponent() == opponent)
+            {
+                scoresForOpponent.add(score);
+            }
+        }
+        return scoresForOpponent;
     }
 }
