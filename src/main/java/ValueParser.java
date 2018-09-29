@@ -166,6 +166,21 @@ public class ValueParser
         return scoresForDate;
     }
 
+    public List<Score> getScoresForDateRange(List<Score> scores, Date start, Date end)
+    {
+        List<Score> scoresForDate = new ArrayList<Score>();
+        for (Score score : scores)
+        {
+            if (score.getDate().equals(start)
+                    || score.getDate().after(start) && score.getDate().before(end)
+                    || score.getDate().equals(end))
+            {
+                scoresForDate.add(score);
+            }
+        }
+        return scoresForDate;
+    }
+
     public List<Score> getScoresForPlayer(List<Score> scores, Player player)
     {
         List<Score> scoresForPlayer = new ArrayList<Score>();

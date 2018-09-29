@@ -15,8 +15,15 @@ public class Main
         ValueParser parser = new ValueParser(values);
         
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
+        System.out.println("numberOfGamesWonForDateForPlayerForOpponent");
         analyzer.numberOfGamesWonForDateForPlayerForOpponent(
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANTONIO,
+                Player.KIT);
+        System.out.println("numberOfGamesWonForDateRangeForPlayerForOpponent");
+        analyzer.numberOfGamesWonForDateRangeForPlayerForOpponent(
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
                 Player.KIT);
     }
