@@ -24,6 +24,9 @@ public class Main
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO));
+        System.out.println("numberOfGamesPlayedForPlayer");
+        System.out.println(analyzer.numberOfGamesPlayedForPlayer(
+                Player.ANTONIO));
         System.out.println("numberOfGamesWonForDateForPlayerForOpponent");
         System.out.println(analyzer.numberOfGamesWonForDateForPlayerForOpponent(
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),

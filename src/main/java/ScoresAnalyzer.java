@@ -15,11 +15,12 @@ public class ScoresAnalyzer
     public int numberOfGamesPlayedForDateForPlayer(Date date, Player player)
     {
         List<Score> scores = valueParser.getScoresForPlayer(
-                        valueParser.getScoresForDate(
-                                valueParser.getScores(), date),
-                        player);
+                valueParser.getScoresForDate(
+                        valueParser.getScores(), date),
+                player);
         int gamesPlayed = 0;
-        for (Score score : scores) {
+        for (Score score : scores)
+        {
             gamesPlayed += score.getPlayerWins();
             gamesPlayed += score.getOpponentWins();
         }
@@ -29,11 +30,25 @@ public class ScoresAnalyzer
     public int numberOfGamesPlayedForDateRangeForPlayer(Date start, Date end, Player player)
     {
         List<Score> scores = valueParser.getScoresForPlayer(
-                        valueParser.getScoresForDateRange(
-                                valueParser.getScores(), start, end),
-                        player);
+                valueParser.getScoresForDateRange(
+                        valueParser.getScores(), start, end),
+                player);
         int gamesPlayed = 0;
-        for (Score score : scores) {
+        for (Score score : scores)
+        {
+            gamesPlayed += score.getPlayerWins();
+            gamesPlayed += score.getOpponentWins();
+        }
+        return gamesPlayed;
+    }
+
+    public int numberOfGamesPlayedForPlayer(Player player)
+    {
+        List<Score> scores = valueParser.getScoresForPlayer(
+                valueParser.getScores(), player);
+        int gamesPlayed = 0;
+        for (Score score : scores)
+        {
             gamesPlayed += score.getPlayerWins();
             gamesPlayed += score.getOpponentWins();
         }
@@ -49,7 +64,8 @@ public class ScoresAnalyzer
                         player),
                 opponent);
         int gamesWon = 0;
-        for (Score score : scores) {
+        for (Score score : scores)
+        {
             gamesWon += score.getPlayerWins();
         }
         return gamesWon;
@@ -64,7 +80,8 @@ public class ScoresAnalyzer
                         player),
                 opponent);
         int gamesWon = 0;
-        for (Score score : scores) {
+        for (Score score : scores)
+        {
             gamesWon += score.getPlayerWins();
         }
         return gamesWon;
@@ -77,7 +94,8 @@ public class ScoresAnalyzer
                         valueParser.getScores(), player),
                 opponent);
         int gamesWon = 0;
-        for (Score score : scores) {
+        for (Score score : scores)
+        {
             gamesWon += score.getPlayerWins();
         }
         return gamesWon;
