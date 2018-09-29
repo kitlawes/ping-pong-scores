@@ -49,4 +49,22 @@ public class ScoresAnalyzer
         }
         return Player.ANY;
     }
+
+    public int percentage(GameOutcome outcome, Date start, Date end, Player player, Player opponent)
+    {
+        int gamesWon = numberOfGames(GameOutcome.WIN, start, end, player, opponent);
+        int gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
+        int gamesPlayed = gamesWon + gamesLost;
+        if (gamesPlayed == 0) {
+            return 0;
+        }
+        switch (outcome)
+        {
+            case WIN:
+                return (int) Math.round((double) gamesWon / gamesPlayed * 100);
+            case LOSE:
+                return (int) Math.round((double) gamesLost / gamesPlayed * 100);
+        }
+        return 100;
+    }
 }

@@ -201,5 +201,97 @@ public class Main
                 latestDate,
                 Player.ANTONIO,
                 Player.KIT));
+        
+        System.out.println();
+        System.out.println("percentage of games won for date for player");
+        System.out.println(analyzer.percentage(
+                GameOutcome.WIN,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANTONIO,
+                Player.ANY));
+        System.out.println("percentage of games won for date range for player");
+        System.out.println(analyzer.percentage(
+                GameOutcome.WIN,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANTONIO,
+                Player.ANY));
+        System.out.println("percentage of games won for player");
+        System.out.println(analyzer.percentage(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                Player.ANTONIO,
+                Player.ANY));
+        
+        System.out.println();
+        System.out.println("percentage of games lost for date for player");
+        System.out.println(analyzer.percentage(
+                GameOutcome.LOSE,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANTONIO,
+                Player.ANY));
+        System.out.println("percentage of games lost for date range for player");
+        System.out.println(analyzer.percentage(
+                GameOutcome.LOSE,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANTONIO,
+                Player.ANY));
+        System.out.println("percentage of games lost for player");
+        System.out.println(analyzer.percentage(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                Player.ANTONIO,
+                Player.ANY));
+        
+        System.out.println();
+        System.out.println("percentage of games won for date for player for opponent");
+        System.out.println(analyzer.percentage(
+                GameOutcome.WIN,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANTONIO,
+                Player.KIT));
+        System.out.println("percentage of games won for date range for player for opponent");
+        System.out.println(analyzer.percentage(
+                GameOutcome.WIN,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANTONIO,
+                Player.KIT));
+        System.out.println("percentage of games won for player for opponent");
+        System.out.println(analyzer.percentage(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                Player.ANTONIO,
+                Player.KIT));
+        
+        System.out.println();
+        System.out.println("percentage of games lost for date for player for opponent");
+        System.out.println(analyzer.percentage(
+                GameOutcome.LOSE,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANTONIO,
+                Player.KIT));
+        System.out.println("percentage of games lost for date range for player for opponent");
+        System.out.println(analyzer.percentage(
+                GameOutcome.LOSE,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANTONIO,
+                Player.KIT));
+        System.out.println("percentage of games lost for player for opponent");
+        System.out.println(analyzer.percentage(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                Player.ANTONIO,
+                Player.KIT));
     }
 }

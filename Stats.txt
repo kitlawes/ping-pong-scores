@@ -22,7 +22,6 @@ winner for each player against each player
 loser for each day for each player against each player
 loser for each week for each player against each player
 loser for each player against each player
-
 percentage of games won for each player
 percentage of games won for each day for each player
 percentage of games won for each week for each player
