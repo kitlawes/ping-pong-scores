@@ -55,6 +55,86 @@ public class ScoresAnalyzer
         return gamesPlayed;
     }
 
+    public int numberOfGamesWonForDateForPlayer(Date date, Player player)
+    {
+        List<Score> scores = valueParser.getScoresForPlayer(
+                valueParser.getScoresForDate(
+                        valueParser.getScores(), date),
+                player);
+        int gamesWon = 0;
+        for (Score score : scores)
+        {
+            gamesWon += score.getPlayerWins();
+        }
+        return gamesWon;
+    }
+
+    public int numberOfGamesWonForDateRangeForPlayer(Date start, Date end, Player player)
+    {
+        List<Score> scores = valueParser.getScoresForPlayer(
+                valueParser.getScoresForDateRange(
+                        valueParser.getScores(), start, end),
+                player);
+        int gamesWon = 0;
+        for (Score score : scores)
+        {
+            gamesWon += score.getPlayerWins();
+        }
+        return gamesWon;
+    }
+
+    public int numberOfGamesWonForPlayer(Player player)
+    {
+        List<Score> scores = valueParser.getScoresForPlayer(
+                valueParser.getScores(), player);
+        int gamesWon = 0;
+        for (Score score : scores)
+        {
+            gamesWon += score.getPlayerWins();
+        }
+        return gamesWon;
+    }
+
+    public int numberOfGamesLostForDateForPlayer(Date date, Player player)
+    {
+        List<Score> scores = valueParser.getScoresForPlayer(
+                valueParser.getScoresForDate(
+                        valueParser.getScores(), date),
+                player);
+        int gamesLost = 0;
+        for (Score score : scores)
+        {
+            gamesLost += score.getOpponentWins();
+        }
+        return gamesLost;
+    }
+
+    public int numberOfGamesLostForDateRangeForPlayer(Date start, Date end, Player player)
+    {
+        List<Score> scores = valueParser.getScoresForPlayer(
+                valueParser.getScoresForDateRange(
+                        valueParser.getScores(), start, end),
+                player);
+        int gamesLost = 0;
+        for (Score score : scores)
+        {
+            gamesLost += score.getOpponentWins();
+        }
+        return gamesLost;
+    }
+
+    public int numberOfGamesLostForPlayer(Player player)
+    {
+        List<Score> scores = valueParser.getScoresForPlayer(
+                valueParser.getScores(), player);
+        int gamesLost = 0;
+        for (Score score : scores)
+        {
+            gamesLost += score.getOpponentWins();
+        }
+        return gamesLost;
+    }
+
     public int numberOfGamesWonForDateForPlayerForOpponent(Date date, Player player, Player opponent)
     {
         List<Score> scores = valueParser.getScoresForOpponent(

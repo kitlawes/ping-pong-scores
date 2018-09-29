@@ -1,6 +1,6 @@
-number of games played for each day for each player
-number of games played for each week for each player
-number of games played for each player
+	number of games played for each day for each player
+	number of games played for each week for each player
+	number of games played for each player
 number of games won for each day for each player
 number of games won for each week for each player
 number of games won for each player
