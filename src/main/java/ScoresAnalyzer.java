@@ -12,7 +12,20 @@ public class ScoresAnalyzer
         this.valueParser = valueParser;
     }
 
-    public void numberOfGamesWonForDateForPlayerForOpponent(Date date, Player player, Player opponent)
+    public int numberOfGamesWonForPlayerForOpponent(Player player, Player opponent)
+    {
+        List<Score> scores = valueParser.getScoresForOpponent(
+                valueParser.getScoresForPlayer(
+                        valueParser.getScores(), player),
+                opponent);
+        int gamesWon = 0;
+        for (Score score : scores) {
+            gamesWon += score.getPlayerWins();
+        }
+        return gamesWon;
+    }
+
+    public int numberOfGamesWonForDateForPlayerForOpponent(Date date, Player player, Player opponent)
     {
         List<Score> scores = valueParser.getScoresForOpponent(
                 valueParser.getScoresForPlayer(
@@ -20,11 +33,14 @@ public class ScoresAnalyzer
                                 valueParser.getScores(), date),
                         player),
                 opponent);
-
-        System.out.println(scores);
+        int gamesWon = 0;
+        for (Score score : scores) {
+            gamesWon += score.getPlayerWins();
+        }
+        return gamesWon;
     }
 
-    public void numberOfGamesWonForDateRangeForPlayerForOpponent(Date start, Date end, Player player, Player opponent)
+    public int numberOfGamesWonForDateRangeForPlayerForOpponent(Date start, Date end, Player player, Player opponent)
     {
         List<Score> scores = valueParser.getScoresForOpponent(
                 valueParser.getScoresForPlayer(
@@ -32,7 +48,10 @@ public class ScoresAnalyzer
                                 valueParser.getScores(), start, end),
                         player),
                 opponent);
-
-        System.out.println(scores);
+        int gamesWon = 0;
+        for (Score score : scores) {
+            gamesWon += score.getPlayerWins();
+        }
+        return gamesWon;
     }
 }

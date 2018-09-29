@@ -16,15 +16,19 @@ public class Main
         
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
         System.out.println("numberOfGamesWonForDateForPlayerForOpponent");
-        analyzer.numberOfGamesWonForDateForPlayerForOpponent(
+        System.out.println(analyzer.numberOfGamesWonForDateForPlayerForOpponent(
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.KIT);
+                Player.KIT));
         System.out.println("numberOfGamesWonForDateRangeForPlayerForOpponent");
-        analyzer.numberOfGamesWonForDateRangeForPlayerForOpponent(
+        System.out.println(analyzer.numberOfGamesWonForDateRangeForPlayerForOpponent(
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.KIT);
+                Player.KIT));
+        System.out.println("numberOfGamesWonForPlayerForOpponent");
+        System.out.println(analyzer.numberOfGamesWonForPlayerForOpponent(
+                Player.ANTONIO,
+                Player.KIT));
     }
 }
