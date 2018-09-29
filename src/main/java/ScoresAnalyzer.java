@@ -26,6 +26,20 @@ public class ScoresAnalyzer
         return gamesPlayed;
     }
 
+    public int numberOfGamesPlayedForDateRangeForPlayer(Date start, Date end, Player player)
+    {
+        List<Score> scores = valueParser.getScoresForPlayer(
+                        valueParser.getScoresForDateRange(
+                                valueParser.getScores(), start, end),
+                        player);
+        int gamesPlayed = 0;
+        for (Score score : scores) {
+            gamesPlayed += score.getPlayerWins();
+            gamesPlayed += score.getOpponentWins();
+        }
+        return gamesPlayed;
+    }
+
     public int numberOfGamesWonForDateForPlayerForOpponent(Date date, Player player, Player opponent)
     {
         List<Score> scores = valueParser.getScoresForOpponent(

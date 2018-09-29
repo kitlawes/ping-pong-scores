@@ -19,6 +19,11 @@ public class Main
         System.out.println(analyzer.numberOfGamesPlayedForDateForPlayer(
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO));
+        System.out.println("numberOfGamesPlayedForDateRangeForPlayer");
+        System.out.println(analyzer.numberOfGamesPlayedForDateRangeForPlayer(
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANTONIO));
         System.out.println("numberOfGamesWonForDateForPlayerForOpponent");
         System.out.println(analyzer.numberOfGamesWonForDateForPlayerForOpponent(
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
