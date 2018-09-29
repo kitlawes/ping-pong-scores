@@ -28,7 +28,7 @@ public class SpreadsheetReader
     private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
-    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException
+    private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException
     {
         InputStream in = SpreadsheetReader.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
@@ -41,7 +41,7 @@ public class SpreadsheetReader
         return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
     }
 
-    public static List<List<Object>> readSpreadsheet(String... args) throws IOException, GeneralSecurityException
+    public List<List<Object>> readSpreadsheet(String... args) throws IOException, GeneralSecurityException
     {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1kafUYlL-1J22gWAfMh4XtOWCv41uaMU_eF8uP7QDXrk";

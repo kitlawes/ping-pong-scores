@@ -1,15 +1,18 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ValueParser
 {
-    public static List<Score> parseValues(List<List<Object>> values)
+    private List<Score> scores;
+
+    public ValueParser(List<List<Object>> values)
     {
         SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
 
-        List<Score> scores = new ArrayList<>();
+        scores = new ArrayList<>();
         for (int i = 0; i < values.size(); i++)
         {
             List<Object> row = values.get(i);
@@ -83,6 +86,31 @@ public class ValueParser
                 }
             }
         }
-        return scores;
+    }
+
+    public List<Score> getScoresForDate(Date date)
+    {
+        List<Score> scoresForDate = new ArrayList<Score>();
+        for (Score score : scores)
+        {
+            if (score.getDate().equals(date))
+            {
+                scoresForDate.add(score);
+            }
+        }
+        return scoresForDate;
+    }
+
+    public List<Score> getScoresForPlayer(Player player)
+    {
+        List<Score> scoresForPlayer = new ArrayList<Score>();
+        for (Score score : scores)
+        {
+            if (score.getPlayer1() == player || score.getPlayer2() == player)
+            {
+                scoresForPlayer.add(score);
+            }
+        }
+        return scoresForPlayer;
     }
 }
