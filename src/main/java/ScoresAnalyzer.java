@@ -36,10 +36,17 @@ public class ScoresAnalyzer
         return games;
     }
 
-    public Player winner(Date start, Date end, Player player, Player opponent)
+    public Player player(GameOutcome outcome, Date start, Date end, Player player, Player opponent)
     {
         int gamesWon = numberOfGames(GameOutcome.WIN, start, end, player, opponent);
         int gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
-        return gamesWon > gamesLost ? player : gamesWon < gamesLost ? opponent : Player.NONE;
+        switch (outcome)
+        {
+            case WIN:
+                return gamesWon > gamesLost ? player : gamesWon < gamesLost ? opponent : Player.NONE;
+            case LOSE:
+                return gamesWon < gamesLost ? player : gamesWon > gamesLost ? opponent : Player.NONE;
+        }
+        return Player.ANY;
     }
 }

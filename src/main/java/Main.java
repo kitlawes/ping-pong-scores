@@ -158,19 +158,45 @@ public class Main
         
         System.out.println();
         System.out.println("winner for date for player for opponent");
-        System.out.println(analyzer.winner(
+        System.out.println(analyzer.player(
+                GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
                 Player.KIT));
         System.out.println("winner for date range for player for opponent");
-        System.out.println(analyzer.winner(
+        System.out.println(analyzer.player(
+                GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
                 Player.KIT));
         System.out.println("winner for player for opponent");
-        System.out.println(analyzer.winner(
+        System.out.println(analyzer.player(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                Player.ANTONIO,
+                Player.KIT));
+        
+        System.out.println();
+        System.out.println("loser for date for player for opponent");
+        System.out.println(analyzer.player(
+                GameOutcome.LOSE,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANTONIO,
+                Player.KIT));
+        System.out.println("loser for date range for player for opponent");
+        System.out.println(analyzer.player(
+                GameOutcome.LOSE,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANTONIO,
+                Player.KIT));
+        System.out.println("loser for player for opponent");
+        System.out.println(analyzer.player(
+                GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
