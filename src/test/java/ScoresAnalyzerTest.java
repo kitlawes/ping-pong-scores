@@ -935,4 +935,63 @@ public class ScoresAnalyzerTest
                 Player.ANTONIO,
                 Player.ANY));
     }
+
+    @Test
+    public void numberOfIntervalsWithoutAnyGamesForPlayerForOpponent()
+    {
+        // number of days without any games played for player for opponent
+        assertEquals(28,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of weeks without any games played for player for opponent
+        assertEquals(3,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of days without any games won for player for opponent
+        assertEquals(32,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of weeks without any games won for player for opponent
+        assertEquals(4,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of days without any games lost for player for opponent
+        assertEquals(31,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of weeks without any games lost for player for opponent
+        assertEquals(3,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+    }
 }
