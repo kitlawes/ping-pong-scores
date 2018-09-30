@@ -56,7 +56,7 @@ public class ScoresAnalyzer
         return Player.ANY;
     }
 
-    public int percentageOfGamesWithOutcome(GameOutcome outcome, Date start, Date end, Player player, Player opponent)
+    public int percentageOfGames(GameOutcome outcome, Date start, Date end, Player player, Player opponent)
     {
         int gamesWon = numberOfGames(GameOutcome.WIN, start, end, player, opponent);
         int gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
@@ -253,6 +253,29 @@ public class ScoresAnalyzer
         Collections.sort(list, new Comparator<Map.Entry<PlayerPair, Integer>>()
         {
             public int compare(Map.Entry<PlayerPair, Integer> o1, Map.Entry<PlayerPair, Integer> o2)
+            {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+        return list;
+    }
+
+    public List<Map.Entry<Player, Integer>> playersOrderedByPercentageOfGames(GameOutcome outcome, Date start, Date end)
+    {
+        final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
+        players.remove(Player.ANY);
+        players.remove(Player.NONE);
+
+        Map<Player, Integer> percentageOfGames = new HashMap<>();
+        for (Player player : players)
+        {
+            percentageOfGames.put(player, percentageOfGames(outcome, start, end, player, Player.ANY));
+        }
+
+        List<Map.Entry<Player, Integer>> list = new ArrayList<>(percentageOfGames.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Player, Integer>>()
+        {
+            public int compare(Map.Entry<Player, Integer> o1, Map.Entry<Player, Integer> o2)
             {
                 return o2.getValue().compareTo(o1.getValue());
             }

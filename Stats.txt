@@ -138,10 +138,10 @@ graph of average percentage for each player over time with moving averages
 players ordered by number of games played
 players ordered by number of games won
 players ordered by number of games lost
-
 pairs of players number of games played
 pairs of players number of games won
 pairs of players number of games lost
+
 players ordered by percentage of games won
 players ordered by percentage of games lost
 pairs of players percentage of games won

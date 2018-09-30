@@ -48,6 +48,17 @@ public class Main
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate));
-
+        
+        System.out.println();
+        System.out.println("players ordered by percentage of games won");
+        System.out.println(analyzer.playersOrderedByPercentageOfGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate));
+        System.out.println("players ordered by number of games lost");
+        System.out.println(analyzer.playersOrderedByPercentageOfGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate));
     }
 }

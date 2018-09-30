@@ -43,7 +43,7 @@ public class PerformanceGraph
                 {
                     if (player != opponent)
                     {
-                        percentage += analyzer.percentageOfGamesWithOutcome(
+                        percentage += analyzer.percentageOfGames(
                                 GameOutcome.WIN,
                                 startDate,
                                 endDate,
