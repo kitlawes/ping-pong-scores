@@ -240,9 +240,9 @@ public class ScoresAnalyzer
         return list;
     }
 
-    public List<Map.Entry<PlayerPair, Double>> orderedPairsOfPlayers(OrderCriterion orderCriterion,
-                                                                      GameOutcome outcome, Date start, Date end,
-                                                                      Integer intervalDays)
+    public List<Map.Entry<PlayerPair, Double>> orderedPairsOfPlayers(OrderCriterion orderCriterion, Intervals intervals,
+                                                                     IntervalGames intervalGames, GameOutcome outcome,
+                                                                     Date start, Date end, Integer intervalDays)
     {
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
@@ -280,6 +280,9 @@ public class ScoresAnalyzer
                     break;
                 case MOST_GAMES:
                     orderedPlayerPairs.put(playerPair, (double) mostGames(outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
+                    break;
+                case INTERVALS:
+                    orderedPlayerPairs.put(playerPair, (double) numberOfIntervals(intervals, intervalGames, outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
                     break;
             }
         }
