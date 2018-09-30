@@ -41,16 +41,16 @@ percentage of games lost for each week for each player against each player
 average games played in a day
 average games played in a week
 average games played in a day for each player
-average games played in a week for each player
 average games won in a day for each player
-average games won in a week for each player
 average games lost in a day for each player
+average games played in a week for each player
+average games won in a week for each player
 average games lost in a week for each player
 average games played in a day for each player against each player
-average games played in a week for each player against each player
 average games won in a day for each player against each player
-average games won in a week for each player against each player
 average games lost in a day for each player against each player
+average games played in a week for each player against each player
+average games won in a week for each player against each player
 average games lost in a week for each player against each player
 
 most games played in a day
