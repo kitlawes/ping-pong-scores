@@ -475,4 +475,36 @@ public class ScoresAnalyzerTest
                 Player.ANTONIO,
                 Player.ANY));
     }
+
+    @Test
+    public void averageNumberOfGamesInAWeekForPlayer()
+    {
+        // average number of games played in a day for player
+        assertEquals(30.67,
+                analyzer.averageNumberOfGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+        // average number of games won in a day for player
+        assertEquals(14.83,
+                analyzer.averageNumberOfGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+        // average number of games lost in a day for player
+        assertEquals(15.83,
+                analyzer.averageNumberOfGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+    }
 }
