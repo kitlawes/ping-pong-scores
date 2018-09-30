@@ -1758,4 +1758,36 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
     }
+
+    @Test
+    public void dateOf100GamesForPlayerForOpponent()
+    {
+        // date of 100 games played for player for opponent
+        assertEquals(new GregorianCalendar(2018, Calendar.AUGUST, 13).getTime(),
+                analyzer.dateOfNumberOfGames(
+                        100,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // date of 100 games won for player for opponent
+        assertEquals(new GregorianCalendar(2018, Calendar.SEPTEMBER, 21).getTime(),
+                analyzer.dateOfNumberOfGames(
+                        100,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // date of 100 games lost for player for opponent
+        assertEquals(new GregorianCalendar(2018, Calendar.SEPTEMBER, 20).getTime(),
+                analyzer.dateOfNumberOfGames(
+                        100,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        Player.ANTONIO,
+                        Player.KIT));
+    }
 }
