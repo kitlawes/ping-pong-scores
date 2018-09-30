@@ -180,5 +180,49 @@ public class Main
                 earliestDate,
                 latestDate,
                 5));
+        
+        System.out.println();
+        System.out.println("players ordered by most games played in a day");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.MOST_GAMES,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most games won in a day");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.MOST_GAMES,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most games lost in a day");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.MOST_GAMES,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most games played in a week");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.MOST_GAMES,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by most games won in a week");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.MOST_GAMES,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by most games lost in a week");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.MOST_GAMES,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5));
     }
 }

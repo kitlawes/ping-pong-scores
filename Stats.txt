@@ -145,20 +145,19 @@ players ordered by percentage of games won
 players ordered by percentage of games lost
 pairs of players percentage of games won
 pairs of players percentage of games lost
-
 players ordered by average games played in a day
 players ordered by average games won in a day
 players ordered by average games lost in a day
 players ordered by average games played in a week
 players ordered by average games won in a week
 players ordered by average games lost in a week
-
 pairs of players average games played in a day
 pairs of players average games won in a day
 pairs of players average games lost in a day
 pairs of players average games played in a week
 pairs of players average games won in a week
 pairs of players average games lost in a week
+
 players ordered by most games played in a day
 players ordered by most games played in a week
 players ordered by most games won in a day
@@ -171,6 +170,7 @@ pairs of players most games won in a day
 pairs of players most games won in a week
 pairs of players most games lost in a day
 pairs of players most games lost in a week
+
 players ordered by days with at least one game played
 players ordered by weeks with at least one game played
 players ordered by days with at least one game won
