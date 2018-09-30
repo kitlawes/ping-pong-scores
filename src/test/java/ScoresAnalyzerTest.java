@@ -1044,4 +1044,29 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
     }
+
+    @Test
+    public void numberOfIntervalsWithGamesWonEqualToGamesLostForPlayer()
+    {
+        // number of days with games won equal to games lost for player
+        assertEquals(24,
+                analyzer.numberOfIntervalsWithGameOutcomeEqualToGameOutcome(
+                        GameOutcome.WIN,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // number of weeks with games won equal to games lost for player
+        assertEquals(3,
+                analyzer.numberOfIntervalsWithGameOutcomeEqualToGameOutcome(
+                        GameOutcome.WIN,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+    }
 }

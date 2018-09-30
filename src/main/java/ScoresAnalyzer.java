@@ -197,4 +197,30 @@ public class ScoresAnalyzer
         }
         return numberOfIntervals;
     }
+
+    public int numberOfIntervalsWithGameOutcomeEqualToGameOutcome(GameOutcome outcome,
+        GameOutcome equalOutcome, Date start, Date end, int intervalDays, Player player, Player opponent)
+    {
+        List<Date> dates = valueParser.getDatesInRange(start, end);
+        Collections.sort(dates);
+        int numberOfIntervals = 0;
+        int outcomeGames = 0;
+        int equalOutcomeGames = 0;
+        for (int i = 0; i < dates.size(); i++)
+        {
+            Date date = dates.get(i);
+            outcomeGames += numberOfGames(outcome, date, date, player, opponent);
+            equalOutcomeGames += numberOfGames(equalOutcome, date, date, player, opponent);
+            if ((i + 1) % intervalDays == 0)
+            {
+                if (outcomeGames == equalOutcomeGames)
+                {
+                    numberOfIntervals++;
+                }
+                outcomeGames = 0;
+                equalOutcomeGames = 0;
+            }
+        }
+        return numberOfIntervals;
+    }
 }
