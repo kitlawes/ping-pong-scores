@@ -274,6 +274,9 @@ public class ScoresAnalyzer
                 case AVERAGE_NUMBER_OF_GAMES:
                     orderedPlayerPairs.put(playerPair, averageNumberOfGames(outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
                     break;
+                case MOST_GAMES:
+                    orderedPlayerPairs.put(playerPair, (double) mostGames(outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
+                    break;
             }
         }
 
