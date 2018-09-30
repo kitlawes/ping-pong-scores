@@ -209,11 +209,50 @@ public class ScoresAnalyzer
         {
             numberOfGames.put(player, numberOfGames(outcome, start, end, player, Player.ANY));
         }
-        
+
         List<Map.Entry<Player, Integer>> list = new ArrayList<>(numberOfGames.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Player, Integer>>()
         {
             public int compare(Map.Entry<Player, Integer> o1, Map.Entry<Player, Integer> o2)
+            {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+        return list;
+    }
+
+    public List<Map.Entry<PlayerPair, Integer>> pairsOfPlayersOrderedByNumberOfGames(GameOutcome outcome, Date start, Date end)
+    {
+        final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
+        players.remove(Player.ANY);
+        players.remove(Player.NONE);
+        final ArrayList<PlayerPair> playerPairs = new ArrayList<>();
+        for (int i = 0; i < players.size(); i++)
+        {
+            Player player = players.get(i);
+            for (int j = outcome == GameOutcome.ANY ? i + 1 : 0; j < players.size(); j++)
+            {
+                Player opponent = players.get(j);
+                if (player != opponent)
+                {
+                    PlayerPair playerPair = new PlayerPair();
+                    playerPair.setPlayer(player);
+                    playerPair.setOpponent(opponent);
+                    playerPairs.add(playerPair);
+                }
+            }
+        }
+
+        Map<PlayerPair, Integer> numberOfGames = new HashMap<>();
+        for (PlayerPair playerPair : playerPairs)
+        {
+            numberOfGames.put(playerPair, numberOfGames(outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent()));
+        }
+
+        List<Map.Entry<PlayerPair, Integer>> list = new ArrayList<>(numberOfGames.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<PlayerPair, Integer>>()
+        {
+            public int compare(Map.Entry<PlayerPair, Integer> o1, Map.Entry<PlayerPair, Integer> o2)
             {
                 return o2.getValue().compareTo(o1.getValue());
             }

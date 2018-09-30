@@ -32,5 +32,22 @@ public class Main
                 earliestDate,
                 latestDate));
 
+        System.out.println();
+        System.out.println("pairs of players ordered by number of games played");
+        System.out.println(analyzer.pairsOfPlayersOrderedByNumberOfGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate));
+        System.out.println("pairs of players ordered by number of games won");
+        System.out.println(analyzer.pairsOfPlayersOrderedByNumberOfGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate));
+        System.out.println("pairs of players ordered by number of games lost");
+        System.out.println(analyzer.pairsOfPlayersOrderedByNumberOfGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate));
+
     }
 }

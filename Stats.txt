@@ -132,11 +132,13 @@ date of 100/200/300/... games lost for each player
 date of 100/200/300/... games played for each player against each player
 date of 100/200/300/... games won for each player against each player
 date of 100/200/300/... games lost for each player against each player
+
 graph of average percentage for each player over time with moving averages
 
 players ordered by number of games played
 players ordered by number of games won
 players ordered by number of games lost
+
 pairs of players number of games played
 pairs of players number of games won
 pairs of players number of games lost
