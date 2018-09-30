@@ -876,4 +876,63 @@ public class ScoresAnalyzerTest
                 Player.ANY,
                 Player.ANY));
     }
+
+    @Test
+    public void numberOfIntervalsWithoutAnyGamesForPlayer()
+    {
+        // number of days without any games played for player
+        assertEquals(23,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of weeks without any games played for player
+        assertEquals(3,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of days without any games won for player
+        assertEquals(25,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of weeks without any games won for player
+        assertEquals(4,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of days without any games lost for player
+        assertEquals(24,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of weeks without any games lost for player
+        assertEquals(3,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+    }
 }
