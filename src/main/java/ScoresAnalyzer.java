@@ -126,99 +126,45 @@ public class ScoresAnalyzer
         return mostGames;
     }
 
-    public int numberOfIntervalsWithAtLeastOneGame(GameOutcome outcome, Date start, Date end, int intervalDays,
-                                                   Player player, Player opponent)
+    public int numberOfIntervals(IntervalGames intervalGames, GameOutcome outcome, Date start, Date end,
+                                 int intervalDays, Player player, Player opponent)
     {
         List<Date> dates = valueParser.getDatesInRange(start, end);
         Collections.sort(dates);
         int numberOfIntervals = 0;
-        int games = 0;
+        int gamesPlayed = 0;
+        int gamesWon = 0;
+        int gamesLost = 0;
         for (int i = 0; i < dates.size(); i++)
         {
             Date date = dates.get(i);
-            games += numberOfGames(outcome, date, date, player, opponent);
+            gamesPlayed += numberOfGames(GameOutcome.ANY, date, date, player, opponent);
+            gamesWon += numberOfGames(GameOutcome.WIN, date, date, player, opponent);
+            gamesLost += numberOfGames(GameOutcome.LOSE, date, date, player, opponent);
             if ((i + 1) % intervalDays == 0)
             {
-                if (games >= 1)
+                if (intervalGames == IntervalGames.AT_LEAST_ONE
+                        && (outcome == GameOutcome.ANY && gamesPlayed >= 1
+                        || outcome == GameOutcome.WIN && gamesWon >= 1
+                        || outcome == GameOutcome.LOSE && gamesLost >= 1)
+                        || intervalGames == IntervalGames.WITHOUT_ANY
+                        && (outcome == GameOutcome.ANY && gamesPlayed == 0
+                        || outcome == GameOutcome.WIN && gamesWon == 0
+                        || outcome == GameOutcome.LOSE && gamesLost == 0)
+                        || intervalGames == IntervalGames.MORE_FREQUENT
+                        && (outcome == GameOutcome.WIN && gamesWon > gamesLost
+                        || outcome == GameOutcome.LOSE && gamesLost > gamesWon)
+                        || intervalGames == IntervalGames.EQUALLY_FREQUENT
+                        && gamesWon == gamesLost
+                        || intervalGames == IntervalGames.LESS_FREQUENT
+                        && (outcome == GameOutcome.WIN && gamesWon < gamesLost
+                        || outcome == GameOutcome.LOSE && gamesLost < gamesWon))
                 {
                     numberOfIntervals++;
                 }
-                games = 0;
-            }
-        }
-        return numberOfIntervals;
-    }
-
-    public int numberOfIntervalsWithoutAnyGames(GameOutcome outcome, Date start, Date end, int intervalDays,
-                                                Player player, Player opponent)
-    {
-        List<Date> dates = valueParser.getDatesInRange(start, end);
-        Collections.sort(dates);
-        int numberOfIntervals = 0;
-        int games = 0;
-        for (int i = 0; i < dates.size(); i++)
-        {
-            Date date = dates.get(i);
-            games += numberOfGames(outcome, date, date, player, opponent);
-            if ((i + 1) % intervalDays == 0)
-            {
-                if (games == 0)
-                {
-                    numberOfIntervals++;
-                }
-                games = 0;
-            }
-        }
-        return numberOfIntervals;
-    }
-
-    public int numberOfIntervalsWithGameOutcomeMoreFrequentThanGameOutcome(GameOutcome moreFrequentOutcome,
-        GameOutcome lessFrequentOutcome, Date start, Date end, int intervalDays, Player player, Player opponent)
-    {
-        List<Date> dates = valueParser.getDatesInRange(start, end);
-        Collections.sort(dates);
-        int numberOfIntervals = 0;
-        int moreFrequentOutcomeGames = 0;
-        int lessFrequentOutcomeGames = 0;
-        for (int i = 0; i < dates.size(); i++)
-        {
-            Date date = dates.get(i);
-            moreFrequentOutcomeGames += numberOfGames(moreFrequentOutcome, date, date, player, opponent);
-            lessFrequentOutcomeGames += numberOfGames(lessFrequentOutcome, date, date, player, opponent);
-            if ((i + 1) % intervalDays == 0)
-            {
-                if (moreFrequentOutcomeGames > lessFrequentOutcomeGames)
-                {
-                    numberOfIntervals++;
-                }
-                moreFrequentOutcomeGames = 0;
-                lessFrequentOutcomeGames = 0;
-            }
-        }
-        return numberOfIntervals;
-    }
-
-    public int numberOfIntervalsWithGameOutcomeEqualToGameOutcome(GameOutcome outcome,
-        GameOutcome equalOutcome, Date start, Date end, int intervalDays, Player player, Player opponent)
-    {
-        List<Date> dates = valueParser.getDatesInRange(start, end);
-        Collections.sort(dates);
-        int numberOfIntervals = 0;
-        int outcomeGames = 0;
-        int equalOutcomeGames = 0;
-        for (int i = 0; i < dates.size(); i++)
-        {
-            Date date = dates.get(i);
-            outcomeGames += numberOfGames(outcome, date, date, player, opponent);
-            equalOutcomeGames += numberOfGames(equalOutcome, date, date, player, opponent);
-            if ((i + 1) % intervalDays == 0)
-            {
-                if (outcomeGames == equalOutcomeGames)
-                {
-                    numberOfIntervals++;
-                }
-                outcomeGames = 0;
-                equalOutcomeGames = 0;
+                gamesPlayed = 0;
+                gamesWon = 0;
+                gamesLost = 0;
             }
         }
         return numberOfIntervals;
