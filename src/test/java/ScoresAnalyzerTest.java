@@ -1019,4 +1019,29 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
     }
+
+    @Test
+    public void numberOfIntervalsWithGamesWonGreaterThanGamesLostForPlayerForOpponent()
+    {
+        // number of days with games won greater than games lost for player for opponent
+        assertEquals(15,
+                analyzer.numberOfIntervalsWithGameOutcomeMoreFrequentThanGameOutcome(
+                        GameOutcome.WIN,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // number of weeks with games won greater than games lost for player for opponent
+        assertEquals(4,
+                analyzer.numberOfIntervalsWithGameOutcomeMoreFrequentThanGameOutcome(
+                        GameOutcome.WIN,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+    }
 }
