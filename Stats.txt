@@ -169,7 +169,6 @@ pairs of players most games won in a day
 pairs of players most games won in a week
 pairs of players most games lost in a day
 pairs of players most games lost in a week
-
 players ordered by days with at least one game played
 players ordered by days with at least one game won
 players ordered by days with at least one game lost
@@ -195,6 +194,7 @@ pairs of players days without any games lost
 pairs of players weeks without any games played
 pairs of players weeks without any games won
 pairs of players weeks without any games lost
+
 players ordered by days with games won greater than games lost
 pairs of players days with games won greater than games lost
 players ordered by days with games won equal to games lost

@@ -448,5 +448,117 @@ public class Main
                 earliestDate,
                 latestDate,
                 5));
+        
+        System.out.println();
+        System.out.println("players ordered by days without any games played");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by days without any games won");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by days without any games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by weeks without any games played");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by weeks without any games won");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by weeks without any games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5));
+
+        System.out.println();
+        System.out.println("pairs of players ordered by days without any games played");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by days without any games won");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by days without any games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by weeks without any games played");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by weeks without any games won");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by weeks without any games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5));
     }
 }
