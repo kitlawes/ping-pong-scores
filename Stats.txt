@@ -193,7 +193,6 @@ pairs of players days without any games lost
 pairs of players weeks without any games played
 pairs of players weeks without any games won
 pairs of players weeks without any games lost
-
 players ordered by days with games won greater than games lost
 players ordered by days with games won equal to games lost
 players ordered by days with games won less than games lost
@@ -206,7 +205,6 @@ pairs of players ordered by days with games won less than games lost
 pairs of players ordered by weeks with games won greater than games lost
 pairs of players ordered by weeks with games won equal to games lost
 pairs of players ordered by weeks with games won less than games lost
-
 players ordered by most consecutive days with at least one game played
 players ordered by most consecutive days with at least one game won
 players ordered by most consecutive days with at least one game lost
@@ -225,6 +223,7 @@ players ordered by most consecutive days with games won less than games lost
 pairs of players most consecutive days with games won greater than games lost
 pairs of players most consecutive days with games won equal to games lost
 pairs of players most consecutive days with games won less than games lost
+
 players ordered by date of 100/200/300/... games played
 players ordered by date of 100/200/300/... games won
 players ordered by date of 100/200/300/... games lost

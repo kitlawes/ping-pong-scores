@@ -672,5 +672,341 @@ public class Main
                 earliestDate,
                 latestDate,
                 5));
+
+        System.out.println();
+        System.out.println("players ordered by most consecutive days with at least one game played");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive days with at least one game won");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive days with at least one game lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive weeks with at least one game played");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by most consecutive weeks with at least one game won");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by most consecutive weeks with at least one game lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5));
+
+        System.out.println();
+        System.out.println("pairs of players ordered by most consecutive days with at least one game played");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive days with at least one game won");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive days with at least one game lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive weeks with at least one game played");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by most consecutive weeks with at least one game won");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by most consecutive weeks with at least one game lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.AT_LEAST_ONE,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5));
+
+        System.out.println();
+        System.out.println("players ordered by most consecutive days without any games played");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive days without any games won");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive days without any games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive weeks without any games played");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by most consecutive weeks without any games won");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by most consecutive weeks without any games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5));
+
+        System.out.println();
+        System.out.println("pairs of players ordered by most consecutive days without any games played");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive days without any games won");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive days without any games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive weeks without any games played");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by most consecutive weeks without any games won");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by most consecutive weeks without any games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.WITHOUT_ANY,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5));
+
+        System.out.println();
+        System.out.println("players ordered by most consecutive days with games won greater than games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.MORE_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive days with games won equal to games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.EQUALLY_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive days with games won less than games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.LESS_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by most consecutive weeks with games won greater than games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.MORE_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by most consecutive weeks with games won equal to games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.EQUALLY_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by most consecutive weeks with games won less than games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.LESS_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+
+        System.out.println();
+        System.out.println("pairs of players ordered by most consecutive days with games won greater than games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.MORE_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive days with games won equal to games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.EQUALLY_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive days with games won less than games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.LESS_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by most consecutive weeks with games won greater than games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.MORE_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by most consecutive weeks with games won equal to games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.EQUALLY_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by most consecutive weeks with games won less than games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.MOST_CONSECUTIVE,
+                IntervalGames.LESS_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
     }
 }
