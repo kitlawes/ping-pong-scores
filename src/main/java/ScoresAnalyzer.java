@@ -233,8 +233,9 @@ public class ScoresAnalyzer
         return list;
     }
 
-    public List<Map.Entry<PlayerPair, Integer>> orderedPairsOfPlayers(OrderCriterion orderCriterion,
-                                                                      GameOutcome outcome, Date start, Date end)
+    public List<Map.Entry<PlayerPair, Double>> orderedPairsOfPlayers(OrderCriterion orderCriterion,
+                                                                      GameOutcome outcome, Date start, Date end,
+                                                                      Integer intervalDays)
     {
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
@@ -256,24 +257,27 @@ public class ScoresAnalyzer
             }
         }
 
-        Map<PlayerPair, Integer> orderedPlayerPairs = new HashMap<>();
+        Map<PlayerPair, Double> orderedPlayerPairs = new HashMap<>();
         for (PlayerPair playerPair : playerPairs)
         {
             switch (orderCriterion)
             {
                 case NUMBER_OF_GAMES:
-                    orderedPlayerPairs.put(playerPair, numberOfGames(outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent()));
+                    orderedPlayerPairs.put(playerPair, (double) numberOfGames(outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent()));
                     break;
                 case PERCENTAGE_OF_GAMES:
-                    orderedPlayerPairs.put(playerPair, percentageOfGames(outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent()));
+                    orderedPlayerPairs.put(playerPair, (double) percentageOfGames(outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent()));
+                    break;
+                case AVERAGE_NUMBER_OF_GAMES:
+                    orderedPlayerPairs.put(playerPair, averageNumberOfGames(outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
                     break;
             }
         }
 
-        List<Map.Entry<PlayerPair, Integer>> list = new ArrayList<>(orderedPlayerPairs.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<PlayerPair, Integer>>()
+        List<Map.Entry<PlayerPair, Double>> list = new ArrayList<>(orderedPlayerPairs.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<PlayerPair, Double>>()
         {
-            public int compare(Map.Entry<PlayerPair, Integer> o1, Map.Entry<PlayerPair, Integer> o2)
+            public int compare(Map.Entry<PlayerPair, Double> o1, Map.Entry<PlayerPair, Double> o2)
             {
                 return o2.getValue().compareTo(o1.getValue());
             }
