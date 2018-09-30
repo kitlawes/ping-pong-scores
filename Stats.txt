@@ -93,7 +93,6 @@ days without any games won for each player against each player
 weeks without any games won for each player against each player
 days without any games lost for each player against each player
 weeks without any games lost for each player against each player
-
 days with games won greater than games lost for each player
 weeks with games won greater than games lost for each player
 days with games won greater than games lost for each player against each player
@@ -126,7 +125,6 @@ most consecutive days with games won equal to games lost for each player
 most consecutive days with games won equal to games lost for each player against each player
 most consecutive days with games won less than games lost for each player
 most consecutive days with games won less than games lost for each player against each player
-
 date of 100/200/300/... games played
 date of 100/200/300/... games played for each player
 date of 100/200/300/... games won for each player
@@ -134,6 +132,11 @@ date of 100/200/300/... games lost for each player
 date of 100/200/300/... games played for each player against each player
 date of 100/200/300/... games won for each player against each player
 date of 100/200/300/... games lost for each player against each player
+
+graph of average percentage for each player over time with moving averages
+
+players ordered by how many games they've played
+players ordered by how many games they've won
+players ordered by how many games they've lost
 pairs of players ordered by how many games they've played
 pairs of players ordered by how equal they are
-graph of average percentage for each player over time with moving averages

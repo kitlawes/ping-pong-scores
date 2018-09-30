@@ -4,25 +4,25 @@ import java.util.List;
 
 public class ScoresAnalyzer
 {
-    private ValueParser valueParser;
+    private ValueParser parser;
 
-    public ScoresAnalyzer(ValueParser valueParser)
+    public ScoresAnalyzer(ValueParser parser)
     {
-        this.valueParser = valueParser;
+        this.parser = parser;
     }
 
     public int numberOfGames(GameOutcome outcome, Date start, Date end, Player player, Player opponent)
     {
-        List<Score> scores = valueParser.getScoresForDateRange(
-                valueParser.getScores(), start, end);
+        List<Score> scores = parser.getScoresForDateRange(
+                parser.getScores(), start, end);
         if (player != Player.ANY)
         {
-            scores = valueParser.getScoresForPlayer(
+            scores = parser.getScoresForPlayer(
                     scores, player);
         }
         if (opponent != Player.ANY)
         {
-            scores = valueParser.getScoresForOpponent(
+            scores = parser.getScoresForOpponent(
                     scores, opponent);
         }
         int games = 0;
@@ -93,7 +93,7 @@ public class ScoresAnalyzer
             gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
             gamesPlayed = gamesWon + gamesLost;
         }
-        int numberOfDatesInRange = valueParser.getNumberOfDatesInRange(start, end);
+        int numberOfDatesInRange = parser.getNumberOfDatesInRange(start, end);
         int divisor = numberOfDatesInRange / intervalDays;
         switch (outcome)
         {
@@ -109,7 +109,7 @@ public class ScoresAnalyzer
 
     public int mostGames(GameOutcome outcome, Date start, Date end, int intervalDays, Player player, Player opponent)
     {
-        List<Date> dates = valueParser.getDatesInRange(start, end);
+        List<Date> dates = parser.getDatesInRange(start, end);
         Collections.sort(dates);
         int mostGames = 0;
         int games = 0;
@@ -129,7 +129,7 @@ public class ScoresAnalyzer
     public int numberOfIntervals(Intervals intervals, IntervalGames intervalGames, GameOutcome outcome,
                                  Date start, Date end, int intervalDays, Player player, Player opponent)
     {
-        List<Date> dates = valueParser.getDatesInRange(start, end);
+        List<Date> dates = parser.getDatesInRange(start, end);
         Collections.sort(dates);
         int numberOfIntervals = 0;
         int mostConsecutiveIntervals = 0;
@@ -186,7 +186,7 @@ public class ScoresAnalyzer
     public Date dateOfNumberOfGames(int numberOfGames, GameOutcome outcome, Date start, Date end, Player player,
                                     Player opponent)
     {
-        List<Date> dates = valueParser.getDatesInRange(start, end);
+        List<Date> dates = parser.getDatesInRange(start, end);
         Collections.sort(dates);
         int games = 0;
         for (Date date : dates)
