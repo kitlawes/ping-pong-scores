@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -103,5 +104,28 @@ public class ScoresAnalyzer
                 return (double) Math.round((double) gamesPlayed / divisor * 100) / 100;
         }
         return 0;
+    }
+
+    public double mostGames(GameOutcome outcome, Date start, Date end, int days, Player player, Player opponent)
+    {
+        List<Date> dates = valueParser.getDatesInRange(start, end);
+        Collections.sort(dates);
+        int mostGames = 0;
+        int games = 0;
+        for (int i = 0; i < dates.size(); i++)
+        {
+            if (i % days == 0)
+            {
+                mostGames = Math.max(mostGames, games);
+                games = 0;
+            }
+            Date date = dates.get(i);
+            games += numberOfGames(outcome, date, date, player, opponent);
+        }
+        if (dates.size() % days == 0)
+        {
+            mostGames = Math.max(mostGames, games);
+        }
+        return mostGames;
     }
 }

@@ -571,4 +571,27 @@ public class ScoresAnalyzerTest
                 Player.ANTONIO,
                 Player.KIT));
     }
+
+    @Test
+    public void mostGamesPlayed()
+    {
+        // most games played in a day
+        assertEquals(28,
+                analyzer.mostGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANY,
+                Player.ANY));
+        // most games played in a week
+        assertEquals(98,
+                analyzer.mostGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANY,
+                Player.ANY));
+    }
 }

@@ -172,7 +172,7 @@ public class ValueParser
         return latestDate;
     }
 
-    public int getNumberOfDatesInRange(Date start, Date end)
+    public List<Date> getDatesInRange(Date start, Date end)
     {
         Set<Date> dates = new HashSet<>();
         for (Score score : scores)
@@ -184,7 +184,12 @@ public class ValueParser
                 dates.add(score.getDate());
             }
         }
-        return dates.size();
+        return new ArrayList<>(dates);
+    }
+
+    public int getNumberOfDatesInRange(Date start, Date end)
+    {
+        return getDatesInRange(start, end).size();
     }
 
     public List<Score> getScores()
