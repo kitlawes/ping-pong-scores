@@ -106,7 +106,7 @@ public class ScoresAnalyzer
         return 0;
     }
 
-    public double mostGames(GameOutcome outcome, Date start, Date end, int days, Player player, Player opponent)
+    public int mostGames(GameOutcome outcome, Date start, Date end, int days, Player player, Player opponent)
     {
         List<Date> dates = valueParser.getDatesInRange(start, end);
         Collections.sort(dates);

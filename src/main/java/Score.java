@@ -57,14 +57,4 @@ public class Score
     {
         this.opponentWins = opponentWins;
     }
-
-    @Override
-    public String toString()
-    {
-        return "date: " + date
-                + " player: " + player
-                + " opponent: " + opponent
-                + " playerWins: " + playerWins
-                + " opponentWins: " + opponentWins;
-    }
 }

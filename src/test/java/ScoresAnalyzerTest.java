@@ -594,4 +594,63 @@ public class ScoresAnalyzerTest
                 Player.ANY,
                 Player.ANY));
     }
+
+    @Test
+    public void mostGamesForPlayer()
+    {
+        // most games played in a day for player
+        assertEquals(19,
+                analyzer.mostGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // most games played in a week for player
+        assertEquals(59,
+                analyzer.mostGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+        // most games won in a day for player
+        assertEquals(13,
+                analyzer.mostGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // most games won in a week for player
+        assertEquals(35,
+                analyzer.mostGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+        // most games lost in a day for player
+        assertEquals(11,
+                analyzer.mostGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // most games lost in a week for player
+        assertEquals(32,
+                analyzer.mostGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+    }
 }
