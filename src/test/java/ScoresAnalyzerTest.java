@@ -716,7 +716,7 @@ public class ScoresAnalyzerTest
     @Test
     public void numberOfIntervalsWithAtLeastOneGamePlayed()
     {
-        // days with at least one game played
+        // number of days with at least one game played
         assertEquals(54,
                 analyzer.numberOfIntervalsWithAtLeastOneGame(
                 GameOutcome.ANY,
@@ -725,7 +725,7 @@ public class ScoresAnalyzerTest
                 1,
                 Player.ANY,
                 Player.ANY));
-        // weeks with at least one game played
+        // number of weeks with at least one game played
         assertEquals(11,
                 analyzer.numberOfIntervalsWithAtLeastOneGame(
                 GameOutcome.ANY,
@@ -733,6 +733,65 @@ public class ScoresAnalyzerTest
                 latestDate,
                 5,
                 Player.ANY,
+                Player.ANY));
+    }
+
+    @Test
+    public void numberOfIntervalsWithAtLeastOneGameForPlayer()
+    {
+        // number of days with at least one game played for player
+        assertEquals(37,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of weeks with at least one game played for player
+        assertEquals(9,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of days with at least one game won for player
+        assertEquals(35,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of weeks with at least one game won for player
+        assertEquals(8,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of days with at least one game lost for player
+        assertEquals(36,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.ANY));
+        // number of weeks with at least one game lost for player
+        assertEquals(9,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
                 Player.ANY));
     }
 }
