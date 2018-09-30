@@ -17,46 +17,68 @@ public class Main
         final Date latestDate = parser.getLatestDate();
 
         System.out.println("players ordered by number of games played");
-        System.out.println(analyzer.playersOrderedByNumberOfGames(
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate));
         System.out.println("players ordered by number of games won");
-        System.out.println(analyzer.playersOrderedByNumberOfGames(
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate));
         System.out.println("players ordered by number of games lost");
-        System.out.println(analyzer.playersOrderedByNumberOfGames(
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate));
 
         System.out.println();
         System.out.println("pairs of players ordered by number of games played");
-        System.out.println(analyzer.pairsOfPlayersOrderedByNumberOfGames(
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate));
         System.out.println("pairs of players ordered by number of games won");
-        System.out.println(analyzer.pairsOfPlayersOrderedByNumberOfGames(
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate));
         System.out.println("pairs of players ordered by number of games lost");
-        System.out.println(analyzer.pairsOfPlayersOrderedByNumberOfGames(
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate));
         
         System.out.println();
         System.out.println("players ordered by percentage of games won");
-        System.out.println(analyzer.playersOrderedByPercentageOfGames(
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.PERCENTAGE_OF_GAMES,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate));
         System.out.println("players ordered by number of games lost");
-        System.out.println(analyzer.playersOrderedByPercentageOfGames(
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.PERCENTAGE_OF_GAMES,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate));
+        
+        System.out.println();
+        System.out.println("pairs of players ordered by percentage of games won");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.PERCENTAGE_OF_GAMES,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate));
+        System.out.println("pairs of players ordered by number of games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.PERCENTAGE_OF_GAMES,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate));
