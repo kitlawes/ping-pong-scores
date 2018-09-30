@@ -794,4 +794,63 @@ public class ScoresAnalyzerTest
                 Player.ANTONIO,
                 Player.ANY));
     }
+
+    @Test
+    public void numberOfIntervalsWithAtLeastOneGameForPlayerForOpponent()
+    {
+        // number of days with at least one game played for player for opponent
+        assertEquals(32,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of weeks with at least one game played for player for opponent
+        assertEquals(9,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of days with at least one game won for player for opponent
+        assertEquals(28,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of weeks with at least one game won for player for opponent
+        assertEquals(8,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of days with at least one game lost for player for opponent
+        assertEquals(29,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANTONIO,
+                Player.KIT));
+        // number of weeks with at least one game lost for player for opponent
+        assertEquals(9,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+    }
 }
