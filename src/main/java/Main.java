@@ -21,19 +21,22 @@ public class Main
                 OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.ANY,
                 earliestDate,
-                latestDate));
+                latestDate,
+                null));
         System.out.println("players ordered by number of games won");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.WIN,
                 earliestDate,
-                latestDate));
+                latestDate,
+                null));
         System.out.println("players ordered by number of games lost");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.NUMBER_OF_GAMES,
                 GameOutcome.LOSE,
                 earliestDate,
-                latestDate));
+                latestDate,
+                null));
 
         System.out.println();
         System.out.println("pairs of players ordered by number of games played");
@@ -61,13 +64,15 @@ public class Main
                 OrderCriterion.PERCENTAGE_OF_GAMES,
                 GameOutcome.WIN,
                 earliestDate,
-                latestDate));
+                latestDate,
+                null));
         System.out.println("players ordered by number of games lost");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.PERCENTAGE_OF_GAMES,
                 GameOutcome.LOSE,
                 earliestDate,
-                latestDate));
+                latestDate,
+                null));
         
         System.out.println();
         System.out.println("pairs of players ordered by percentage of games won");
@@ -82,5 +87,28 @@ public class Main
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate));
+        
+        System.out.println();
+        System.out.println("players ordered by average number of games played in a day");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by average number of games won in a day");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by average number of games lost in a day");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1));
     }
 }

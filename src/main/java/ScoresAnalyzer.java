@@ -198,31 +198,34 @@ public class ScoresAnalyzer
         return null;
     }
 
-    public List<Map.Entry<Player, Integer>> orderedPlayers(OrderCriterion orderCriterion, GameOutcome outcome,
-                                                           Date start, Date end)
+    public List<Map.Entry<Player, Double>> orderedPlayers(OrderCriterion orderCriterion, GameOutcome outcome,
+                                                          Date start, Date end, Integer intervalDays)
     {
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
 
-        Map<Player, Integer> orderedPlayers = new HashMap<>();
+        Map<Player, Double> orderedPlayers = new HashMap<>();
         for (Player player : players)
         {
             switch (orderCriterion)
             {
                 case NUMBER_OF_GAMES:
-                    orderedPlayers.put(player, numberOfGames(outcome, start, end, player, Player.ANY));
+                    orderedPlayers.put(player, (double) numberOfGames(outcome, start, end, player, Player.ANY));
                     break;
                 case PERCENTAGE_OF_GAMES:
-                    orderedPlayers.put(player, percentageOfGames(outcome, start, end, player, Player.ANY));
+                    orderedPlayers.put(player, (double) percentageOfGames(outcome, start, end, player, Player.ANY));
+                    break;
+                case AVERAGE_NUMBER_OF_GAMES:
+                    orderedPlayers.put(player, averageNumberOfGames(outcome, start, end, intervalDays, player, Player.ANY));
                     break;
             }
         }
 
-        List<Map.Entry<Player, Integer>> list = new ArrayList<>(orderedPlayers.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<Player, Integer>>()
+        List<Map.Entry<Player, Double>> list = new ArrayList<>(orderedPlayers.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Player, Double>>()
         {
-            public int compare(Map.Entry<Player, Integer> o1, Map.Entry<Player, Integer> o2)
+            public int compare(Map.Entry<Player, Double> o1, Map.Entry<Player, Double> o2)
             {
                 return o2.getValue().compareTo(o1.getValue());
             }
