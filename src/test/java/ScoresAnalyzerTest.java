@@ -719,6 +719,7 @@ public class ScoresAnalyzerTest
         // number of days with at least one game played
         assertEquals(54,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.ANY,
                         earliestDate,
@@ -729,6 +730,7 @@ public class ScoresAnalyzerTest
         // number of weeks with at least one game played
         assertEquals(11,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.ANY,
                         earliestDate,
@@ -744,6 +746,7 @@ public class ScoresAnalyzerTest
         // number of days with at least one game played for player
         assertEquals(37,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.ANY,
                         earliestDate,
@@ -754,6 +757,7 @@ public class ScoresAnalyzerTest
         // number of weeks with at least one game played for player
         assertEquals(9,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.ANY,
                         earliestDate,
@@ -764,6 +768,7 @@ public class ScoresAnalyzerTest
         // number of days with at least one game won for player
         assertEquals(35,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.WIN,
                         earliestDate,
@@ -774,6 +779,7 @@ public class ScoresAnalyzerTest
         // number of weeks with at least one game won for player
         assertEquals(8,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.WIN,
                         earliestDate,
@@ -784,6 +790,7 @@ public class ScoresAnalyzerTest
         // number of days with at least one game lost for player
         assertEquals(36,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.LOSE,
                         earliestDate,
@@ -794,6 +801,7 @@ public class ScoresAnalyzerTest
         // number of weeks with at least one game lost for player
         assertEquals(9,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.LOSE,
                         earliestDate,
@@ -809,6 +817,7 @@ public class ScoresAnalyzerTest
         // number of days with at least one game played for player for opponent
         assertEquals(32,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.ANY,
                         earliestDate,
@@ -819,6 +828,7 @@ public class ScoresAnalyzerTest
         // number of weeks with at least one game played for player for opponent
         assertEquals(9,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.ANY,
                         earliestDate,
@@ -829,6 +839,7 @@ public class ScoresAnalyzerTest
         // number of days with at least one game won for player for opponent
         assertEquals(28,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.WIN,
                         earliestDate,
@@ -839,6 +850,7 @@ public class ScoresAnalyzerTest
         // number of weeks with at least one game won for player for opponent
         assertEquals(8,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.WIN,
                         earliestDate,
@@ -849,6 +861,7 @@ public class ScoresAnalyzerTest
         // number of days with at least one game lost for player for opponent
         assertEquals(29,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.LOSE,
                         earliestDate,
@@ -859,6 +872,7 @@ public class ScoresAnalyzerTest
         // number of weeks with at least one game lost for player for opponent
         assertEquals(9,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.AT_LEAST_ONE,
                         GameOutcome.LOSE,
                         earliestDate,
@@ -874,6 +888,7 @@ public class ScoresAnalyzerTest
         // number of days without any games played
         assertEquals(6,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.ANY,
                         earliestDate,
@@ -884,6 +899,7 @@ public class ScoresAnalyzerTest
         // number of weeks without any games played
         assertEquals(1,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.ANY,
                         earliestDate,
@@ -899,6 +915,7 @@ public class ScoresAnalyzerTest
         // number of days without any games played for player
         assertEquals(23,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.ANY,
                         earliestDate,
@@ -909,6 +926,7 @@ public class ScoresAnalyzerTest
         // number of weeks without any games played for player
         assertEquals(3,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.ANY,
                         earliestDate,
@@ -919,6 +937,7 @@ public class ScoresAnalyzerTest
         // number of days without any games won for player
         assertEquals(25,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.WIN,
                         earliestDate,
@@ -929,6 +948,7 @@ public class ScoresAnalyzerTest
         // number of weeks without any games won for player
         assertEquals(4,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.WIN,
                         earliestDate,
@@ -939,6 +959,7 @@ public class ScoresAnalyzerTest
         // number of days without any games lost for player
         assertEquals(24,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.LOSE,
                         earliestDate,
@@ -949,6 +970,7 @@ public class ScoresAnalyzerTest
         // number of weeks without any games lost for player
         assertEquals(3,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.LOSE,
                         earliestDate,
@@ -964,6 +986,7 @@ public class ScoresAnalyzerTest
         // number of days without any games played for player for opponent
         assertEquals(28,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.ANY,
                         earliestDate,
@@ -974,6 +997,7 @@ public class ScoresAnalyzerTest
         // number of weeks without any games played for player for opponent
         assertEquals(3,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.ANY,
                         earliestDate,
@@ -984,6 +1008,7 @@ public class ScoresAnalyzerTest
         // number of days without any games won for player for opponent
         assertEquals(32,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.WIN,
                         earliestDate,
@@ -994,6 +1019,7 @@ public class ScoresAnalyzerTest
         // number of weeks without any games won for player for opponent
         assertEquals(4,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1004,6 +1030,7 @@ public class ScoresAnalyzerTest
         // number of days without any games lost for player for opponent
         assertEquals(31,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.LOSE,
                         earliestDate,
@@ -1014,6 +1041,7 @@ public class ScoresAnalyzerTest
         // number of weeks without any games lost for player for opponent
         assertEquals(3,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
                         GameOutcome.LOSE,
                         earliestDate,
@@ -1029,6 +1057,7 @@ public class ScoresAnalyzerTest
         // number of days with games won greater than games lost for player
         assertEquals(16,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.MORE_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1039,6 +1068,7 @@ public class ScoresAnalyzerTest
         // number of weeks with games won greater than games lost for player
         assertEquals(2,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.MORE_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1054,6 +1084,7 @@ public class ScoresAnalyzerTest
         // number of days with games won greater than games lost for player for opponent
         assertEquals(15,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.MORE_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1064,6 +1095,7 @@ public class ScoresAnalyzerTest
         // number of weeks with games won greater than games lost for player for opponent
         assertEquals(4,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.MORE_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1079,6 +1111,7 @@ public class ScoresAnalyzerTest
         // number of days with games won equal to games lost for player
         assertEquals(24,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.EQUALLY_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1089,6 +1122,7 @@ public class ScoresAnalyzerTest
         // number of weeks with games won equal to games lost for player
         assertEquals(3,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.EQUALLY_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1104,6 +1138,7 @@ public class ScoresAnalyzerTest
         // number of days with games won equal to games lost for player for opponent
         assertEquals(28,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.EQUALLY_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1114,6 +1149,7 @@ public class ScoresAnalyzerTest
         // number of weeks with games won equal to games lost for player for opponent
         assertEquals(3,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.EQUALLY_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1129,6 +1165,7 @@ public class ScoresAnalyzerTest
         // number of days with games won less than games lost for player
         assertEquals(20,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.LESS_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1139,6 +1176,7 @@ public class ScoresAnalyzerTest
         // number of weeks with games won less than games lost for player
         assertEquals(7,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.LESS_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1154,6 +1192,7 @@ public class ScoresAnalyzerTest
         // number of days with games won less than games lost for player for opponent
         assertEquals(17,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
                         IntervalGames.LESS_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,
@@ -1164,6 +1203,507 @@ public class ScoresAnalyzerTest
         // number of weeks with games won less than games lost for player for opponent
         assertEquals(5,
                 analyzer.numberOfIntervals(
+                        Intervals.ANY,
+                        IntervalGames.LESS_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithAtLeastOneGamePlayed()
+    {
+        // most consecutive days with at least one game played
+        assertEquals(30,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANY,
+                        Player.ANY));
+        // most consecutive weeks with at least one game played
+        assertEquals(11,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANY,
+                        Player.ANY));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithAtLeastOneGameForPlayer()
+    {
+        // most consecutive days with at least one game played for player
+        assertEquals(17,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks with at least one game played for player
+        assertEquals(6,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive days with at least one game won for player
+        assertEquals(17,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks with at least one game won for player
+        assertEquals(6,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive days with at least one game lost for player
+        assertEquals(17,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks with at least one game lost for player
+        assertEquals(6,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithAtLeastOneGameForPlayerForOpponent()
+    {
+        // most consecutive days with at least one game played for player for opponent
+        assertEquals(10,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks with at least one game played for player for opponent
+        assertEquals(6,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive days with at least one game won for player for opponent
+        assertEquals(10,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks with at least one game won for player for opponent
+        assertEquals(6,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive days with at least one game lost for player for opponent
+        assertEquals(9,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks with at least one game lost for player for opponent
+        assertEquals(6,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.AT_LEAST_ONE,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithoutAnyGamesPlayed()
+    {
+        // most consecutive days without any games played
+        assertEquals(5,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANY,
+                        Player.ANY));
+        // most consecutive weeks without any games played
+        assertEquals(1,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANY,
+                        Player.ANY));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithoutAnyGamesForPlayer()
+    {
+        // most consecutive days without any games played for player
+        assertEquals(16,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks without any games played for player
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive days without any games won for player
+        assertEquals(17,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks without any games won for player
+        assertEquals(3,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive days without any games lost for player
+        assertEquals(16,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks without any games lost for player
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithoutAnyGamesForPlayerForOpponent()
+    {
+        // most consecutive days without any games played for player for opponent
+        assertEquals(16,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks without any games played for player for opponent
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive days without any games won for player for opponent
+        assertEquals(17,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks without any games won for player for opponent
+        assertEquals(3,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive days without any games lost for player for opponent
+        assertEquals(16,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks without any games lost for player for opponent
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.WITHOUT_ANY,
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithGamesWonGreaterThanGamesLostForPlayer()
+    {
+        // most consecutive days with games won greater than games lost for player
+        assertEquals(7,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.MORE_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks with games won greater than games lost for player
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.MORE_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithGamesWonGreaterThanGamesLostForPlayerForOpponent()
+    {
+        // most consecutive days with games won greater than games lost for player for opponent
+        assertEquals(7,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.MORE_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks with games won greater than games lost for player for opponent
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.MORE_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithGamesWonEqualToGamesLostForPlayer()
+    {
+        // most consecutive days with games won equal to games lost for player
+        assertEquals(16,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.EQUALLY_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks with games won equal to games lost for player
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.EQUALLY_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithGamesWonEqualToGamesLostForPlayerForOpponent()
+    {
+        // most consecutive days with games won equal to games lost for player for opponent
+        assertEquals(16,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.EQUALLY_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks with games won equal to games lost for player for opponent
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.EQUALLY_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.KIT));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithGamesWonLessThanGamesLostForPlayer()
+    {
+        // most consecutive days with games won less than games lost for player
+        assertEquals(3,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.LESS_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.ANY));
+        // most consecutive weeks with games won less than games lost for player
+        assertEquals(4,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.LESS_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        5,
+                        Player.ANTONIO,
+                        Player.ANY));
+    }
+
+    @Test
+    public void mostConsecutiveIntervalsWithGamesWonLessThanGamesLostForPlayerForOpponent()
+    {
+        // most consecutive days with games won less than games lost for player for opponent
+        assertEquals(4,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
+                        IntervalGames.LESS_FREQUENT,
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        1,
+                        Player.ANTONIO,
+                        Player.KIT));
+        // most consecutive weeks with games won less than games lost for player for opponent
+        assertEquals(2,
+                analyzer.numberOfIntervals(
+                        Intervals.MOST_CONSECUTIVE,
                         IntervalGames.LESS_FREQUENT,
                         GameOutcome.WIN,
                         earliestDate,

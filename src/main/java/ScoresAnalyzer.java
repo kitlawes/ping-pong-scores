@@ -126,12 +126,13 @@ public class ScoresAnalyzer
         return mostGames;
     }
 
-    public int numberOfIntervals(IntervalGames intervalGames, GameOutcome outcome, Date start, Date end,
-                                 int intervalDays, Player player, Player opponent)
+    public int numberOfIntervals(Intervals intervals, IntervalGames intervalGames, GameOutcome outcome,
+                                 Date start, Date end, int intervalDays, Player player, Player opponent)
     {
         List<Date> dates = valueParser.getDatesInRange(start, end);
         Collections.sort(dates);
         int numberOfIntervals = 0;
+        int mostConsecutiveIntervals = 0;
         int gamesPlayed = 0;
         int gamesWon = 0;
         int gamesLost = 0;
@@ -161,12 +162,24 @@ public class ScoresAnalyzer
                         || outcome == GameOutcome.LOSE && gamesLost < gamesWon))
                 {
                     numberOfIntervals++;
+                    mostConsecutiveIntervals = Math.max(mostConsecutiveIntervals, numberOfIntervals);
+                }
+                else if (intervals == Intervals.MOST_CONSECUTIVE)
+                {
+                    numberOfIntervals = 0;
                 }
                 gamesPlayed = 0;
                 gamesWon = 0;
                 gamesLost = 0;
             }
         }
-        return numberOfIntervals;
+        switch (intervals)
+        {
+            case ANY:
+                return numberOfIntervals;
+            case MOST_CONSECUTIVE:
+                return mostConsecutiveIntervals;
+        }
+        return 0;
     }
 }
