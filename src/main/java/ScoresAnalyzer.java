@@ -77,7 +77,8 @@ public class ScoresAnalyzer
         return 100;
     }
 
-    public double averageNumberOfGames(GameOutcome outcome, Date start, Date end, int intervalDays, Player player, Player opponent)
+    public double averageNumberOfGames(GameOutcome outcome, Date start, Date end, int intervalDays, Player player,
+                                       Player opponent)
     {
         int gamesWon = 0;
         int gamesLost = 0;
@@ -114,22 +115,19 @@ public class ScoresAnalyzer
         int games = 0;
         for (int i = 0; i < dates.size(); i++)
         {
-            if (i % intervalDays == 0)
+            Date date = dates.get(i);
+            games += numberOfGames(outcome, date, date, player, opponent);
+            if ((i + 1) % intervalDays == 0)
             {
                 mostGames = Math.max(mostGames, games);
                 games = 0;
             }
-            Date date = dates.get(i);
-            games += numberOfGames(outcome, date, date, player, opponent);
-        }
-        if (dates.size() % intervalDays == 0)
-        {
-            mostGames = Math.max(mostGames, games);
         }
         return mostGames;
     }
 
-    public int numberOfIntervalsWithAtLeastOneGame(GameOutcome outcome, Date start, Date end, int intervalDays, Player player, Player opponent)
+    public int numberOfIntervalsWithAtLeastOneGame(GameOutcome outcome, Date start, Date end, int intervalDays,
+                                                   Player player, Player opponent)
     {
         List<Date> dates = valueParser.getDatesInRange(start, end);
         Collections.sort(dates);
@@ -151,7 +149,8 @@ public class ScoresAnalyzer
         return numberOfIntervals;
     }
 
-    public int numberOfIntervalsWithoutAnyGames(GameOutcome outcome, Date start, Date end, int intervalDays, Player player, Player opponent)
+    public int numberOfIntervalsWithoutAnyGames(GameOutcome outcome, Date start, Date end, int intervalDays,
+                                                Player player, Player opponent)
     {
         List<Date> dates = valueParser.getDatesInRange(start, end);
         Collections.sort(dates);
@@ -168,6 +167,32 @@ public class ScoresAnalyzer
                     numberOfIntervals++;
                 }
                 games = 0;
+            }
+        }
+        return numberOfIntervals;
+    }
+
+    public int numberOfIntervalsWithGameOutcomeMoreFrequentThanGameOutcome(GameOutcome moreFrequentOutcome,
+        GameOutcome lessFrequentOutcome, Date start, Date end, int intervalDays, Player player, Player opponent)
+    {
+        List<Date> dates = valueParser.getDatesInRange(start, end);
+        Collections.sort(dates);
+        int numberOfIntervals = 0;
+        int moreFrequentOutcomeGames = 0;
+        int lessFrequentOutcomeGames = 0;
+        for (int i = 0; i < dates.size(); i++)
+        {
+            Date date = dates.get(i);
+            moreFrequentOutcomeGames += numberOfGames(moreFrequentOutcome, date, date, player, opponent);
+            lessFrequentOutcomeGames += numberOfGames(lessFrequentOutcome, date, date, player, opponent);
+            if ((i + 1) % intervalDays == 0)
+            {
+                if (moreFrequentOutcomeGames > lessFrequentOutcomeGames)
+                {
+                    numberOfIntervals++;
+                }
+                moreFrequentOutcomeGames = 0;
+                lessFrequentOutcomeGames = 0;
             }
         }
         return numberOfIntervals;

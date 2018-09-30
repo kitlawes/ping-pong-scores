@@ -79,7 +79,6 @@ days with at least one game won for each player against each player
 weeks with at least one game won for each player against each player
 days with at least one game lost for each player against each player
 weeks with at least one game lost for each player against each player
-
 days without any games played
 weeks without any games played
 days without any games played for each player
@@ -97,22 +96,17 @@ weeks without any games lost for each player against each player
 
 days with games won greater than games lost for each player
 weeks with games won greater than games lost for each player
-days with games won greater than games lost against each player for each player
-weeks with games won greater than games lost against each player for each player
 days with games won greater than games lost for each player against each player
 weeks with games won greater than games lost for each player against each player
-days with games won equal to games lost and not zero for each player
-weeks with games won equal to games lost and not zero for each player
-days with games won equal to games lost and not zero against each player for each player
-weeks with games won equal to games lost and not zero against each player for each player
-days with games won equal to games lost and not zero for each player against each player
-weeks with games won equal to games lost and not zero for each player against each player
+days with games won equal to games lost for each player
+weeks with games won equal to games lost for each player
+days with games won equal to games lost for each player against each player
+weeks with games won equal to games lost for each player against each player
 days with games won less than games lost for each player
 weeks with games won less than games lost for each player
-days with games won less than games lost against each player for each player
-weeks with games won less than games lost against each player for each player
 days with games won less than games lost for each player against each player
 weeks with games won less than games lost for each player against each player
+
 most consecutive days with at least one game played
 most consecutive days with at least one game played for each player
 most consecutive days with at least one game won for each player
@@ -128,13 +122,10 @@ most consecutive days without any games played for each player against each play
 most consecutive days without any games won for each player against each player
 most consecutive days without any games lost for each player against each player
 most consecutive days with games won greater than games lost for each player
-most consecutive days with games won greater than games lost against each player for each player
 most consecutive days with games won greater than games lost for each player against each player
-most consecutive days with games won equal to games lost and not zero for each player
-most consecutive days with games won equal to games lost and not zero against each player for each player
-most consecutive days with games won equal to games lost and not zero for each player against each player
+most consecutive days with games won equal to games lost for each player
+most consecutive days with games won equal to games lost for each player against each player
 most consecutive days with games won less than games lost for each player
-most consecutive days with games won less than games lost against each player for each player
 most consecutive days with games won less than games lost for each player against each player
 date of 100/200/300/... games played
 date of 100/200/300/... games played for each player
