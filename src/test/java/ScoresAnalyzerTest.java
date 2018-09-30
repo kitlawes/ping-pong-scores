@@ -853,4 +853,27 @@ public class ScoresAnalyzerTest
                 Player.ANTONIO,
                 Player.KIT));
     }
+
+    @Test
+    public void numberOfIntervalsWithoutAnyGamesPlayed()
+    {
+        // number of days without any games played
+        assertEquals(6,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANY,
+                Player.ANY));
+        // number of weeks without any games played
+        assertEquals(1,
+                analyzer.numberOfIntervalsWithoutAnyGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANY,
+                Player.ANY));
+    }
 }

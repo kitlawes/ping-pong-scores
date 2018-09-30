@@ -137,7 +137,9 @@ public class ScoresAnalyzer
         int games = 0;
         for (int i = 0; i < dates.size(); i++)
         {
-            if (i % intervalDays == 0)
+            Date date = dates.get(i);
+            games += numberOfGames(outcome, date, date, player, opponent);
+            if ((i + 1) % intervalDays == 0)
             {
                 if (games >= 1)
                 {
@@ -145,14 +147,27 @@ public class ScoresAnalyzer
                 }
                 games = 0;
             }
+        }
+        return numberOfIntervals;
+    }
+
+    public int numberOfIntervalsWithoutAnyGames(GameOutcome outcome, Date start, Date end, int intervalDays, Player player, Player opponent)
+    {
+        List<Date> dates = valueParser.getDatesInRange(start, end);
+        Collections.sort(dates);
+        int numberOfIntervals = 0;
+        int games = 0;
+        for (int i = 0; i < dates.size(); i++)
+        {
             Date date = dates.get(i);
             games += numberOfGames(outcome, date, date, player, opponent);
-        }
-        if (dates.size() % intervalDays == 0)
-        {
-            if (games >= 1)
+            if ((i + 1) % intervalDays == 0)
             {
-                numberOfIntervals++;
+                if (games == 0)
+                {
+                    numberOfIntervals++;
+                }
+                games = 0;
             }
         }
         return numberOfIntervals;

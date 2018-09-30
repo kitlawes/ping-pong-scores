@@ -65,7 +65,6 @@ most games won in a day for each player against each player
 most games won in a week for each player against each player
 most games lost in a day for each player against each player
 most games lost in a week for each player against each player
-
 days with at least one game played
 weeks with at least one game played
 days with at least one game played for each player
@@ -95,6 +94,7 @@ days without any games won for each player against each player
 weeks without any games won for each player against each player
 days without any games lost for each player against each player
 weeks without any games lost for each player against each player
+
 days with games won greater than games lost for each player
 weeks with games won greater than games lost for each player
 days with games won greater than games lost against each player for each player
