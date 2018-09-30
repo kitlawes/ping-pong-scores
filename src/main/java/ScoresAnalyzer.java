@@ -182,4 +182,21 @@ public class ScoresAnalyzer
         }
         return 0;
     }
+
+    public Date dateOfNumberOfGames(int numberOfGames, GameOutcome outcome, Date start, Date end, Player player,
+                                    Player opponent)
+    {
+        List<Date> dates = valueParser.getDatesInRange(start, end);
+        Collections.sort(dates);
+        int games = 0;
+        for (Date date : dates)
+        {
+            games += numberOfGames(outcome, date, date, player, opponent);
+            if (games >= numberOfGames)
+            {
+                return date;
+            }
+        }
+        return null;
+    }
 }

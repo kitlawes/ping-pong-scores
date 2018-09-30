@@ -1712,4 +1712,18 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
     }
+
+    @Test
+    public void dateOf100GamesPlayed()
+    {
+        // date of 100 games played
+        assertEquals(new GregorianCalendar(2018, Calendar.JULY, 26).getTime(),
+                analyzer.dateOfNumberOfGames(
+                        100,
+                        GameOutcome.ANY,
+                        earliestDate,
+                        latestDate,
+                        Player.ANY,
+                        Player.ANY));
+    }
 }
