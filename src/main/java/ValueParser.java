@@ -1,8 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ValueParser
 {
@@ -172,6 +170,21 @@ public class ValueParser
             }
         }
         return latestDate;
+    }
+
+    public int getNumberOfDatesInRange(Date start, Date end)
+    {
+        Set<Date> dates = new HashSet<>();
+        for (Score score : scores)
+        {
+            if (score.getDate().equals(start)
+                    || score.getDate().after(start) && score.getDate().before(end)
+                    || score.getDate().equals(end))
+            {
+                dates.add(score.getDate());
+            }
+        }
+        return dates.size();
     }
 
     public List<Score> getScores()

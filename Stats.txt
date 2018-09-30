@@ -1,3 +1,6 @@
+number of games played for each day
+number of games played for each week
+number of games played
 number of games played for each day for each player
 number of games played for each week for each player
 number of games played for each player
@@ -49,6 +52,7 @@ average games lost in a day for each player
 average games lost in a day for each player against each player
 average games lost in a week for each player
 average games lost in a week for each player against each player
+
 most games played in a day
 most games played in a day for each player
 most games played in a day for each player against each player
