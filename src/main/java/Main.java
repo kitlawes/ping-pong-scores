@@ -336,7 +336,7 @@ public class Main
                 earliestDate,
                 latestDate,
                 5));
-        
+
         System.out.println();
         System.out.println("players ordered by days with at least one game played");
         System.out.println(analyzer.orderedPlayers(
@@ -448,7 +448,7 @@ public class Main
                 earliestDate,
                 latestDate,
                 5));
-        
+
         System.out.println();
         System.out.println("players ordered by days without any games played");
         System.out.println(analyzer.orderedPlayers(
@@ -557,6 +557,118 @@ public class Main
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5));
+
+        System.out.println();
+        System.out.println("players ordered by days with games won greater than games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.MORE_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by days with games won equal to games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.EQUALLY_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by days with games won less than games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.LESS_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("players ordered by weeks with games won greater than games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.MORE_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by weeks with games won equal to games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.EQUALLY_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("players ordered by weeks with games won less than games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.LESS_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+
+        System.out.println();
+        System.out.println("pairs of players ordered by days with games won greater than games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.MORE_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by days with games won equal to games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.EQUALLY_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by days with games won less than games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.LESS_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1));
+        System.out.println("pairs of players ordered by weeks with games won greater than games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.MORE_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by weeks with games won equal to games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.EQUALLY_FREQUENT,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5));
+        System.out.println("pairs of players ordered by weeks with games won less than games lost");
+        System.out.println(analyzer.orderedPairsOfPlayers(
+                OrderCriterion.INTERVALS,
+                Intervals.ANY,
+                IntervalGames.LESS_FREQUENT,
+                GameOutcome.WIN,
                 earliestDate,
                 latestDate,
                 5));
