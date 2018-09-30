@@ -539,4 +539,36 @@ public class ScoresAnalyzerTest
                 Player.ANTONIO,
                 Player.KIT));
     }
+
+    @Test
+    public void averageNumberOfGamesInAWeekForPlayerForOpponent()
+    {
+        // average number of games played in a week for player for opponent
+        assertEquals(19.25,
+                analyzer.averageNumberOfGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+        // average number of games won in a week for player for opponent
+        assertEquals(9.5,
+                analyzer.averageNumberOfGames(
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+        // average number of games lost in a week for player for opponent
+        assertEquals(9.75,
+                analyzer.averageNumberOfGames(
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANTONIO,
+                Player.KIT));
+    }
 }
