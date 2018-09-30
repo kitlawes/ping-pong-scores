@@ -77,7 +77,7 @@ public class ScoresAnalyzer
         return 100;
     }
 
-    public double averageNumberOfGames(GameOutcome outcome, Date start, Date end, int days, Player player, Player opponent)
+    public double averageNumberOfGames(GameOutcome outcome, Date start, Date end, int intervalDays, Player player, Player opponent)
     {
         int gamesWon = 0;
         int gamesLost = 0;
@@ -93,7 +93,7 @@ public class ScoresAnalyzer
             gamesPlayed = gamesWon + gamesLost;
         }
         int numberOfDatesInRange = valueParser.getNumberOfDatesInRange(start, end);
-        int divisor = numberOfDatesInRange / days;
+        int divisor = numberOfDatesInRange / intervalDays;
         switch (outcome)
         {
             case WIN:
@@ -106,7 +106,7 @@ public class ScoresAnalyzer
         return 0;
     }
 
-    public int mostGames(GameOutcome outcome, Date start, Date end, int days, Player player, Player opponent)
+    public int mostGames(GameOutcome outcome, Date start, Date end, int intervalDays, Player player, Player opponent)
     {
         List<Date> dates = valueParser.getDatesInRange(start, end);
         Collections.sort(dates);
@@ -114,7 +114,7 @@ public class ScoresAnalyzer
         int games = 0;
         for (int i = 0; i < dates.size(); i++)
         {
-            if (i % days == 0)
+            if (i % intervalDays == 0)
             {
                 mostGames = Math.max(mostGames, games);
                 games = 0;
@@ -122,10 +122,39 @@ public class ScoresAnalyzer
             Date date = dates.get(i);
             games += numberOfGames(outcome, date, date, player, opponent);
         }
-        if (dates.size() % days == 0)
+        if (dates.size() % intervalDays == 0)
         {
             mostGames = Math.max(mostGames, games);
         }
         return mostGames;
+    }
+
+    public int numberOfIntervalsWithAtLeastOneGame(GameOutcome outcome, Date start, Date end, int intervalDays, Player player, Player opponent)
+    {
+        List<Date> dates = valueParser.getDatesInRange(start, end);
+        Collections.sort(dates);
+        int numberOfIntervals = 0;
+        int games = 0;
+        for (int i = 0; i < dates.size(); i++)
+        {
+            if (i % intervalDays == 0)
+            {
+                if (games >= 1)
+                {
+                    numberOfIntervals++;
+                }
+                games = 0;
+            }
+            Date date = dates.get(i);
+            games += numberOfGames(outcome, date, date, player, opponent);
+        }
+        if (dates.size() % intervalDays == 0)
+        {
+            if (games >= 1)
+            {
+                numberOfIntervals++;
+            }
+        }
+        return numberOfIntervals;
     }
 }

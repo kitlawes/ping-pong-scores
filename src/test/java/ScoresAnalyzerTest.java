@@ -712,4 +712,27 @@ public class ScoresAnalyzerTest
                 Player.ANTONIO,
                 Player.KIT));
     }
+
+    @Test
+    public void numberOfIntervalsWithAtLeastOneGamePlayed()
+    {
+        // days with at least one game played
+        assertEquals(54,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1,
+                Player.ANY,
+                Player.ANY));
+        // weeks with at least one game played
+        assertEquals(11,
+                analyzer.numberOfIntervalsWithAtLeastOneGame(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                5,
+                Player.ANY,
+                Player.ANY));
+    }
 }
