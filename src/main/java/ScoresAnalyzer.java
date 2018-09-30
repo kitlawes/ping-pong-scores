@@ -78,9 +78,19 @@ public class ScoresAnalyzer
 
     public double averageNumberOfGames(GameOutcome outcome, Date start, Date end, int days, Player player, Player opponent)
     {
-        int gamesWon = numberOfGames(GameOutcome.WIN, start, end, player, opponent);
-        int gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
-        int gamesPlayed = gamesWon + gamesLost;
+        int gamesWon = 0;
+        int gamesLost = 0;
+        int gamesPlayed;
+        if (player == Player.ANY && opponent == Player.ANY)
+        {
+            gamesPlayed = numberOfGames(GameOutcome.ANY, start, end, player, opponent);
+        }
+        else
+        {
+            gamesWon = numberOfGames(GameOutcome.WIN, start, end, player, opponent);
+            gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
+            gamesPlayed = gamesWon + gamesLost;
+        }
         int numberOfDatesInRange = valueParser.getNumberOfDatesInRange(start, end);
         int divisor = numberOfDatesInRange / days;
         switch (outcome)

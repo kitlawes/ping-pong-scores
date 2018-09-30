@@ -48,402 +48,399 @@ public class ScoresAnalyzerTest
     public void numberOfGamesPlayed()
     {
         // number of games played for date
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(19,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANY,
-                Player.ANY),
-                19);
+                Player.ANY));
         // number of games played for date range
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(61,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANY,
-                Player.ANY),
-                61);
+                Player.ANY));
         // number of games played
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(757,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
                 Player.ANY,
-                Player.ANY),
-                757);
+                Player.ANY));
     }
 
     @Test
     public void numberOfGamesPlayedForPlayer()
     {
         // number of games played for date for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(11,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                11);
+                Player.ANY));
         // number of games played for date range for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(36,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                36);
+                Player.ANY));
         // number of games played for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(368,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.ANY),
-                368);
+                Player.ANY));
     }
 
     @Test
     public void numberOfGamesWonForPlayer()
     {
         // number of games won for date for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(3,
+                analyzer.numberOfGames(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                3);
+                Player.ANY));
         // number of games won for date range for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(14,
+                analyzer.numberOfGames(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                14);
+                Player.ANY));
         // number of games won for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(178,
+                analyzer.numberOfGames(
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.ANY),
-                178);
+                Player.ANY));
     }
 
     @Test
     public void numberOfGamesLostForPlayer()
     {
         // number of games lost for date for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(8,
+                analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                8);
+                Player.ANY));
         // number of games lost for date range for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(22,
+                analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                22);
+                Player.ANY));
         // number of games lost for player
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(190,
+                analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.ANY),
-                190);
+                Player.ANY));
     }
 
     @Test
     public void numberOfGamesPlayedForPlayerForOpponent()
     {
         // number of games played for date for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(7,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                7);
+                Player.KIT));
         // number of games played for date range for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(11,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                11);
+                Player.KIT));
         // number of games played for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(231,
+                analyzer.numberOfGames(
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.KIT),
-                231);
+                Player.KIT));
     }
 
     @Test
     public void numberOfGamesWonForPlayerForOpponent()
     {
         // number of games won for date for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(2,
+                analyzer.numberOfGames(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                2);
+                Player.KIT));
         // number of games won for date range for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(5,
+                analyzer.numberOfGames(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                5);
+                Player.KIT));
         // number of games won for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(114,
+                analyzer.numberOfGames(
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.KIT),
-                114);
+                Player.KIT));
     }
 
     @Test
     public void numberOfGamesLostForPlayerForOpponent()
     {
         // number of games lost for date for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(5,
+                analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                5);
+                Player.KIT));
         // number of games lost for date range for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(6,
+                analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                6);
+                Player.KIT));
         // number of games lost for player for opponent
-        assertEquals(analyzer.numberOfGames(
+        assertEquals(117,
+                analyzer.numberOfGames(
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.KIT),
-                117);
+                Player.KIT));
     }
 
     @Test
     public void winnerForPlayerForOpponent()
     {
         // winner for date for player for opponent
-        assertEquals(analyzer.playerWithOutcome(
+        assertEquals(Player.KIT,
+                analyzer.playerWithOutcome(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                Player.KIT);
+                Player.KIT));
         // winner for date range for player for opponent
-        assertEquals(analyzer.playerWithOutcome(
+        assertEquals(Player.KIT,
+                analyzer.playerWithOutcome(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                Player.KIT);
+                Player.KIT));
         // winner for player for opponent
-        assertEquals(analyzer.playerWithOutcome(
+        assertEquals(Player.KIT,
+                analyzer.playerWithOutcome(
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.KIT),
-                Player.KIT);
+                Player.KIT));
     }
 
     @Test
     public void loserForPlayerForOpponent()
     {
         // loser for date for player for opponent
-        assertEquals(analyzer.playerWithOutcome(
+        assertEquals(Player.ANTONIO,
+                analyzer.playerWithOutcome(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                Player.ANTONIO);
+                Player.KIT));
         // loser for date range for player for opponent
-        assertEquals(analyzer.playerWithOutcome(
+        assertEquals(Player.ANTONIO,
+                analyzer.playerWithOutcome(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                Player.ANTONIO);
+                Player.KIT));
         // loser for player for opponent
-        assertEquals(analyzer.playerWithOutcome(
+        assertEquals(Player.ANTONIO,
+                analyzer.playerWithOutcome(
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.KIT),
-                Player.ANTONIO);
+                Player.KIT));
     }
 
     @Test
     public void percentageOfGamesWonForPlayer()
     {
         // percentage of games won for date for player
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(27,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                27);
+                Player.ANY));
         // percentage of games won for date range for player
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(39,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                39);
+                Player.ANY));
         // percentage of games won for player
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(48,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.ANY),
-                48);
+                Player.ANY));
     }
 
     @Test
     public void percentageOfGamesLostForPlayer()
     {
         // percentage of games lost for date for player
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(73,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                73);
+                Player.ANY));
         // percentage of games lost for date range for player
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(61,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.ANY),
-                61);
+                Player.ANY));
         // percentage of games lost for player
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(52,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.ANY),
-                52);
+                Player.ANY));
     }
 
     @Test
     public void percentageOfGamesWonForPlayerForOpponent()
     {
         // percentage of games won for date for player for opponent
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(29,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                29);
+                Player.KIT));
         // percentage of games won for date range for player for opponent
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(45,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.WIN,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                45);
+                Player.KIT));
         // percentage of games won for player for opponent
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(49,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.KIT),
-                49);
+                Player.KIT));
     }
 
     @Test
     public void percentageOfGamesLostForPlayerForOpponent()
     {
         // percentage of games lost for date for player for opponent
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(71,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                71);
+                Player.KIT));
         // percentage of games lost for date range for player for opponent
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(55,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.LOSE,
                 new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
                 new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
                 Player.ANTONIO,
-                Player.KIT),
-                55);
+                Player.KIT));
         // percentage of games lost for player for opponent
-        assertEquals(analyzer.percentageOfGamesWithOutcome(
+        assertEquals(51,
+                analyzer.percentageOfGamesWithOutcome(
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
                 Player.ANTONIO,
-                Player.KIT),
-                51);
+                Player.KIT));
     }
 
     @Test
-    @Disabled
-    public void averageGamesPlayedForDateForPlayer()
+    public void averageNumberOfGamesPlayed()
     {
-        // average games played in a day
-        assertEquals(analyzer.averageNumberOfGames(
+        // average number of games played in a day
+        assertEquals(12.62,
+                analyzer.averageNumberOfGames(
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
                 1,
                 Player.ANY,
-                Player.ANY),
-                0);
-
-
-        // average games won in a week for player for opponent
-        assertEquals(analyzer.averageNumberOfGames(
-                GameOutcome.WIN,
+                Player.ANY));
+        // average number of games played in a week
+        assertEquals(63.08,
+                analyzer.averageNumberOfGames(
+                GameOutcome.ANY,
                 earliestDate,
                 latestDate,
                 5,
-                Player.ANTONIO,
-                Player.KIT),
-                0);
+                Player.ANY,
+                Player.ANY));
     }
 }
