@@ -19,6 +19,29 @@ public class Main
         final Date earliestDate = parser.getEarliestDate();
         final Date latestDate = parser.getLatestDate();
         
+        System.out.println("number of games played for date");
+        System.out.println(analyzer.numberOfGames(
+                GameOutcome.ANY,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANY,
+                Player.ANY));
+        System.out.println("number of games played for date range");
+        System.out.println(analyzer.numberOfGames(
+                GameOutcome.ANY,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANY,
+                Player.ANY));
+        System.out.println("number of games played");
+        System.out.println(analyzer.numberOfGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                Player.ANY,
+                Player.ANY));
+        
+        System.out.println();
         System.out.println("number of games played for date for player");
         System.out.println(analyzer.numberOfGames(
                 GameOutcome.ANY,

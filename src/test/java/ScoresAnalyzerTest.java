@@ -45,6 +45,35 @@ public class ScoresAnalyzerTest
     }
 
     @Test
+    public void numberOfGamesPlayed()
+    {
+        // number of games played for date
+        assertEquals(analyzer.numberOfGames(
+                GameOutcome.ANY,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                Player.ANY,
+                Player.ANY),
+                19);
+        // number of games played for date range
+        assertEquals(analyzer.numberOfGames(
+                GameOutcome.ANY,
+                new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                Player.ANY,
+                Player.ANY),
+                61);
+        // number of games played
+        assertEquals(analyzer.numberOfGames(
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                Player.ANY,
+                Player.ANY),
+                757);
+    }
+
+    @Test
     public void numberOfGamesPlayedForPlayer()
     {
         // number of games played for date for player
