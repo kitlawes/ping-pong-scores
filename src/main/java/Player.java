@@ -5,5 +5,6 @@ public enum Player
     HUNOR,
     JIPESH,
     ANY,
-    NONE
+    NONE,
+    ALL
 }

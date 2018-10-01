@@ -80,6 +80,7 @@ public class ScoresAnalyzer
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
+        players.remove(Player.ALL);
         Double percentage = new Double(0);
         int numberOfPercentages = 0;
         for (Player opponent : players)
@@ -231,6 +232,7 @@ public class ScoresAnalyzer
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
+        players.remove(Player.ALL);
 
         Map<Player, Object> orderedPlayers = new HashMap<>();
         for (Player player : players)
@@ -296,6 +298,7 @@ public class ScoresAnalyzer
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
+        players.remove(Player.ALL);
         final ArrayList<PlayerPair> playerPairs = new ArrayList<>();
         for (int i = 0; i < players.size(); i++)
         {

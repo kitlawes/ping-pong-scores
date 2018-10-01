@@ -11,7 +11,7 @@ public class Main
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
         LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph(Graph.NUMBER_OF_GAMES_PLAYED);
+        lineGraph.drawGraph(Graph.NUMBER_OF_GAMES_PLAYED_FOR_EACH_DAY, Player.ALL);
 
         final Date earliestDate = parser.getEarliestDate();
         final Date latestDate = parser.getLatestDate();
@@ -1155,7 +1155,8 @@ public class Main
             {
                 System.out.println("players ordered by date of " + gamesPlayed + " games played");
                 System.out.println(orderedPlayers);
-            } else
+            }
+            else
             {
                 break;
             }
@@ -1179,7 +1180,8 @@ public class Main
             {
                 System.out.println("players ordered by date of " + gamesWon + " games won");
                 System.out.println(orderedPlayers);
-            } else
+            }
+            else
             {
                 break;
             }
@@ -1203,7 +1205,8 @@ public class Main
             {
                 System.out.println("players ordered by date of " + gamesLost + " games lost");
                 System.out.println(orderedPlayers);
-            } else
+            }
+            else
             {
                 break;
             }
@@ -1227,7 +1230,8 @@ public class Main
             {
                 System.out.println("pairs of players ordered by date of " + gamesPlayed + " games played");
                 System.out.println(orderedPairsOfPlayers);
-            } else
+            }
+            else
             {
                 break;
             }
@@ -1251,7 +1255,8 @@ public class Main
             {
                 System.out.println("pairs of players ordered by date of " + gamesWon + " games won");
                 System.out.println(orderedPairsOfPlayers);
-            } else
+            }
+            else
             {
                 break;
             }
@@ -1275,7 +1280,8 @@ public class Main
             {
                 System.out.println("pairs of players ordered by date of " + gamesLost + " games lost");
                 System.out.println(orderedPairsOfPlayers);
-            } else
+            }
+            else
             {
                 break;
             }

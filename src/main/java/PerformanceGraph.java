@@ -13,23 +13,25 @@ public class PerformanceGraph
         this.parser = parser;
         this.analyzer = analyzer;
     }
-    
-    public void drawPerformanceGraph() {
+
+    public void drawPerformanceGraph()
+    {
         final Date earliestDate = parser.getEarliestDate();
         final Date latestDate = parser.getLatestDate();
         List<Date> dates = parser.getDatesInRange(earliestDate, latestDate);
         Collections.sort(dates);
-        
+
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
-        
+        players.remove(Player.ALL);
+
         final List<Map<Player, Double>> percentages = new ArrayList<>();
         double lowestPercentage = 100.0;
         double highestPercentage = 0.0;
-        
+
         int intervalDays = 14;
-        
+
         for (int i = 0; i + intervalDays < dates.size(); i++)
         {
             Map<Player, Double> map = new HashMap<>();
@@ -80,16 +82,16 @@ public class PerformanceGraph
                         switch (player)
                         {
                             case ANTONIO:
-                                g.setColor(new Color(0f/ 2f, 1f/ 2f, 2f/ 2f));
+                                g.setColor(new Color(0f / 2f, 1f / 2f, 2f / 2f));
                                 break;
                             case KIT:
-                                g.setColor(new Color(0f/ 2f, 2f/ 2f, 1f/ 2f));
+                                g.setColor(new Color(0f / 2f, 2f / 2f, 1f / 2f));
                                 break;
                             case HUNOR:
-                                g.setColor(new Color(2f/ 2f, 0f/ 2f, 1f/ 2f));
+                                g.setColor(new Color(2f / 2f, 0f / 2f, 1f / 2f));
                                 break;
                             case JIPESH:
-                                g.setColor(new Color(1f/ 2f, 0f/ 2f, 2f/ 2f));
+                                g.setColor(new Color(1f / 2f, 0f / 2f, 2f / 2f));
                                 break;
                         }
                         g.drawLine(leftInset + (int) Math.round((double) i / (size - 1) * (width - leftInset - rightInset)),
