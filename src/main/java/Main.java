@@ -11,7 +11,7 @@ public class Main
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
         LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph();
+        lineGraph.drawGraph(Graph.NUMBER_OF_GAMES_PLAYED);
 
         final Date earliestDate = parser.getEarliestDate();
         final Date latestDate = parser.getLatestDate();

@@ -14,9 +14,9 @@ public class LineGraph
         this.analyzer = analyzer;
     }
 
-    public void drawGraph()
+    public void drawGraph(Graph graph)
     {
-        // graph of number of games played for each day
+        // graph of number of games played
         Date earliestDate = parser.getEarliestDate();
         Date latestDate = parser.getLatestDate();
         final List<Date> dates = parser.getDatesInRange(earliestDate, latestDate);
@@ -27,9 +27,19 @@ public class LineGraph
         final Map<Date, Integer> data = new HashMap<>();
         for (Date date : dates)
         {
+            Date start = null;
+            switch (graph)
+            {
+                case NUMBER_OF_GAMES_PLAYED_FOR_EACH_DAY:
+                    start = date;
+                    break;
+                case NUMBER_OF_GAMES_PLAYED:
+                    start = earliestDate;
+                    break;
+            }
             Integer games = analyzer.numberOfGames(
                     GameOutcome.ANY,
-                    date,
+                    start,
                     date,
                     Player.ANY,
                     Player.ANY);
