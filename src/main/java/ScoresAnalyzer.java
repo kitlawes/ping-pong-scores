@@ -84,8 +84,7 @@ public class ScoresAnalyzer
         if (player == Player.ANY && opponent == Player.ANY)
         {
             gamesPlayed = numberOfGames(GameOutcome.ANY, start, end, player, opponent);
-        }
-        else
+        } else
         {
             gamesWon = numberOfGames(GameOutcome.WIN, start, end, player, opponent);
             gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
@@ -161,8 +160,7 @@ public class ScoresAnalyzer
                 {
                     numberOfIntervals++;
                     mostConsecutiveIntervals = Math.max(mostConsecutiveIntervals, numberOfIntervals);
-                }
-                else if (intervals == Intervals.MOST_CONSECUTIVE)
+                } else if (intervals == Intervals.MOST_CONSECUTIVE)
                 {
                     numberOfIntervals = 0;
                 }
@@ -199,8 +197,9 @@ public class ScoresAnalyzer
     }
 
     public List<Map.Entry<Player, Object>> orderedPlayers(OrderCriterion orderCriterion, Intervals intervals,
-                                                          IntervalGames intervalGames, Integer numberOfGames, GameOutcome outcome,
-                                                          Date start, Date end, Integer intervalDays)
+                                                          IntervalGames intervalGames, Integer numberOfGames,
+                                                          GameOutcome outcome, Date start, Date end,
+                                                          Integer intervalDays)
     {
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
@@ -260,8 +259,9 @@ public class ScoresAnalyzer
     }
 
     public List<Map.Entry<PlayerPair, Object>> orderedPairsOfPlayers(OrderCriterion orderCriterion, Intervals intervals,
-                                                                     IntervalGames intervalGames, GameOutcome outcome,
-                                                                     Date start, Date end, Integer intervalDays)
+                                                                     IntervalGames intervalGames, Integer numberOfGames,
+                                                                     GameOutcome outcome, Date start, Date end,
+                                                                     Integer intervalDays)
     {
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
@@ -303,6 +303,13 @@ public class ScoresAnalyzer
                 case INTERVALS:
                     orderedPlayerPairs.put(playerPair, numberOfIntervals(intervals, intervalGames, outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
                     break;
+                case DATE_OF_NUMBER_OF_GAMES:
+                    Date date = dateOfNumberOfGames(numberOfGames, outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent());
+                    if (date != null)
+                    {
+                        orderedPlayerPairs.put(playerPair, date);
+                    }
+                    break;
             }
         }
 
@@ -318,6 +325,10 @@ public class ScoresAnalyzer
                 if (o1.getValue() instanceof Double)
                 {
                     return ((Double) o2.getValue()).compareTo(((Double) o1.getValue()));
+                }
+                if (o1.getValue() instanceof Date)
+                {
+                    return ((Date) o1.getValue()).compareTo(((Date) o2.getValue()));
                 }
                 return 0;
             }
