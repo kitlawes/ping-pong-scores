@@ -4,5 +4,6 @@ public enum OrderCriterion
     PERCENTAGE_OF_GAMES,
     AVERAGE_NUMBER_OF_GAMES,
     MOST_GAMES,
-    INTERVALS
+    INTERVALS,
+    DATE_OF_NUMBER_OF_GAMES
 }

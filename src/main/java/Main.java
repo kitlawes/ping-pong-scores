@@ -21,6 +21,7 @@ public class Main
                 OrderCriterion.NUMBER_OF_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -30,6 +31,7 @@ public class Main
                 OrderCriterion.NUMBER_OF_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -37,6 +39,7 @@ public class Main
         System.out.println("players ordered by number of games lost");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.NUMBER_OF_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.LOSE,
@@ -79,6 +82,7 @@ public class Main
                 OrderCriterion.PERCENTAGE_OF_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -86,6 +90,7 @@ public class Main
         System.out.println("players ordered by number of games lost");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.PERCENTAGE_OF_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.LOSE,
@@ -119,6 +124,7 @@ public class Main
                 OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -126,6 +132,7 @@ public class Main
         System.out.println("players ordered by average number of games won in a day");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.WIN,
@@ -137,6 +144,7 @@ public class Main
                 OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -144,6 +152,7 @@ public class Main
         System.out.println("players ordered by average number of games played in a week");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.ANY,
@@ -155,6 +164,7 @@ public class Main
                 OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -162,6 +172,7 @@ public class Main
         System.out.println("players ordered by average number of games lost in a week");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.LOSE,
@@ -231,6 +242,7 @@ public class Main
                 OrderCriterion.MOST_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -238,6 +250,7 @@ public class Main
         System.out.println("players ordered by most games won in a day");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.MOST_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.WIN,
@@ -249,6 +262,7 @@ public class Main
                 OrderCriterion.MOST_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -256,6 +270,7 @@ public class Main
         System.out.println("players ordered by most games played in a week");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.MOST_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.ANY,
@@ -267,6 +282,7 @@ public class Main
                 OrderCriterion.MOST_GAMES,
                 null,
                 null,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -274,6 +290,7 @@ public class Main
         System.out.println("players ordered by most games lost in a week");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.MOST_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.LOSE,
@@ -343,6 +360,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -352,6 +370,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -361,6 +380,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -370,6 +390,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -379,6 +400,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -388,6 +410,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -455,6 +478,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -464,6 +488,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -473,6 +498,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -482,6 +508,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -491,6 +518,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -500,6 +528,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -567,6 +596,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.MORE_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -576,6 +606,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.EQUALLY_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -585,6 +616,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.LESS_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -594,6 +626,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.MORE_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -603,6 +636,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.EQUALLY_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -612,6 +646,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.LESS_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -679,6 +714,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -688,6 +724,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -697,6 +734,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -706,6 +744,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -715,6 +754,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -724,6 +764,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -791,6 +832,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -800,6 +842,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -809,6 +852,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -818,6 +862,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
@@ -827,6 +872,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -836,6 +882,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
+                null,
                 GameOutcome.LOSE,
                 earliestDate,
                 latestDate,
@@ -903,6 +950,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.MORE_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -912,6 +960,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.EQUALLY_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -921,6 +970,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.LESS_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -930,6 +980,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.MORE_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -939,6 +990,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.EQUALLY_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -948,6 +1000,7 @@ public class Main
                 OrderCriterion.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.LESS_FREQUENT,
+                null,
                 GameOutcome.WIN,
                 earliestDate,
                 latestDate,
@@ -1008,5 +1061,77 @@ public class Main
                 earliestDate,
                 latestDate,
                 5));
+
+        System.out.println();
+        int gamesPlayed = 0;
+        while (true)
+        {
+            gamesPlayed += 100;
+            List<Map.Entry<Player, Object>> orderedPlayers = analyzer.orderedPlayers(
+                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    null,
+                    null,
+                    gamesPlayed,
+                    GameOutcome.ANY,
+                    earliestDate,
+                    latestDate,
+                    1);
+            if (!orderedPlayers.isEmpty())
+            {
+                System.out.println("players ordered by date of " + gamesPlayed + " games played");
+                System.out.println(orderedPlayers);
+            } else
+            {
+                break;
+            }
+        }
+
+        System.out.println();
+        int gamesWon = 0;
+        while (true)
+        {
+            gamesWon += 100;
+            List<Map.Entry<Player, Object>> orderedPlayers = analyzer.orderedPlayers(
+                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    null,
+                    null,
+                    gamesWon,
+                    GameOutcome.WIN,
+                    earliestDate,
+                    latestDate,
+                    1);
+            if (!orderedPlayers.isEmpty())
+            {
+                System.out.println("players ordered by date of " + gamesWon + " games won");
+                System.out.println(orderedPlayers);
+            } else
+            {
+                break;
+            }
+        }
+
+        System.out.println();
+        int gamesLost = 0;
+        while (true)
+        {
+            gamesLost += 100;
+            List<Map.Entry<Player, Object>> orderedPlayers = analyzer.orderedPlayers(
+                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    null,
+                    null,
+                    gamesLost,
+                    GameOutcome.LOSE,
+                    earliestDate,
+                    latestDate,
+                    1);
+            if (!orderedPlayers.isEmpty())
+            {
+                System.out.println("players ordered by date of " + gamesLost + " games lost");
+                System.out.println(orderedPlayers);
+            } else
+            {
+                break;
+            }
+        }
     }
 }
