@@ -25,18 +25,24 @@ winner for each player against each player
 loser for each day for each player against each player
 loser for each week for each player against each player
 loser for each player against each player
-percentage of games won for each player
 percentage of games won for each day for each player
 percentage of games won for each week for each player
-percentage of games lost for each player
+percentage of games won for each player
 percentage of games lost for each day for each player
 percentage of games lost for each week for each player
-percentage of games won for each player against each player
+percentage of games lost for each player
 percentage of games won for each day for each player against each player
 percentage of games won for each week for each player against each player
-percentage of games lost for each player against each player
+percentage of games won for each player against each player
 percentage of games lost for each day for each player against each player
 percentage of games lost for each week for each player against each player
+percentage of games lost for each player against each player
+average percentage of games won for each day for each player
+average percentage of games won for each week for each player
+average percentage of games won for each player
+average percentage of games lost for each player
+average percentage of games lost for each player
+average percentage of games lost for each player
 average games played in a day
 average games played in a week
 average games played in a day for each player
@@ -145,6 +151,8 @@ players ordered by percentage of games won
 players ordered by percentage of games lost
 pairs of players ordered by percentage of games won
 pairs of players ordered by percentage of games lost
+players ordered by average percentage of games won
+players ordered by average percentage of games lost
 players ordered by average games played in a day
 players ordered by average games won in a day
 players ordered by average games lost in a day
@@ -223,7 +231,6 @@ players ordered by most consecutive days with games won less than games lost
 pairs of players ordered by most consecutive days with games won greater than games lost
 pairs of players ordered by most consecutive days with games won equal to games lost
 pairs of players ordered by most consecutive days with games won less than games lost
-
 players ordered by date of 100/200/300/... games played
 players ordered by date of 100/200/300/... games won
 players ordered by date of 100/200/300/... games lost

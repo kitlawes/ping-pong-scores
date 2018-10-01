@@ -307,7 +307,7 @@ public class ScoresAnalyzerTest
     public void percentageOfGamesWonForPlayer()
     {
         // percentage of games won for date for player
-        assertEquals(27,
+        assertEquals(new Double(27.27272727272727),
                 analyzer.percentageOfGames(
                         GameOutcome.WIN,
                         new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
@@ -315,7 +315,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // percentage of games won for date range for player
-        assertEquals(39,
+        assertEquals(new Double(38.88888888888889),
                 analyzer.percentageOfGames(
                         GameOutcome.WIN,
                         new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
@@ -323,7 +323,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // percentage of games won for player
-        assertEquals(48,
+        assertEquals(new Double(48.369565217391305),
                 analyzer.percentageOfGames(
                         GameOutcome.WIN,
                         earliestDate,
@@ -336,7 +336,7 @@ public class ScoresAnalyzerTest
     public void percentageOfGamesLostForPlayer()
     {
         // percentage of games lost for date for player
-        assertEquals(73,
+        assertEquals(new Double(72.72727272727273),
                 analyzer.percentageOfGames(
                         GameOutcome.LOSE,
                         new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
@@ -344,7 +344,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // percentage of games lost for date range for player
-        assertEquals(61,
+        assertEquals(new Double(61.111111111111114),
                 analyzer.percentageOfGames(
                         GameOutcome.LOSE,
                         new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
@@ -352,7 +352,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // percentage of games lost for player
-        assertEquals(52,
+        assertEquals(new Double(51.63043478260869),
                 analyzer.percentageOfGames(
                         GameOutcome.LOSE,
                         earliestDate,
@@ -365,7 +365,7 @@ public class ScoresAnalyzerTest
     public void percentageOfGamesWonForPlayerForOpponent()
     {
         // percentage of games won for date for player for opponent
-        assertEquals(29,
+        assertEquals(new Double(28.57142857142857),
                 analyzer.percentageOfGames(
                         GameOutcome.WIN,
                         new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
@@ -373,7 +373,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // percentage of games won for date range for player for opponent
-        assertEquals(45,
+        assertEquals(new Double(45.45454545454545),
                 analyzer.percentageOfGames(
                         GameOutcome.WIN,
                         new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
@@ -381,7 +381,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // percentage of games won for player for opponent
-        assertEquals(49,
+        assertEquals(new Double(49.35064935064935),
                 analyzer.percentageOfGames(
                         GameOutcome.WIN,
                         earliestDate,
@@ -394,7 +394,7 @@ public class ScoresAnalyzerTest
     public void percentageOfGamesLostForPlayerForOpponent()
     {
         // percentage of games lost for date for player for opponent
-        assertEquals(71,
+        assertEquals(new Double(71.42857142857143),
                 analyzer.percentageOfGames(
                         GameOutcome.LOSE,
                         new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
@@ -402,7 +402,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // percentage of games lost for date range for player for opponent
-        assertEquals(55,
+        assertEquals(new Double(54.54545454545454),
                 analyzer.percentageOfGames(
                         GameOutcome.LOSE,
                         new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
@@ -410,13 +410,65 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // percentage of games lost for player for opponent
-        assertEquals(51,
+        assertEquals(new Double(50.649350649350644),
                 analyzer.percentageOfGames(
                         GameOutcome.LOSE,
                         earliestDate,
                         latestDate,
                         Player.ANTONIO,
                         Player.KIT));
+    }
+
+    @Test
+    public void averagePercentageOfGamesWonForPlayer()
+    {
+        // average percentage of games won for date for player
+        assertEquals(new Double(26.785714285714285),
+                analyzer.averagePercentageOfGames(
+                        GameOutcome.WIN,
+                        new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                        new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                        Player.ANTONIO));
+        // average percentage of games won for date range for player
+        assertEquals(new Double(40.72727272727273),
+                analyzer.averagePercentageOfGames(
+                        GameOutcome.WIN,
+                        new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                        new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                        Player.ANTONIO));
+        // average percentage of games won for player
+        assertEquals(new Double(48.968952194758636),
+                analyzer.averagePercentageOfGames(
+                        GameOutcome.WIN,
+                        earliestDate,
+                        latestDate,
+                        Player.ANTONIO));
+    }
+
+    @Test
+    public void averagePercentageOfGamesLostForPlayer()
+    {
+        // average percentage of games lost for date for player
+        assertEquals(new Double(73.21428571428572),
+                analyzer.averagePercentageOfGames(
+                        GameOutcome.LOSE,
+                        new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                        new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                        Player.ANTONIO));
+        // average percentage of games lost for date range for player
+        assertEquals(new Double(59.272727272727266),
+                analyzer.averagePercentageOfGames(
+                        GameOutcome.LOSE,
+                        new GregorianCalendar(2018, Calendar.JULY, 16).getTime(),
+                        new GregorianCalendar(2018, Calendar.JULY, 20).getTime(),
+                        Player.ANTONIO));
+        // average percentage of games lost for player
+        assertEquals(new Double(51.03104780524135),
+                analyzer.averagePercentageOfGames(
+                        GameOutcome.LOSE,
+                        earliestDate,
+                        latestDate,
+                        Player.ANTONIO));
     }
 
     @Test
