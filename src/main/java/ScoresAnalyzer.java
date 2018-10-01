@@ -122,11 +122,11 @@ public class ScoresAnalyzer
         switch (outcome)
         {
             case WIN:
-                return (double) Math.round((double) gamesWon / divisor * 100) / 100;
+                return (double) gamesWon / divisor;
             case LOSE:
-                return (double) Math.round((double) gamesLost / divisor * 100) / 100;
+                return (double) gamesLost / divisor;
             case ANY:
-                return (double) Math.round((double) gamesPlayed / divisor * 100) / 100;
+                return (double) gamesPlayed / divisor;
         }
         return 0;
     }
@@ -242,6 +242,9 @@ public class ScoresAnalyzer
                     break;
                 case PERCENTAGE_OF_GAMES:
                     orderedPlayers.put(player, percentageOfGames(outcome, start, end, player, Player.ANY));
+                    break;
+                case AVERAGE_PERCENTAGE_OF_GAMES:
+                    orderedPlayers.put(player, averagePercentageOfGames(outcome, start, end, player));
                     break;
                 case AVERAGE_NUMBER_OF_GAMES:
                     orderedPlayers.put(player, averageNumberOfGames(outcome, start, end, intervalDays, player, Player.ANY));

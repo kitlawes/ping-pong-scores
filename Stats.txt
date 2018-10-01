@@ -40,8 +40,8 @@ percentage of games lost for each player against each player
 average percentage of games won for each day for each player
 average percentage of games won for each week for each player
 average percentage of games won for each player
-average percentage of games lost for each player
-average percentage of games lost for each player
+average percentage of games lost for each day for each player
+average percentage of games lost for each week for each player
 average percentage of games lost for each player
 average games played in a day
 average games played in a week
@@ -237,3 +237,73 @@ players ordered by date of 100/200/300/... games lost
 pairs of players ordered by date of 100/200/300/... games played
 pairs of players ordered by date of 100/200/300/... games won
 pairs of players ordered by date of 100/200/300/... games lost
+
+line graph of number of games played for each day
+line graph of number of games played
+line graph of number of games played for each day for each player
+line graph of number of games played for each player
+line graph of number of games won for each day for each player
+line graph of number of games won for each player
+line graph of number of games lost for each day for each player
+line graph of number of games lost for each player
+line graph of number of games played for each day for each player against each player
+line graph of number of games played for each player against each player
+line graph of number of games won for each day for each player against each player
+line graph of number of games won for each player against each player
+line graph of number of games lost for each day for each player against each player
+line graph of number of games lost for each player against each player
+line graph of percentage of games won for each day for each player
+line graph of percentage of games lost for each day for each player
+line graph of percentage of games won for each day for each player against each player
+line graph of percentage of games lost for each day for each player against each player
+line graph of average percentage of games won for each day for each player
+line graph of average percentage of games won for each player
+line graph of average percentage of games lost for each day for each player
+line graph of average percentage of games lost for each player
+line graph of most games played in a day
+line graph of most games played in a day for each player
+line graph of most games won in a day for each player
+line graph of most games lost in a day for each player
+line graph of most games played in a day for each player against each player
+line graph of most games won in a day for each player against each player
+line graph of most games lost in a day for each player against each player
+line graph of days with at least one game played
+line graph of days with at least one game played for each player
+line graph of days with at least one game won for each player
+line graph of days with at least one game lost for each player
+line graph of days with at least one game played for each player against each player
+line graph of days with at least one game won for each player against each player
+line graph of days with at least one game lost for each player against each player
+line graph of days without any games played
+line graph of days without any games played for each player
+line graph of days without any games won for each player
+line graph of days without any games lost for each player
+line graph of days without any games played for each player against each player
+line graph of days without any games won for each player against each player
+line graph of days without any games lost for each player against each player
+line graph of days with games won greater than games lost for each player
+line graph of days with games won greater than games lost for each player against each player
+line graph of days with games won equal to games lost for each player
+line graph of days with games won equal to games lost for each player against each player
+line graph of days with games won less than games lost for each player
+line graph of days with games won less than games lost for each player against each player
+line graph of most consecutive days with at least one game played
+line graph of most consecutive days with at least one game played for each player
+line graph of most consecutive days with at least one game won for each player
+line graph of most consecutive days with at least one game lost for each player
+line graph of most consecutive days with at least one game played for each player against each player
+line graph of most consecutive days with at least one game won for each player against each player
+line graph of most consecutive days with at least one game lost for each player against each player
+line graph of most consecutive days without any games played
+line graph of most consecutive days without any games played for each player
+line graph of most consecutive days without any games won for each player
+line graph of most consecutive days without any games lost for each player
+line graph of most consecutive days without any games played for each player against each player
+line graph of most consecutive days without any games won for each player against each player
+line graph of most consecutive days without any games lost for each player against each player
+line graph of most consecutive days with games won greater than games lost for each player
+line graph of most consecutive days with games won greater than games lost for each player against each player
+line graph of most consecutive days with games won equal to games lost for each player
+line graph of most consecutive days with games won equal to games lost for each player against each player
+line graph of most consecutive days with games won less than games lost for each player
+line graph of most consecutive days with games won less than games lost for each player against each player

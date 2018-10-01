@@ -38,8 +38,8 @@ public class ScoresAnalyzerTest
 
         analyzer = new ScoresAnalyzer(parser);
 
-        earliestDate = parser.getEarliestDate();
-        latestDate = parser.getLatestDate();
+        earliestDate = new GregorianCalendar(2018, Calendar.JULY, 16).getTime();
+        latestDate = new GregorianCalendar(2018, Calendar.SEPTEMBER, 28).getTime();
     }
 
     @Test
@@ -475,7 +475,7 @@ public class ScoresAnalyzerTest
     public void averageNumberOfGamesPlayed()
     {
         // average number of games played in a day
-        assertEquals(12.62,
+        assertEquals(13.763636363636364,
                 analyzer.averageNumberOfGames(
                         GameOutcome.ANY,
                         earliestDate,
@@ -484,7 +484,7 @@ public class ScoresAnalyzerTest
                         Player.ANY,
                         Player.ANY));
         // average number of games played in a week
-        assertEquals(63.08,
+        assertEquals(68.81818181818181,
                 analyzer.averageNumberOfGames(
                         GameOutcome.ANY,
                         earliestDate,
@@ -498,7 +498,7 @@ public class ScoresAnalyzerTest
     public void averageNumberOfGamesInADayForPlayer()
     {
         // average number of games played in a day for player
-        assertEquals(6.13,
+        assertEquals(6.6909090909090905,
                 analyzer.averageNumberOfGames(
                         GameOutcome.ANY,
                         earliestDate,
@@ -507,7 +507,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // average number of games won in a day for player
-        assertEquals(2.97,
+        assertEquals(3.2363636363636363,
                 analyzer.averageNumberOfGames(
                         GameOutcome.WIN,
                         earliestDate,
@@ -516,7 +516,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // average number of games lost in a day for player
-        assertEquals(3.17,
+        assertEquals(3.4545454545454546,
                 analyzer.averageNumberOfGames(
                         GameOutcome.LOSE,
                         earliestDate,
@@ -530,7 +530,7 @@ public class ScoresAnalyzerTest
     public void averageNumberOfGamesInAWeekForPlayer()
     {
         // average number of games played in a day for player
-        assertEquals(30.67,
+        assertEquals(33.45454545454545,
                 analyzer.averageNumberOfGames(
                         GameOutcome.ANY,
                         earliestDate,
@@ -539,7 +539,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // average number of games won in a day for player
-        assertEquals(14.83,
+        assertEquals(16.181818181818183,
                 analyzer.averageNumberOfGames(
                         GameOutcome.WIN,
                         earliestDate,
@@ -548,7 +548,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // average number of games lost in a day for player
-        assertEquals(15.83,
+        assertEquals(17.272727272727273,
                 analyzer.averageNumberOfGames(
                         GameOutcome.LOSE,
                         earliestDate,
@@ -562,7 +562,7 @@ public class ScoresAnalyzerTest
     public void averageNumberOfGamesInADayForPlayerForOpponent()
     {
         // average number of games played in a day for player for opponent
-        assertEquals(3.85,
+        assertEquals(4.2,
                 analyzer.averageNumberOfGames(
                         GameOutcome.ANY,
                         earliestDate,
@@ -571,7 +571,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // average number of games won in a day for player for opponent
-        assertEquals(1.9,
+        assertEquals(2.0727272727272728,
                 analyzer.averageNumberOfGames(
                         GameOutcome.WIN,
                         earliestDate,
@@ -580,7 +580,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // average number of games lost in a day for player for opponent
-        assertEquals(1.95,
+        assertEquals(2.1272727272727274,
                 analyzer.averageNumberOfGames(
                         GameOutcome.LOSE,
                         earliestDate,
@@ -594,7 +594,7 @@ public class ScoresAnalyzerTest
     public void averageNumberOfGamesInAWeekForPlayerForOpponent()
     {
         // average number of games played in a week for player for opponent
-        assertEquals(19.25,
+        assertEquals(21.0,
                 analyzer.averageNumberOfGames(
                         GameOutcome.ANY,
                         earliestDate,
@@ -603,7 +603,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // average number of games won in a week for player for opponent
-        assertEquals(9.5,
+        assertEquals(10.363636363636363,
                 analyzer.averageNumberOfGames(
                         GameOutcome.WIN,
                         earliestDate,
@@ -612,7 +612,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // average number of games lost in a week for player for opponent
-        assertEquals(9.75,
+        assertEquals(10.636363636363637,
                 analyzer.averageNumberOfGames(
                         GameOutcome.LOSE,
                         earliestDate,
@@ -936,7 +936,7 @@ public class ScoresAnalyzerTest
     public void numberOfIntervalsWithoutAnyGamesPlayed()
     {
         // number of days without any games played
-        assertEquals(6,
+        assertEquals(1,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -947,7 +947,7 @@ public class ScoresAnalyzerTest
                         Player.ANY,
                         Player.ANY));
         // number of weeks without any games played
-        assertEquals(1,
+        assertEquals(0,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -963,7 +963,7 @@ public class ScoresAnalyzerTest
     public void numberOfIntervalsWithoutAnyGamesForPlayer()
     {
         // number of days without any games played for player
-        assertEquals(23,
+        assertEquals(18,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -974,7 +974,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // number of weeks without any games played for player
-        assertEquals(3,
+        assertEquals(2,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -985,7 +985,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // number of days without any games won for player
-        assertEquals(25,
+        assertEquals(20,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -996,7 +996,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // number of weeks without any games won for player
-        assertEquals(4,
+        assertEquals(3,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1007,7 +1007,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // number of days without any games lost for player
-        assertEquals(24,
+        assertEquals(19,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1018,7 +1018,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // number of weeks without any games lost for player
-        assertEquals(3,
+        assertEquals(2,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1034,7 +1034,7 @@ public class ScoresAnalyzerTest
     public void numberOfIntervalsWithoutAnyGamesForPlayerForOpponent()
     {
         // number of days without any games played for player for opponent
-        assertEquals(28,
+        assertEquals(23,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1045,7 +1045,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // number of weeks without any games played for player for opponent
-        assertEquals(3,
+        assertEquals(2,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1056,7 +1056,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // number of days without any games won for player for opponent
-        assertEquals(32,
+        assertEquals(27,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1067,7 +1067,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // number of weeks without any games won for player for opponent
-        assertEquals(4,
+        assertEquals(3,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1078,7 +1078,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // number of days without any games lost for player for opponent
-        assertEquals(31,
+        assertEquals(26,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1089,7 +1089,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // number of weeks without any games lost for player for opponent
-        assertEquals(3,
+        assertEquals(2,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.WITHOUT_ANY,
@@ -1159,7 +1159,7 @@ public class ScoresAnalyzerTest
     public void numberOfIntervalsWithGamesWonEqualToGamesLostForPlayer()
     {
         // number of days with games won equal to games lost for player
-        assertEquals(24,
+        assertEquals(19,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.EQUALLY_FREQUENT,
@@ -1170,7 +1170,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.ANY));
         // number of weeks with games won equal to games lost for player
-        assertEquals(3,
+        assertEquals(2,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.EQUALLY_FREQUENT,
@@ -1186,7 +1186,7 @@ public class ScoresAnalyzerTest
     public void numberOfIntervalsWithGamesWonEqualToGamesLostForPlayerForOpponent()
     {
         // number of days with games won equal to games lost for player for opponent
-        assertEquals(28,
+        assertEquals(23,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.EQUALLY_FREQUENT,
@@ -1197,7 +1197,7 @@ public class ScoresAnalyzerTest
                         Player.ANTONIO,
                         Player.KIT));
         // number of weeks with games won equal to games lost for player for opponent
-        assertEquals(3,
+        assertEquals(2,
                 analyzer.numberOfIntervals(
                         Intervals.ANY,
                         IntervalGames.EQUALLY_FREQUENT,
@@ -1436,7 +1436,7 @@ public class ScoresAnalyzerTest
     public void mostConsecutiveIntervalsWithoutAnyGamesPlayed()
     {
         // most consecutive days without any games played
-        assertEquals(5,
+        assertEquals(1,
                 analyzer.numberOfIntervals(
                         Intervals.MOST_CONSECUTIVE,
                         IntervalGames.WITHOUT_ANY,
@@ -1447,7 +1447,7 @@ public class ScoresAnalyzerTest
                         Player.ANY,
                         Player.ANY));
         // most consecutive weeks without any games played
-        assertEquals(1,
+        assertEquals(0,
                 analyzer.numberOfIntervals(
                         Intervals.MOST_CONSECUTIVE,
                         IntervalGames.WITHOUT_ANY,

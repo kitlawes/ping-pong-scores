@@ -90,7 +90,7 @@ public class Main
                 earliestDate,
                 latestDate,
                 null));
-        System.out.println("players ordered by number of games lost");
+        System.out.println("players ordered by percentage of games lost");
         System.out.println(analyzer.orderedPlayers(
                 OrderCriterion.PERCENTAGE_OF_GAMES,
                 null,
@@ -112,9 +112,31 @@ public class Main
                 earliestDate,
                 latestDate,
                 null));
-        System.out.println("pairs of players ordered by number of games lost");
+        System.out.println("pairs of players ordered by percentage of games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
                 OrderCriterion.PERCENTAGE_OF_GAMES,
+                null,
+                null,
+                null,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                null));
+
+        System.out.println();
+        System.out.println("players ordered by average percentage of games won");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.AVERAGE_PERCENTAGE_OF_GAMES,
+                null,
+                null,
+                null,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                null));
+        System.out.println("players ordered by average percentage of games lost");
+        System.out.println(analyzer.orderedPlayers(
+                OrderCriterion.AVERAGE_PERCENTAGE_OF_GAMES,
                 null,
                 null,
                 null,
