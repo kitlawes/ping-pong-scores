@@ -246,7 +246,6 @@ line graph of number of games won for each day for each player
 line graph of number of games won for each player
 line graph of number of games lost for each day for each player
 line graph of number of games lost for each player
-
 line graph of number of games played for each day for each player against each player
 line graph of number of games played for each player against each player
 line graph of number of games won for each day for each player against each player
@@ -258,6 +257,7 @@ line graph of percentage of games won for each day for each player
 line graph of percentage of games lost for each day for each player
 line graph of percentage of games won for each day for each player against each player
 line graph of percentage of games lost for each day for each player against each player
+
 line graph of average percentage of games won for each day for each player
 line graph of average percentage of games won for each player
 line graph of average percentage of games lost for each day for each player
