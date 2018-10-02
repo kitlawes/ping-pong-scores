@@ -111,7 +111,8 @@ public class ScoresAnalyzer
         if (player == Player.ANY && opponent == Player.ANY)
         {
             gamesPlayed = numberOfGames(GameOutcome.ANY, start, end, player, opponent);
-        } else
+        }
+        else
         {
             gamesWon = numberOfGames(GameOutcome.WIN, start, end, player, opponent);
             gamesLost = numberOfGames(GameOutcome.LOSE, start, end, player, opponent);
@@ -187,7 +188,8 @@ public class ScoresAnalyzer
                 {
                     numberOfIntervals++;
                     mostConsecutiveIntervals = Math.max(mostConsecutiveIntervals, numberOfIntervals);
-                } else if (intervals == Intervals.MOST_CONSECUTIVE)
+                }
+                else if (intervals == Intervals.MOST_CONSECUTIVE)
                 {
                     numberOfIntervals = 0;
                 }
@@ -228,64 +230,10 @@ public class ScoresAnalyzer
                                                           GameOutcome outcome, Date start, Date end,
                                                           Integer intervalDays)
     {
-        final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
+        List<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
-
-        Map<Player, Object> orderedPlayers = new HashMap<>();
-        for (Player player : players)
-        {
-            switch (orderCriterion)
-            {
-                case NUMBER_OF_GAMES:
-                    orderedPlayers.put(player, numberOfGames(outcome, start, end, player, Player.ANY));
-                    break;
-                case PERCENTAGE_OF_GAMES:
-                    orderedPlayers.put(player, percentageOfGames(outcome, start, end, player, Player.ANY));
-                    break;
-                case AVERAGE_PERCENTAGE_OF_GAMES:
-                    orderedPlayers.put(player, averagePercentageOfGames(outcome, start, end, player));
-                    break;
-                case AVERAGE_NUMBER_OF_GAMES:
-                    orderedPlayers.put(player, averageNumberOfGames(outcome, start, end, intervalDays, player, Player.ANY));
-                    break;
-                case MOST_GAMES:
-                    orderedPlayers.put(player, mostGames(outcome, start, end, intervalDays, player, Player.ANY));
-                    break;
-                case INTERVALS:
-                    orderedPlayers.put(player, numberOfIntervals(intervals, intervalGames, outcome, start, end, intervalDays, player, Player.ANY));
-                    break;
-                case DATE_OF_NUMBER_OF_GAMES:
-                    Date date = dateOfNumberOfGames(numberOfGames, outcome, start, end, player, Player.ANY);
-                    if (date != null)
-                    {
-                        orderedPlayers.put(player, date);
-                    }
-                    break;
-            }
-        }
-
-        List<Map.Entry<Player, Object>> list = new ArrayList<>(orderedPlayers.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<Player, Object>>()
-        {
-            public int compare(Map.Entry<Player, Object> o1, Map.Entry<Player, Object> o2)
-            {
-                if (o1.getValue() instanceof Integer)
-                {
-                    return ((Integer) o2.getValue()).compareTo(((Integer) o1.getValue()));
-                }
-                if (o1.getValue() instanceof Double)
-                {
-                    return ((Double) o2.getValue()).compareTo(((Double) o1.getValue()));
-                }
-                if (o1.getValue() instanceof Date)
-                {
-                    return ((Date) o1.getValue()).compareTo(((Date) o2.getValue()));
-                }
-                return 0;
-            }
-        });
-        return list;
+        return orderedPlayersOrPlayerPairs(players, orderCriterion, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
     }
 
     public List<Map.Entry<PlayerPair, Object>> orderedPairsOfPlayers(OrderCriterion orderCriterion, Intervals intervals,
@@ -293,10 +241,10 @@ public class ScoresAnalyzer
                                                                      GameOutcome outcome, Date start, Date end,
                                                                      Integer intervalDays)
     {
-        final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
+        ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
-        final ArrayList<PlayerPair> playerPairs = new ArrayList<>();
+        ArrayList<PlayerPair> playerPairs = new ArrayList<>();
         for (int i = 0; i < players.size(); i++)
         {
             Player player = players.get(i);
@@ -312,41 +260,64 @@ public class ScoresAnalyzer
                 }
             }
         }
+        return orderedPlayersOrPlayerPairs(playerPairs, orderCriterion, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
+    }
 
-        Map<PlayerPair, Object> orderedPlayerPairs = new HashMap<>();
-        for (PlayerPair playerPair : playerPairs)
+    public <T> List<Map.Entry<T, Object>> orderedPlayersOrPlayerPairs(List<T> playersOrPlayerPairs,
+                                                                      OrderCriterion orderCriterion,
+                                                                      Intervals intervals, IntervalGames intervalGames,
+                                                                      Integer numberOfGames, GameOutcome outcome,
+                                                                      Date start, Date end, Integer intervalDays)
+    {
+        Map<T, Object> orderedPlayersOrPlayerPairs = new HashMap<>();
+        for (T playerOrPlayerPair : playersOrPlayerPairs)
         {
+            Player player = null;
+            Player opponent = null;
+            if (playerOrPlayerPair instanceof Player)
+            {
+                player = (Player) playerOrPlayerPair;
+                opponent = Player.ANY;
+            }
+            if (playerOrPlayerPair instanceof PlayerPair)
+            {
+                player = ((PlayerPair) playerOrPlayerPair).getPlayer();
+                opponent = ((PlayerPair) playerOrPlayerPair).getOpponent();
+            }
             switch (orderCriterion)
             {
                 case NUMBER_OF_GAMES:
-                    orderedPlayerPairs.put(playerPair, numberOfGames(outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent()));
+                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, numberOfGames(outcome, start, end, player, opponent));
                     break;
                 case PERCENTAGE_OF_GAMES:
-                    orderedPlayerPairs.put(playerPair, percentageOfGames(outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent()));
+                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, percentageOfGames(outcome, start, end, player, opponent));
+                    break;
+                case AVERAGE_PERCENTAGE_OF_GAMES:
+                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, averagePercentageOfGames(outcome, start, end, player));
                     break;
                 case AVERAGE_NUMBER_OF_GAMES:
-                    orderedPlayerPairs.put(playerPair, averageNumberOfGames(outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
+                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, averageNumberOfGames(outcome, start, end, intervalDays, player, opponent));
                     break;
                 case MOST_GAMES:
-                    orderedPlayerPairs.put(playerPair, mostGames(outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
+                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, mostGames(outcome, start, end, intervalDays, player, opponent));
                     break;
                 case INTERVALS:
-                    orderedPlayerPairs.put(playerPair, numberOfIntervals(intervals, intervalGames, outcome, start, end, intervalDays, playerPair.getPlayer(), playerPair.getOpponent()));
+                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, numberOfIntervals(intervals, intervalGames, outcome, start, end, intervalDays, player, opponent));
                     break;
                 case DATE_OF_NUMBER_OF_GAMES:
-                    Date date = dateOfNumberOfGames(numberOfGames, outcome, start, end, playerPair.getPlayer(), playerPair.getOpponent());
+                    Date date = dateOfNumberOfGames(numberOfGames, outcome, start, end, player, opponent);
                     if (date != null)
                     {
-                        orderedPlayerPairs.put(playerPair, date);
+                        orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, date);
                     }
                     break;
             }
         }
 
-        List<Map.Entry<PlayerPair, Object>> list = new ArrayList<>(orderedPlayerPairs.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<PlayerPair, Object>>()
+        List<Map.Entry<T, Object>> list = new ArrayList<>(orderedPlayersOrPlayerPairs.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<T, Object>>()
         {
-            public int compare(Map.Entry<PlayerPair, Object> o1, Map.Entry<PlayerPair, Object> o2)
+            public int compare(Map.Entry<T, Object> o1, Map.Entry<T, Object> o2)
             {
                 if (o1.getValue() instanceof Integer)
                 {
