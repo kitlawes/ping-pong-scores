@@ -99,7 +99,7 @@ public class ScoresAnalyzer
                 }
             }
         }
-        return percentage / numberOfPercentages;
+        return numberOfPercentages == 0 ? null : percentage / numberOfPercentages;
     }
 
     public double averageNumberOfGames(GameOutcome outcome, Date start, Date end, int intervalDays, Player player,

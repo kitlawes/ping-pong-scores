@@ -58,6 +58,9 @@ public class LineGraph
                         case PERCENTAGE_OF_GAMES:
                             dataPoint = analyzer.percentageOfGames(outcome, start, date, player, opponent);
                             break;
+                        case AVERAGE_PERCENTAGE_OF_GAMES:
+                            dataPoint = analyzer.averagePercentageOfGames(outcome, start, date, player);
+                            break;
                     }
                     opponentData.put(date, dataPoint);
                     if (lowest == null)
