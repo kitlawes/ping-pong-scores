@@ -14,7 +14,7 @@ public class LineGraph
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Graph graph, Player player)
+    public void drawGraph(Graph graph, GameOutcome outcome, final Player[] players)
     {
         Date earliestDate = parser.getEarliestDate();
         Date latestDate = parser.getLatestDate();
@@ -22,19 +22,6 @@ public class LineGraph
         Collections.sort(dates);
         Integer lowest = null;
         Integer highest = null;
-        final ArrayList<Player> players = new ArrayList<>();
-        switch (player)
-        {
-            case ALL:
-                players.addAll(Arrays.asList(Player.values()));
-                players.remove(Player.ANY);
-                players.remove(Player.NONE);
-                players.remove(Player.ALL);
-                break;
-            default:
-                players.add(player);
-                break;
-        }
 
         final Map<Player, Map<Date, Integer>> data = new HashMap<>();
         for (Player listPlayer : players)
@@ -46,15 +33,15 @@ public class LineGraph
                 Date start = null;
                 switch (graph)
                 {
-                    case NUMBER_OF_GAMES_PLAYED_FOR_EACH_DAY:
+                    case NUMBER_OF_GAMES_FOR_EACH_DAY:
                         start = date;
                         break;
-                    case NUMBER_OF_GAMES_PLAYED:
+                    case NUMBER_OF_GAMES:
                         start = earliestDate;
                         break;
                 }
                 Integer games = analyzer.numberOfGames(
-                        GameOutcome.ANY,
+                        outcome,
                         start,
                         date,
                         listPlayer,

@@ -24,7 +24,6 @@ public class PerformanceGraph
         final ArrayList<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
-        players.remove(Player.ALL);
 
         final List<Map<Player, Double>> percentages = new ArrayList<>();
         double lowestPercentage = 100.0;
