@@ -14,52 +14,64 @@ public class LineGraph
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Graph graph, GameOutcome outcome, final Player[] players)
+    public void drawGraph(Graph graph, GameOutcome outcome, final Player[] players, final Player[] opponents)
     {
         Date earliestDate = parser.getEarliestDate();
         Date latestDate = parser.getLatestDate();
         final List<Date> dates = parser.getDatesInRange(earliestDate, latestDate);
         Collections.sort(dates);
+        int dataAmount = 0;
         Integer lowest = null;
         Integer highest = null;
 
-        final Map<Player, Map<Date, Integer>> data = new HashMap<>();
-        for (Player listPlayer : players)
+        final Map<Player, Map<Player, Map<Date, Integer>>> data = new HashMap<>();
+        for (Player player : players)
         {
-            HashMap<Date, Integer> playerData = new HashMap<>();
-            data.put(listPlayer, playerData);
-            for (Date date : dates)
+            Map<Player, Map<Date, Integer>> playerData = new HashMap<>();
+            data.put(player, playerData);
+            for (Player opponent : opponents)
             {
-                Date start = null;
-                switch (graph)
+                if (player == opponent && player != Player.ANY)
                 {
-                    case NUMBER_OF_GAMES_FOR_EACH_DAY:
-                        start = date;
-                        break;
-                    case NUMBER_OF_GAMES:
-                        start = earliestDate;
-                        break;
+                    continue;
                 }
-                Integer games = analyzer.numberOfGames(
-                        outcome,
-                        start,
-                        date,
-                        listPlayer,
-                        Player.ANY);
-                playerData.put(date, games);
-                if (lowest == null)
+                HashMap<Date, Integer> opponentData = new HashMap<>();
+                playerData.put(opponent, opponentData);
+                dataAmount++;
+                for (Date date : dates)
                 {
-                    lowest = games;
+                    Date start = null;
+                    switch (graph)
+                    {
+                        case NUMBER_OF_GAMES_FOR_EACH_DAY:
+                            start = date;
+                            break;
+                        case NUMBER_OF_GAMES:
+                            start = earliestDate;
+                            break;
+                    }
+                    Integer games = analyzer.numberOfGames(
+                            outcome,
+                            start,
+                            date,
+                            player,
+                            opponent);
+                    opponentData.put(date, games);
+                    if (lowest == null)
+                    {
+                        lowest = games;
+                    }
+                    lowest = Math.min(lowest, games);
+                    if (highest == null)
+                    {
+                        highest = games;
+                    }
+                    highest = Math.max(highest, games);
                 }
-                lowest = Math.min(lowest, games);
-                if (highest == null)
-                {
-                    highest = games;
-                }
-                highest = Math.max(highest, games);
             }
         }
 
+        final int finalDataAmount = dataAmount;
         final Integer finalLowest = lowest;
         final Integer finalHighest = highest;
         final int width = 500;
@@ -78,36 +90,25 @@ public class LineGraph
 //                g.drawLine(width - rightInset, topInset, width - rightInset, height - bottomInset);
 //                g.drawLine(width - rightInset, height - bottomInset, leftInset, height - bottomInset);
 //                g.drawLine(leftInset, height - bottomInset, leftInset, topInset);
-                int size = dates.size();
-                for (Player player : players)
+                int dateAmount = dates.size();
+                int dataIndex = -1;
+                for (Map<Player, Map<Date, Integer>> playerData : data.values())
                 {
-                    switch (player)
+                    for (Map<Date, Integer> opponentData : playerData.values())
                     {
-                        case ANTONIO:
-                            g.setColor(new Color(0f / 2f, 1f / 2f, 2f / 2f));
-                            break;
-                        case KIT:
-                            g.setColor(new Color(0f / 2f, 2f / 2f, 1f / 2f));
-                            break;
-                        case HUNOR:
-                            g.setColor(new Color(1f / 2f, 2f / 2f, 0f / 2f));
-                            break;
-                        case JIPESH:
-                            g.setColor(new Color(2f / 2f, 1f / 2f, 0f / 2f));
-                            break;
-                        case ANY:
-                            g.setColor(new Color(0f / 2f, 0f / 2f, 0f / 2f));
-                            break;
-                    }
-                    Map<Date, Integer> playerData = data.get(player);
-                    for (int i = 0; i + 1 < size; i++)
-                    {
-                        Integer currentGames = playerData.get(dates.get(i));
-                        Integer nextGames = playerData.get(dates.get(i + 1));
-                        g.drawLine(leftInset + (int) Math.round((double) i / (size - 1) * (width - leftInset - rightInset)),
-                                topInset + (int) Math.round((double) (finalHighest - currentGames) / (finalHighest - finalLowest) * (height - topInset - bottomInset)),
-                                leftInset + (int) Math.round((double) (i + 1) / (size - 1) * (width - leftInset - rightInset)),
-                                topInset + (int) Math.round((double) (finalHighest - nextGames) / (finalHighest - finalLowest) * (height - topInset - bottomInset)));
+                        dataIndex++;
+                        g.setColor(new Color((float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+                                (float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+                                (float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+                        for (int i = 0; i + 1 < dateAmount; i++)
+                        {
+                            Integer currentGames = opponentData.get(dates.get(i));
+                            Integer nextGames = opponentData.get(dates.get(i + 1));
+                            g.drawLine(leftInset + (int) Math.round((double) i / (dateAmount - 1) * (width - leftInset - rightInset)),
+                                    topInset + (int) Math.round((double) (finalHighest - currentGames) / (finalHighest - finalLowest) * (height - topInset - bottomInset)),
+                                    leftInset + (int) Math.round((double) (i + 1) / (dateAmount - 1) * (width - leftInset - rightInset)),
+                                    topInset + (int) Math.round((double) (finalHighest - nextGames) / (finalHighest - finalLowest) * (height - topInset - bottomInset)));
+                        }
                     }
                 }
             }

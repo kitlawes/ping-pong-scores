@@ -12,7 +12,8 @@ public class Main
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
         LineGraph lineGraph = new LineGraph(parser, analyzer);
         lineGraph.drawGraph(Graph.NUMBER_OF_GAMES_FOR_EACH_DAY,
-                GameOutcome.WIN,
+                GameOutcome.ANY,
+                new Player[]{Player.ANTONIO},
                 new Player[]{Player.ANTONIO, Player.KIT, Player.HUNOR, Player.JIPESH, Player.ANY});
 
         if (true)
