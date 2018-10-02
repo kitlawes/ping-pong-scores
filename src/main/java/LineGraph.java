@@ -14,8 +14,8 @@ public class LineGraph
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Graph graph, boolean cumulative, GameOutcome outcome, int intervalDays,
-                          final Player[] players, final Player[] opponents)
+    public void drawGraph(Statistic statistic, boolean cumulative, Intervals intervals, IntervalGames intervalGames,
+                          GameOutcome outcome, int intervalDays, final Player[] players, final Player[] opponents)
     {
         Date earliestDate = parser.getEarliestDate();
         Date latestDate = parser.getLatestDate();
@@ -51,7 +51,7 @@ public class LineGraph
                         start = date;
                     }
                     Double dataPoint = null;
-                    switch (graph)
+                    switch (statistic)
                     {
                         case NUMBER_OF_GAMES:
                             dataPoint = new Double(analyzer.numberOfGames(outcome, start, date, player, opponent));
@@ -64,6 +64,9 @@ public class LineGraph
                             break;
                         case MOST_GAMES:
                             dataPoint = new Double(analyzer.mostGames(outcome, start, date, intervalDays, player, opponent));
+                            break;
+                        case INTERVALS:
+                            dataPoint = new Double(analyzer.numberOfIntervals(intervals, intervalGames, outcome, start, date, intervalDays, player, opponent));
                             break;
                     }
                     opponentData.put(date, dataPoint);

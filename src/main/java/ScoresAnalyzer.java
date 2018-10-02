@@ -225,7 +225,7 @@ public class ScoresAnalyzer
         return null;
     }
 
-    public List<Map.Entry<Player, Object>> orderedPlayers(OrderCriterion orderCriterion, Intervals intervals,
+    public List<Map.Entry<Player, Object>> orderedPlayers(Statistic statistic, Intervals intervals,
                                                           IntervalGames intervalGames, Integer numberOfGames,
                                                           GameOutcome outcome, Date start, Date end,
                                                           Integer intervalDays)
@@ -233,10 +233,10 @@ public class ScoresAnalyzer
         List<Player> players = new ArrayList<>(Arrays.asList(Player.values()));
         players.remove(Player.ANY);
         players.remove(Player.NONE);
-        return orderedPlayersOrPlayerPairs(players, orderCriterion, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
+        return orderedPlayersOrPlayerPairs(players, statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
     }
 
-    public List<Map.Entry<PlayerPair, Object>> orderedPairsOfPlayers(OrderCriterion orderCriterion, Intervals intervals,
+    public List<Map.Entry<PlayerPair, Object>> orderedPairsOfPlayers(Statistic statistic, Intervals intervals,
                                                                      IntervalGames intervalGames, Integer numberOfGames,
                                                                      GameOutcome outcome, Date start, Date end,
                                                                      Integer intervalDays)
@@ -260,11 +260,11 @@ public class ScoresAnalyzer
                 }
             }
         }
-        return orderedPlayersOrPlayerPairs(playerPairs, orderCriterion, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
+        return orderedPlayersOrPlayerPairs(playerPairs, statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
     }
 
     public <T> List<Map.Entry<T, Object>> orderedPlayersOrPlayerPairs(List<T> playersOrPlayerPairs,
-                                                                      OrderCriterion orderCriterion,
+                                                                      Statistic statistic,
                                                                       Intervals intervals, IntervalGames intervalGames,
                                                                       Integer numberOfGames, GameOutcome outcome,
                                                                       Date start, Date end, Integer intervalDays)
@@ -284,7 +284,7 @@ public class ScoresAnalyzer
                 player = ((PlayerPair) playerOrPlayerPair).getPlayer();
                 opponent = ((PlayerPair) playerOrPlayerPair).getOpponent();
             }
-            switch (orderCriterion)
+            switch (statistic)
             {
                 case NUMBER_OF_GAMES:
                     orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, numberOfGames(outcome, start, end, player, opponent));

@@ -1,4 +1,4 @@
-public enum OrderCriterion
+public enum Statistic
 {
     NUMBER_OF_GAMES,
     PERCENTAGE_OF_GAMES,

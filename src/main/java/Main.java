@@ -11,12 +11,14 @@ public class Main
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
         LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph(Graph.MOST_GAMES,
-                true,
+        lineGraph.drawGraph(Statistic.INTERVALS,
+                false,
+                Intervals.ANY,
+                IntervalGames.WITHOUT_ANY,
                 GameOutcome.ANY,
-                5,
+                1,
                 new Player[]{Player.ANTONIO},
-                new Player[]{Player.ANY});
+                new Player[]{Player.KIT});
 
         if (true)
         {
@@ -28,7 +30,7 @@ public class Main
 
         System.out.println("players ordered by number of games played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.NUMBER_OF_GAMES,
+                Statistic.NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -38,7 +40,7 @@ public class Main
                 null));
         System.out.println("players ordered by number of games won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.NUMBER_OF_GAMES,
+                Statistic.NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -48,7 +50,7 @@ public class Main
                 null));
         System.out.println("players ordered by number of games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.NUMBER_OF_GAMES,
+                Statistic.NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -60,7 +62,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by number of games played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.NUMBER_OF_GAMES,
+                Statistic.NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -70,7 +72,7 @@ public class Main
                 null));
         System.out.println("pairs of players ordered by number of games won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.NUMBER_OF_GAMES,
+                Statistic.NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -80,7 +82,7 @@ public class Main
                 null));
         System.out.println("pairs of players ordered by number of games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.NUMBER_OF_GAMES,
+                Statistic.NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -92,7 +94,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by percentage of games won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.PERCENTAGE_OF_GAMES,
+                Statistic.PERCENTAGE_OF_GAMES,
                 null,
                 null,
                 null,
@@ -102,7 +104,7 @@ public class Main
                 null));
         System.out.println("players ordered by percentage of games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.PERCENTAGE_OF_GAMES,
+                Statistic.PERCENTAGE_OF_GAMES,
                 null,
                 null,
                 null,
@@ -114,7 +116,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by percentage of games won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.PERCENTAGE_OF_GAMES,
+                Statistic.PERCENTAGE_OF_GAMES,
                 null,
                 null,
                 null,
@@ -124,7 +126,7 @@ public class Main
                 null));
         System.out.println("pairs of players ordered by percentage of games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.PERCENTAGE_OF_GAMES,
+                Statistic.PERCENTAGE_OF_GAMES,
                 null,
                 null,
                 null,
@@ -136,7 +138,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by average percentage of games won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.AVERAGE_PERCENTAGE_OF_GAMES,
+                Statistic.AVERAGE_PERCENTAGE_OF_GAMES,
                 null,
                 null,
                 null,
@@ -146,7 +148,7 @@ public class Main
                 null));
         System.out.println("players ordered by average percentage of games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.AVERAGE_PERCENTAGE_OF_GAMES,
+                Statistic.AVERAGE_PERCENTAGE_OF_GAMES,
                 null,
                 null,
                 null,
@@ -158,7 +160,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by average number of games played in a day");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -168,7 +170,7 @@ public class Main
                 1));
         System.out.println("players ordered by average number of games won in a day");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -178,7 +180,7 @@ public class Main
                 1));
         System.out.println("players ordered by average number of games lost in a day");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -188,7 +190,7 @@ public class Main
                 1));
         System.out.println("players ordered by average number of games played in a week");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -198,7 +200,7 @@ public class Main
                 5));
         System.out.println("players ordered by average number of games won in a week");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -208,7 +210,7 @@ public class Main
                 5));
         System.out.println("players ordered by average number of games lost in a week");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -220,7 +222,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by average number of games played in a day");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -230,7 +232,7 @@ public class Main
                 1));
         System.out.println("pairs of players by average number of games won in a day");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -240,7 +242,7 @@ public class Main
                 1));
         System.out.println("pairs of players by average number of games lost in a day");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -250,7 +252,7 @@ public class Main
                 1));
         System.out.println("pairs of players by average number of games played in a week");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -260,7 +262,7 @@ public class Main
                 5));
         System.out.println("pairs of players by average number of games won in a week");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -270,7 +272,7 @@ public class Main
                 5));
         System.out.println("pairs of players by average number of games lost in a week");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.AVERAGE_NUMBER_OF_GAMES,
+                Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
                 null,
                 null,
@@ -282,7 +284,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by most games played in a day");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -292,7 +294,7 @@ public class Main
                 1));
         System.out.println("players ordered by most games won in a day");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -302,7 +304,7 @@ public class Main
                 1));
         System.out.println("players ordered by most games lost in a day");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -312,7 +314,7 @@ public class Main
                 1));
         System.out.println("players ordered by most games played in a week");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -322,7 +324,7 @@ public class Main
                 5));
         System.out.println("players ordered by most games won in a week");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -332,7 +334,7 @@ public class Main
                 5));
         System.out.println("players ordered by most games lost in a week");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -344,7 +346,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by most games played in a day");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -354,7 +356,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most games won in a day");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -364,7 +366,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most games lost in a day");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -374,7 +376,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most games played in a week");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -384,7 +386,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by most games won in a week");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -394,7 +396,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by most games lost in a week");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.MOST_GAMES,
+                Statistic.MOST_GAMES,
                 null,
                 null,
                 null,
@@ -406,7 +408,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by days with at least one game played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -416,7 +418,7 @@ public class Main
                 1));
         System.out.println("players ordered by days with at least one game won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -426,7 +428,7 @@ public class Main
                 1));
         System.out.println("players ordered by days with at least one game lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -436,7 +438,7 @@ public class Main
                 1));
         System.out.println("players ordered by weeks with at least one game played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -446,7 +448,7 @@ public class Main
                 5));
         System.out.println("players ordered by weeks with at least one game won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -456,7 +458,7 @@ public class Main
                 5));
         System.out.println("players ordered by weeks with at least one game lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -468,7 +470,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by days with at least one game played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -478,7 +480,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by days with at least one game won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -488,7 +490,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by days with at least one game lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -498,7 +500,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by weeks with at least one game played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -508,7 +510,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by weeks with at least one game won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -518,7 +520,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by weeks with at least one game lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -530,7 +532,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by days without any games played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -540,7 +542,7 @@ public class Main
                 1));
         System.out.println("players ordered by days without any games won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -550,7 +552,7 @@ public class Main
                 1));
         System.out.println("players ordered by days without any games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -560,7 +562,7 @@ public class Main
                 1));
         System.out.println("players ordered by weeks without any games played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -570,7 +572,7 @@ public class Main
                 5));
         System.out.println("players ordered by weeks without any games won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -580,7 +582,7 @@ public class Main
                 5));
         System.out.println("players ordered by weeks without any games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -592,7 +594,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by days without any games played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -602,7 +604,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by days without any games won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -612,7 +614,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by days without any games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -622,7 +624,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by weeks without any games played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -632,7 +634,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by weeks without any games won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -642,7 +644,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by weeks without any games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -654,7 +656,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by days with games won greater than games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.MORE_FREQUENT,
                 null,
@@ -664,7 +666,7 @@ public class Main
                 1));
         System.out.println("players ordered by days with games won equal to games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
@@ -674,7 +676,7 @@ public class Main
                 1));
         System.out.println("players ordered by days with games won less than games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.LESS_FREQUENT,
                 null,
@@ -684,7 +686,7 @@ public class Main
                 1));
         System.out.println("players ordered by weeks with games won greater than games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.MORE_FREQUENT,
                 null,
@@ -694,7 +696,7 @@ public class Main
                 5));
         System.out.println("players ordered by weeks with games won equal to games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
@@ -704,7 +706,7 @@ public class Main
                 5));
         System.out.println("players ordered by weeks with games won less than games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.LESS_FREQUENT,
                 null,
@@ -716,7 +718,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by days with games won greater than games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.MORE_FREQUENT,
                 null,
@@ -726,7 +728,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by days with games won equal to games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
@@ -736,7 +738,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by days with games won less than games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.LESS_FREQUENT,
                 null,
@@ -746,7 +748,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by weeks with games won greater than games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.MORE_FREQUENT,
                 null,
@@ -756,7 +758,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by weeks with games won equal to games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
@@ -766,7 +768,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by weeks with games won less than games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.ANY,
                 IntervalGames.LESS_FREQUENT,
                 null,
@@ -778,7 +780,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by most consecutive days with at least one game played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -788,7 +790,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive days with at least one game won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -798,7 +800,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive days with at least one game lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -808,7 +810,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive weeks with at least one game played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -818,7 +820,7 @@ public class Main
                 5));
         System.out.println("players ordered by most consecutive weeks with at least one game won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -828,7 +830,7 @@ public class Main
                 5));
         System.out.println("players ordered by most consecutive weeks with at least one game lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -840,7 +842,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by most consecutive days with at least one game played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -850,7 +852,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive days with at least one game won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -860,7 +862,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive days with at least one game lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -870,7 +872,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive weeks with at least one game played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -880,7 +882,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks with at least one game won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -890,7 +892,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks with at least one game lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.AT_LEAST_ONE,
                 null,
@@ -902,7 +904,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by most consecutive days without any games played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -912,7 +914,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive days without any games won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -922,7 +924,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive days without any games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -932,7 +934,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive weeks without any games played");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -942,7 +944,7 @@ public class Main
                 5));
         System.out.println("players ordered by most consecutive weeks without any games won");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -952,7 +954,7 @@ public class Main
                 5));
         System.out.println("players ordered by most consecutive weeks without any games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -964,7 +966,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by most consecutive days without any games played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -974,7 +976,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive days without any games won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -984,7 +986,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive days without any games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -994,7 +996,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive weeks without any games played");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -1004,7 +1006,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks without any games won");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -1014,7 +1016,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks without any games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.WITHOUT_ANY,
                 null,
@@ -1026,7 +1028,7 @@ public class Main
         System.out.println();
         System.out.println("players ordered by most consecutive days with games won greater than games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.MORE_FREQUENT,
                 null,
@@ -1036,7 +1038,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive days with games won equal to games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
@@ -1046,7 +1048,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive days with games won less than games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.LESS_FREQUENT,
                 null,
@@ -1056,7 +1058,7 @@ public class Main
                 1));
         System.out.println("players ordered by most consecutive weeks with games won greater than games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.MORE_FREQUENT,
                 null,
@@ -1066,7 +1068,7 @@ public class Main
                 5));
         System.out.println("players ordered by most consecutive weeks with games won equal to games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
@@ -1076,7 +1078,7 @@ public class Main
                 5));
         System.out.println("players ordered by most consecutive weeks with games won less than games lost");
         System.out.println(analyzer.orderedPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.LESS_FREQUENT,
                 null,
@@ -1088,7 +1090,7 @@ public class Main
         System.out.println();
         System.out.println("pairs of players ordered by most consecutive days with games won greater than games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.MORE_FREQUENT,
                 null,
@@ -1098,7 +1100,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive days with games won equal to games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
@@ -1108,7 +1110,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive days with games won less than games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.LESS_FREQUENT,
                 null,
@@ -1118,7 +1120,7 @@ public class Main
                 1));
         System.out.println("pairs of players ordered by most consecutive weeks with games won greater than games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.MORE_FREQUENT,
                 null,
@@ -1128,7 +1130,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks with games won equal to games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
@@ -1138,7 +1140,7 @@ public class Main
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks with games won less than games lost");
         System.out.println(analyzer.orderedPairsOfPlayers(
-                OrderCriterion.INTERVALS,
+                Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
                 IntervalGames.LESS_FREQUENT,
                 null,
@@ -1153,7 +1155,7 @@ public class Main
         {
             gamesPlayed += 100;
             List<Map.Entry<Player, Object>> orderedPlayers = analyzer.orderedPlayers(
-                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    Statistic.DATE_OF_NUMBER_OF_GAMES,
                     null,
                     null,
                     gamesPlayed,
@@ -1178,7 +1180,7 @@ public class Main
         {
             gamesWon += 100;
             List<Map.Entry<Player, Object>> orderedPlayers = analyzer.orderedPlayers(
-                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    Statistic.DATE_OF_NUMBER_OF_GAMES,
                     null,
                     null,
                     gamesWon,
@@ -1203,7 +1205,7 @@ public class Main
         {
             gamesLost += 100;
             List<Map.Entry<Player, Object>> orderedPlayers = analyzer.orderedPlayers(
-                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    Statistic.DATE_OF_NUMBER_OF_GAMES,
                     null,
                     null,
                     gamesLost,
@@ -1228,7 +1230,7 @@ public class Main
         {
             gamesPlayed += 100;
             List<Map.Entry<PlayerPair, Object>> orderedPairsOfPlayers = analyzer.orderedPairsOfPlayers(
-                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    Statistic.DATE_OF_NUMBER_OF_GAMES,
                     null,
                     null,
                     gamesPlayed,
@@ -1253,7 +1255,7 @@ public class Main
         {
             gamesWon += 100;
             List<Map.Entry<PlayerPair, Object>> orderedPairsOfPlayers = analyzer.orderedPairsOfPlayers(
-                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    Statistic.DATE_OF_NUMBER_OF_GAMES,
                     null,
                     null,
                     gamesWon,
@@ -1278,7 +1280,7 @@ public class Main
         {
             gamesLost += 100;
             List<Map.Entry<PlayerPair, Object>> orderedPairsOfPlayers = analyzer.orderedPairsOfPlayers(
-                    OrderCriterion.DATE_OF_NUMBER_OF_GAMES,
+                    Statistic.DATE_OF_NUMBER_OF_GAMES,
                     null,
                     null,
                     gamesLost,
