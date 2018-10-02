@@ -1,5 +1,5 @@
 public enum Graph
 {
-    NUMBER_OF_GAMES_FOR_EACH_DAY,
-    NUMBER_OF_GAMES
+    NUMBER_OF_GAMES,
+    PERCENTAGE_OF_GAMES
 }

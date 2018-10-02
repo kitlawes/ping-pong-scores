@@ -14,20 +14,20 @@ public class LineGraph
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Graph graph, GameOutcome outcome, final Player[] players, final Player[] opponents)
+    public void drawGraph(Graph graph, boolean cumulative, GameOutcome outcome, final Player[] players, final Player[] opponents)
     {
         Date earliestDate = parser.getEarliestDate();
         Date latestDate = parser.getLatestDate();
         final List<Date> dates = parser.getDatesInRange(earliestDate, latestDate);
         Collections.sort(dates);
         int dataAmount = 0;
-        Integer lowest = null;
-        Integer highest = null;
+        Double lowest = null;
+        Double highest = null;
 
-        final Map<Player, Map<Player, Map<Date, Integer>>> data = new HashMap<>();
+        final Map<Player, Map<Player, Map<Date, Double>>> data = new HashMap<>();
         for (Player player : players)
         {
-            Map<Player, Map<Date, Integer>> playerData = new HashMap<>();
+            Map<Player, Map<Date, Double>> playerData = new HashMap<>();
             data.put(player, playerData);
             for (Player opponent : opponents)
             {
@@ -35,45 +35,51 @@ public class LineGraph
                 {
                     continue;
                 }
-                HashMap<Date, Integer> opponentData = new HashMap<>();
+                HashMap<Date, Double> opponentData = new HashMap<>();
                 playerData.put(opponent, opponentData);
                 dataAmount++;
                 for (Date date : dates)
                 {
                     Date start = null;
+                    if (cumulative)
+                    {
+                        start = earliestDate;
+                    }
+                    else
+                    {
+                        start = date;
+                    }
+                    Double dataPoint = null;
                     switch (graph)
                     {
-                        case NUMBER_OF_GAMES_FOR_EACH_DAY:
-                            start = date;
-                            break;
                         case NUMBER_OF_GAMES:
-                            start = earliestDate;
+                            dataPoint = new Double(analyzer.numberOfGames(outcome, start, date, player, opponent));
+                            break;
+                        case PERCENTAGE_OF_GAMES:
+                            dataPoint = analyzer.percentageOfGames(outcome, start, date, player, opponent);
                             break;
                     }
-                    Integer games = analyzer.numberOfGames(
-                            outcome,
-                            start,
-                            date,
-                            player,
-                            opponent);
-                    opponentData.put(date, games);
+                    opponentData.put(date, dataPoint);
                     if (lowest == null)
                     {
-                        lowest = games;
+                        lowest = dataPoint;
                     }
-                    lowest = Math.min(lowest, games);
                     if (highest == null)
                     {
-                        highest = games;
+                        highest = dataPoint;
                     }
-                    highest = Math.max(highest, games);
+                    if (dataPoint != null)
+                    {
+                        lowest = Math.min(lowest, dataPoint);
+                        highest = Math.max(highest, dataPoint);
+                    }
                 }
             }
         }
 
         final int finalDataAmount = dataAmount;
-        final Integer finalLowest = lowest;
-        final Integer finalHighest = highest;
+        final Double finalLowest = lowest;
+        final Double finalHighest = highest;
         final int width = 500;
         final int height = 200;
         final int topInset = 31;
@@ -92,22 +98,41 @@ public class LineGraph
 //                g.drawLine(leftInset, height - bottomInset, leftInset, topInset);
                 int dateAmount = dates.size();
                 int dataIndex = -1;
-                for (Map<Player, Map<Date, Integer>> playerData : data.values())
+                for (Map<Player, Map<Date, Double>> playerData : data.values())
                 {
-                    for (Map<Date, Integer> opponentData : playerData.values())
+                    for (Map<Date, Double> opponentData : playerData.values())
                     {
                         dataIndex++;
                         g.setColor(new Color((float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
                                 (float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
                                 (float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
-                        for (int i = 0; i + 1 < dateAmount; i++)
+                        int i = -1;
+                        Double nextDataPoint = null;
+                        while (nextDataPoint == null)
                         {
-                            Integer currentGames = opponentData.get(dates.get(i));
-                            Integer nextGames = opponentData.get(dates.get(i + 1));
+                            i++;
+                            nextDataPoint = opponentData.get(dates.get(i));
+                        }
+                        DATA_POINT_LOOP:
+                        while (nextDataPoint != null)
+                        {
+                            Double currentDataPoint = nextDataPoint;
+                            nextDataPoint = null;
+                            int j = i;
+                            while (nextDataPoint == null)
+                            {
+                                j++;
+                                if (j == dates.size())
+                                {
+                                    break DATA_POINT_LOOP;
+                                }
+                                nextDataPoint = opponentData.get(dates.get(j));
+                            }
                             g.drawLine(leftInset + (int) Math.round((double) i / (dateAmount - 1) * (width - leftInset - rightInset)),
-                                    topInset + (int) Math.round((double) (finalHighest - currentGames) / (finalHighest - finalLowest) * (height - topInset - bottomInset)),
-                                    leftInset + (int) Math.round((double) (i + 1) / (dateAmount - 1) * (width - leftInset - rightInset)),
-                                    topInset + (int) Math.round((double) (finalHighest - nextGames) / (finalHighest - finalLowest) * (height - topInset - bottomInset)));
+                                    topInset + (int) Math.round((finalHighest - currentDataPoint) / (finalHighest - finalLowest) * (height - topInset - bottomInset)),
+                                    leftInset + (int) Math.round((double) j / (dateAmount - 1) * (width - leftInset - rightInset)),
+                                    topInset + (int) Math.round((finalHighest - nextDataPoint) / (finalHighest - finalLowest) * (height - topInset - bottomInset)));
+                            i = j;
                         }
                     }
                 }
