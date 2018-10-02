@@ -11,9 +11,10 @@ public class Main
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
         LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph(Graph.AVERAGE_PERCENTAGE_OF_GAMES,
-                false,
-                GameOutcome.WIN,
+        lineGraph.drawGraph(Graph.MOST_GAMES,
+                true,
+                GameOutcome.ANY,
+                5,
                 new Player[]{Player.ANTONIO},
                 new Player[]{Player.ANY});
 

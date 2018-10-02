@@ -14,7 +14,8 @@ public class LineGraph
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Graph graph, boolean cumulative, GameOutcome outcome, final Player[] players, final Player[] opponents)
+    public void drawGraph(Graph graph, boolean cumulative, GameOutcome outcome, int intervalDays,
+                          final Player[] players, final Player[] opponents)
     {
         Date earliestDate = parser.getEarliestDate();
         Date latestDate = parser.getLatestDate();
@@ -60,6 +61,9 @@ public class LineGraph
                             break;
                         case AVERAGE_PERCENTAGE_OF_GAMES:
                             dataPoint = analyzer.averagePercentageOfGames(outcome, start, date, player);
+                            break;
+                        case MOST_GAMES:
+                            dataPoint = new Double(analyzer.mostGames(outcome, start, date, intervalDays, player, opponent));
                             break;
                     }
                     opponentData.put(date, dataPoint);
