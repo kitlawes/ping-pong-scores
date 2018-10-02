@@ -11,12 +11,12 @@ public class Main
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
         LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph(Statistic.INTERVALS,
+        lineGraph.drawGraph(Statistic.NUMBER_OF_GAMES,
                 false,
-                Intervals.ANY,
-                IntervalGames.WITHOUT_ANY,
+                null,
+                null,
                 GameOutcome.ANY,
-                1,
+                null,
                 new Player[]{Player.ANTONIO},
                 new Player[]{Player.KIT});
 
