@@ -26,10 +26,10 @@ public class Main
 //                        PlayerPair.getPlayerPair("HUNOR-ANY")},
 //                true);
         BarChart barChart = new BarChart(analyzer);
-        barChart.drawGraph(Statistic.NUMBER_OF_GAMES,
+        barChart.drawGraph(Statistic.DATE_OF_NUMBER_OF_GAMES,
                 null,
                 null,
-                null,
+                300,
                 GameOutcome.ANY,
                 earliestDate,
                 latestDate,
