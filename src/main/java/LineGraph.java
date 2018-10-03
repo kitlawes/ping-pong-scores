@@ -89,6 +89,7 @@ public class LineGraph
 
         final Double finalLowest = lowest;
         final Double finalHighest = highest;
+        final int margin = 10;
         final int graphWidth = 500;
         final int graphHeight = 250;
         final int graphLeftOffset = 250;
@@ -106,7 +107,7 @@ public class LineGraph
                 int dataAmount = playerPairs.length;
 
                 g.setColor(Color.WHITE);
-                g.fillRect(leftInset + graphLeftOffset, topInset, graphWidth, graphHeight);
+                g.fillRect(leftInset + margin + graphLeftOffset, topInset + margin, graphWidth, graphHeight);
 
                 List<Color> colours = new ArrayList<>();
                 for (int i = 0; i < dataAmount; i++)
@@ -144,17 +145,23 @@ public class LineGraph
                             }
                             nextDataPoint = playerPairData.get(dates.get(k));
                         }
-                        g.drawLine(leftInset + graphLeftOffset + (int) Math.round((double) j / (dateAmount - 1) * graphWidth),
-                                topInset + (int) Math.round((finalHighest - currentDataPoint) / (finalHighest - finalLowest) * graphHeight),
-                                leftInset + graphLeftOffset + (int) Math.round((double) k / (dateAmount - 1) * graphWidth),
-                                topInset + (int) Math.round((finalHighest - nextDataPoint) / (finalHighest - finalLowest) * graphHeight));
+                        g.drawLine(leftInset + margin + graphLeftOffset + (int) Math.round((double) j / (dateAmount - 1) * graphWidth),
+                                topInset + margin + (int) Math.round((finalHighest - currentDataPoint) / (finalHighest - finalLowest) * graphHeight),
+                                leftInset + margin + graphLeftOffset + (int) Math.round((double) k / (dateAmount - 1) * graphWidth),
+                                topInset + margin + (int) Math.round((finalHighest - nextDataPoint) / (finalHighest - finalLowest) * graphHeight));
                         j = k;
                     }
                 }
 
                 g.setColor(Color.BLACK);
-                g.drawLine(leftInset + graphLeftOffset, topInset, leftInset + graphLeftOffset, topInset + graphHeight);
-                g.drawLine(leftInset + graphLeftOffset, topInset + graphHeight, leftInset + graphLeftOffset + graphWidth, topInset + graphHeight);
+                g.drawLine(leftInset + margin + graphLeftOffset,
+                        topInset + margin,
+                        leftInset + margin + graphLeftOffset,
+                        topInset + margin + graphHeight);
+                g.drawLine(leftInset + margin + graphLeftOffset,
+                        topInset + margin + graphHeight,
+                        leftInset + margin + graphLeftOffset + graphWidth,
+                        topInset + margin + graphHeight);
 
                 Graphics2D g2d = (Graphics2D) g;
                 SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("EEE MMM dd");
@@ -164,14 +171,14 @@ public class LineGraph
                     if (i % (dateAmount / 20) == 0)
                     {
                         g2d.drawString(simpleDateFormatter.format(dates.get(i)),
-                                topInset + graphHeight + 20,
-                                -(leftInset + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth)));
+                                topInset + margin + graphHeight + 20,
+                                -(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth)));
                     }
                     g2d.rotate(Math.toRadians(-90));
-                    g.drawLine(leftInset + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
-                            topInset + graphHeight,
-                            leftInset + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
-                            topInset + graphHeight + 10);
+                    g.drawLine(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
+                            topInset + margin + graphHeight,
+                            leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
+                            topInset + margin + graphHeight + 10);
                 }
 
                 int maxDecimalPlaces = 0;
@@ -196,27 +203,27 @@ public class LineGraph
                 {
                     double value = (finalHighest - finalLowest) / 10 * i + finalLowest;
                     g.drawString(decimalFormatter.format(value),
-                            leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(decimalFormatter.format(value)),
-                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
-                    g.drawLine(leftInset + graphLeftOffset - 10,
-                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
-                            leftInset + graphLeftOffset,
-                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
+                            leftInset + margin + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(decimalFormatter.format(value)),
+                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
+                    g.drawLine(leftInset + margin + graphLeftOffset - 10,
+                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
+                            leftInset + margin + graphLeftOffset,
+                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
                 }
 
                 for (int i = 0; i < dataAmount; i++)
                 {
                     g.drawString(playerPairs[i].toString(),
-                            leftInset + 10 + 10 + 10,
-                            topInset + graphHeight + 10 + 10 + 20 * i);
+                            leftInset + margin + 10 + 10,
+                            topInset + margin + graphHeight + 10 + 10 + 20 * i);
                     g.setColor(colours.get(i));
-                    g.fillRect(leftInset + 10,
-                            topInset + graphHeight + 10 + 20 * i,
+                    g.fillRect(leftInset + margin,
+                            topInset + margin + graphHeight + 10 + 20 * i,
                             10,
                             10);
                     g.setColor(Color.BLACK);
-                    g.drawRect(leftInset + 10,
-                            topInset + graphHeight + 10 + 20 * i,
+                    g.drawRect(leftInset + margin,
+                            topInset + margin + graphHeight + 10 + 20 * i,
                             10,
                             10);
                 }
@@ -228,7 +235,7 @@ public class LineGraph
         Insets insets = jFrame.getInsets();
         jFrame.setBounds(100,
                 100,
-                insets.left + graphLeftOffset + graphWidth + insets.right,
-                insets.top + graphHeight + graphBottomOffset + insets.bottom);
+                insets.left + margin + graphLeftOffset + graphWidth + margin + insets.right,
+                insets.top + margin + graphHeight + graphBottomOffset + margin + insets.bottom);
     }
 }
