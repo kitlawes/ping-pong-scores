@@ -3,18 +3,18 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class PerformanceGraph
+public class MovingAverageGraph
 {
     private ValueParser parser;
     private ScoresAnalyzer analyzer;
 
-    public PerformanceGraph(ValueParser parser, ScoresAnalyzer analyzer)
+    public MovingAverageGraph(ValueParser parser, ScoresAnalyzer analyzer)
     {
         this.parser = parser;
         this.analyzer = analyzer;
     }
 
-    public void drawPerformanceGraph()
+    public void drawGraph()
     {
         final Date earliestDate = parser.getEarliestDate();
         final Date latestDate = parser.getLatestDate();

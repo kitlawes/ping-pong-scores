@@ -28,4 +28,13 @@ public class PlayerPair
     {
         return player + "-" + opponent;
     }
+
+    public static PlayerPair getPlayerPair(String key)
+    {
+        PlayerPair playerPair = new PlayerPair();
+        String[] players = key.split("-");
+        playerPair.setPlayer(Player.valueOf(players[0]));
+        playerPair.setOpponent(Player.valueOf(players[1]));
+        return playerPair;
+    }
 }

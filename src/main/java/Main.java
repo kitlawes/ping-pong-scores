@@ -10,23 +10,30 @@ public class Main
         List<List<Object>> values = reader.readSpreadsheet();
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
-        LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph(Statistic.NUMBER_OF_GAMES,
-                true,
+
+        final Date earliestDate = parser.getEarliestDate();
+        final Date latestDate = parser.getLatestDate();
+
+        BarChart barChart = new BarChart(analyzer);
+        barChart.drawGraph(Statistic.NUMBER_OF_GAMES,
+                null,
                 null,
                 null,
                 GameOutcome.ANY,
+                earliestDate,
+                latestDate,
                 null,
-                new Player[]{Player.ANTONIO, Player.KIT, Player.HUNOR, Player.JIPESH},
-                new Player[]{Player.ANY});
+                new PlayerPair[]{PlayerPair.getPlayerPair("ANTONIO-KIT"),
+                        PlayerPair.getPlayerPair("ANTONIO-HUNOR"),
+                        PlayerPair.getPlayerPair("ANTONIO-JIPESH"),
+                        PlayerPair.getPlayerPair("KIT-HUNOR"),
+                        PlayerPair.getPlayerPair("KIT-JIPESH"),
+                        PlayerPair.getPlayerPair("HUNOR-JIPESH"),});
 
         if (true)
         {
             return;
         }
-
-        final Date earliestDate = parser.getEarliestDate();
-        final Date latestDate = parser.getLatestDate();
 
         System.out.println("players ordered by number of games played");
         System.out.println(analyzer.orderedPlayers(

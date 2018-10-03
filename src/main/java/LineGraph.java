@@ -87,8 +87,8 @@ public class LineGraph
             }
         }
 
-        final List<String> finalLegendKeys = legendKeys;
         final int finalDataAmount = legendKeys.size();
+        final List<String> finalLegendKeys = legendKeys;
         final Double finalLowest = lowest;
         final Double finalHighest = highest;
         final int graphWidth = 500;
