@@ -14,81 +14,68 @@ public class LineGraph
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Statistic statistic, boolean cumulative, Intervals intervals, IntervalGames intervalGames,
-                          GameOutcome outcome, Integer intervalDays, final Player[] players, final Player[] opponents)
+    public void drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, GameOutcome outcome,
+                          Integer intervalDays, Date start, Date end, final PlayerPair[] playerPairs, boolean cumulative)
     {
-        Date earliestDate = parser.getEarliestDate();
-        Date latestDate = parser.getLatestDate();
-        final List<Date> dates = parser.getDatesInRange(earliestDate, latestDate);
+        final List<Date> dates = parser.getDatesInRange(start, end);
         Collections.sort(dates);
-        List<String> legendKeys = new ArrayList<>();
         Double lowest = null;
         Double highest = null;
 
-        final Map<Player, Map<Player, Map<Date, Double>>> data = new HashMap<>();
-        for (Player player : players)
+        final Map<PlayerPair, Map<Date, Double>> data = new HashMap<>();
+        for (PlayerPair playerPair : playerPairs)
         {
-            Map<Player, Map<Date, Double>> playerData = new HashMap<>();
-            data.put(player, playerData);
-            for (Player opponent : opponents)
+            Map<Date, Double> playerPairData = new HashMap<>();
+            data.put(playerPair, playerPairData);
+            for (Date date : dates)
             {
-                if (player == opponent && player != Player.ANY)
+                Date dataPointStart;
+                if (cumulative)
                 {
-                    continue;
+                    dataPointStart = start;
                 }
-                HashMap<Date, Double> opponentData = new HashMap<>();
-                playerData.put(opponent, opponentData);
-                legendKeys.add(player + "-" + opponent);
-                for (Date date : dates)
+                else
                 {
-                    Date start = null;
-                    if (cumulative)
-                    {
-                        start = earliestDate;
-                    }
-                    else
-                    {
-                        start = date;
-                    }
-                    Double dataPoint = null;
-                    switch (statistic)
-                    {
-                        case NUMBER_OF_GAMES:
-                            dataPoint = new Double(analyzer.numberOfGames(outcome, start, date, player, opponent));
-                            break;
-                        case PERCENTAGE_OF_GAMES:
-                            dataPoint = analyzer.percentageOfGames(outcome, start, date, player, opponent);
-                            break;
-                        case AVERAGE_PERCENTAGE_OF_GAMES:
-                            dataPoint = analyzer.averagePercentageOfGames(outcome, start, date, player);
-                            break;
-                        case MOST_GAMES:
-                            dataPoint = new Double(analyzer.mostGames(outcome, start, date, intervalDays, player, opponent));
-                            break;
-                        case INTERVALS:
-                            dataPoint = new Double(analyzer.numberOfIntervals(intervals, intervalGames, outcome, start, date, intervalDays, player, opponent));
-                            break;
-                    }
-                    opponentData.put(date, dataPoint);
-                    if (lowest == null)
-                    {
-                        lowest = dataPoint;
-                    }
-                    if (highest == null)
-                    {
-                        highest = dataPoint;
-                    }
-                    if (dataPoint != null)
-                    {
-                        lowest = Math.min(lowest, dataPoint);
-                        highest = Math.max(highest, dataPoint);
-                    }
+                    dataPointStart = date;
+                }
+                Double dataPoint = null;
+                Player player = playerPair.getPlayer();
+                Player opponent = playerPair.getOpponent();
+                switch (statistic)
+                {
+                    case NUMBER_OF_GAMES:
+                        dataPoint = new Double(analyzer.numberOfGames(outcome, dataPointStart, date, player, opponent));
+                        break;
+                    case PERCENTAGE_OF_GAMES:
+                        dataPoint = analyzer.percentageOfGames(outcome, dataPointStart, date, player, opponent);
+                        break;
+                    case AVERAGE_PERCENTAGE_OF_GAMES:
+                        dataPoint = analyzer.averagePercentageOfGames(outcome, dataPointStart, date, player);
+                        break;
+                    case MOST_GAMES:
+                        dataPoint = new Double(analyzer.mostGames(outcome, dataPointStart, date, intervalDays, player, opponent));
+                        break;
+                    case INTERVALS:
+                        dataPoint = new Double(analyzer.numberOfIntervals(intervals, intervalGames, outcome, dataPointStart, date, intervalDays, player, opponent));
+                        break;
+                }
+                playerPairData.put(date, dataPoint);
+                if (lowest == null)
+                {
+                    lowest = dataPoint;
+                }
+                if (highest == null)
+                {
+                    highest = dataPoint;
+                }
+                if (dataPoint != null)
+                {
+                    lowest = Math.min(lowest, dataPoint);
+                    highest = Math.max(highest, dataPoint);
                 }
             }
         }
 
-        final int finalDataAmount = legendKeys.size();
-        final List<String> finalLegendKeys = legendKeys;
         final Double finalLowest = lowest;
         final Double finalHighest = highest;
         final int graphWidth = 500;
@@ -105,57 +92,48 @@ public class LineGraph
                 Insets insets = getInsets();
                 int topInset = insets.top;
                 int leftInset = insets.left;
+                int dataAmount = playerPairs.length;
 
                 List<Color> colours = new ArrayList<>();
-                for (int i = 0; i < finalDataAmount; i++)
+                for (int i = 0; i < dataAmount; i++)
                 {
-                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
                 }
 
                 int dateAmount = dates.size();
-                int dataIndex = -1;
-                for (Player player : players)
+                for (int i = 0; i < dataAmount; i++)
                 {
-                    Map<Player, Map<Date, Double>> playerData = data.get(player);
-                    for (Player opponent : opponents)
+                    Map<Date, Double> playerPairData = data.get(playerPairs[i]);
+                    g.setColor(colours.get(i));
+                    int j = -1;
+                    Double nextDataPoint = null;
+                    while (nextDataPoint == null)
                     {
-                        if (!playerData.containsKey(opponent))
-                        {
-                            continue;
-                        }
-                        Map<Date, Double> opponentData = playerData.get(opponent);
-                        dataIndex++;
-                        g.setColor(colours.get(dataIndex));
-                        int i = -1;
-                        Double nextDataPoint = null;
+                        j++;
+                        nextDataPoint = playerPairData.get(dates.get(j));
+                    }
+                    DATA_POINT_LOOP:
+                    while (nextDataPoint != null)
+                    {
+                        Double currentDataPoint = nextDataPoint;
+                        nextDataPoint = null;
+                        int k = j;
                         while (nextDataPoint == null)
                         {
-                            i++;
-                            nextDataPoint = opponentData.get(dates.get(i));
-                        }
-                        DATA_POINT_LOOP:
-                        while (nextDataPoint != null)
-                        {
-                            Double currentDataPoint = nextDataPoint;
-                            nextDataPoint = null;
-                            int j = i;
-                            while (nextDataPoint == null)
+                            k++;
+                            if (k == dateAmount)
                             {
-                                j++;
-                                if (j == dates.size())
-                                {
-                                    break DATA_POINT_LOOP;
-                                }
-                                nextDataPoint = opponentData.get(dates.get(j));
+                                break DATA_POINT_LOOP;
                             }
-                            g.drawLine(leftInset + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
-                                    topInset + (int) Math.round((finalHighest - currentDataPoint) / (finalHighest - finalLowest) * graphHeight),
-                                    leftInset + graphLeftOffset + (int) Math.round((double) j / (dateAmount - 1) * graphWidth),
-                                    topInset + (int) Math.round((finalHighest - nextDataPoint) / (finalHighest - finalLowest) * graphHeight));
-                            i = j;
+                            nextDataPoint = playerPairData.get(dates.get(k));
                         }
+                        g.drawLine(leftInset + graphLeftOffset + (int) Math.round((double) j / (dateAmount - 1) * graphWidth),
+                                topInset + (int) Math.round((finalHighest - currentDataPoint) / (finalHighest - finalLowest) * graphHeight),
+                                leftInset + graphLeftOffset + (int) Math.round((double) k / (dateAmount - 1) * graphWidth),
+                                topInset + (int) Math.round((finalHighest - nextDataPoint) / (finalHighest - finalLowest) * graphHeight));
+                        j = k;
                     }
                 }
 
@@ -191,9 +169,9 @@ public class LineGraph
                             topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight));
                 }
 
-                for (int i = 0; i < finalDataAmount; i++)
+                for (int i = 0; i < dataAmount; i++)
                 {
-                    g.drawString(finalLegendKeys.get(i),
+                    g.drawString(playerPairs[i].toString(),
                             leftInset + 10 + 10 + 10,
                             topInset + graphHeight + 10 + 10 + 20 * i);
                     g.setColor(colours.get(i));

@@ -12,8 +12,8 @@ public class BarChart
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, Integer numberOfGames, GameOutcome outcome,
-                          Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs)
+    public void drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, Integer numberOfGames,
+                          GameOutcome outcome, Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs)
     {
         final List<Map.Entry<PlayerPair, Object>> orderedPlayerPairs = analyzer.orderedPlayersOrPlayerPairs(Arrays.asList(playerPairs), statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
         final List<String> legendKeys = new ArrayList<>();

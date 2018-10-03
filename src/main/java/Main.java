@@ -14,21 +14,36 @@ public class Main
         final Date earliestDate = parser.getEarliestDate();
         final Date latestDate = parser.getLatestDate();
 
-        BarChart barChart = new BarChart(analyzer);
-        barChart.drawGraph(Statistic.NUMBER_OF_GAMES,
-                null,
+        LineGraph lineGraph = new LineGraph(parser, analyzer);
+        lineGraph.drawGraph(Statistic.NUMBER_OF_GAMES,
                 null,
                 null,
                 GameOutcome.ANY,
+                null,
                 earliestDate,
                 latestDate,
-                null,
                 new PlayerPair[]{PlayerPair.getPlayerPair("ANTONIO-KIT"),
                         PlayerPair.getPlayerPair("ANTONIO-HUNOR"),
                         PlayerPair.getPlayerPair("ANTONIO-JIPESH"),
                         PlayerPair.getPlayerPair("KIT-HUNOR"),
                         PlayerPair.getPlayerPair("KIT-JIPESH"),
-                        PlayerPair.getPlayerPair("HUNOR-JIPESH"),});
+                        PlayerPair.getPlayerPair("HUNOR-JIPESH")},
+                true);
+//        BarChart barChart = new BarChart(analyzer);
+//        barChart.drawGraph(Statistic.NUMBER_OF_GAMES,
+//                null,
+//                null,
+//                null,
+//                GameOutcome.ANY,
+//                earliestDate,
+//                latestDate,
+//                null,
+//                new PlayerPair[]{PlayerPair.getPlayerPair("ANTONIO-KIT"),
+//                        PlayerPair.getPlayerPair("ANTONIO-HUNOR"),
+//                        PlayerPair.getPlayerPair("ANTONIO-JIPESH"),
+//                        PlayerPair.getPlayerPair("KIT-HUNOR"),
+//                        PlayerPair.getPlayerPair("KIT-JIPESH"),
+//                        PlayerPair.getPlayerPair("HUNOR-JIPESH")});
 
         if (true)
         {
