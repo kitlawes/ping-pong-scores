@@ -164,7 +164,7 @@ public class BarChart
                     }
                 }
                 String format = "0" + (maxDecimalPlaces > 0 ? "." : "");
-                for (int i = 0; i < maxDecimalPlaces; i++)
+                for (int i = 0; i < maxDecimalPlaces && i < 2; i++)
                 {
                     format += "0";
                 }

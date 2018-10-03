@@ -54,6 +54,9 @@ public class LineGraph
                     case AVERAGE_PERCENTAGE_OF_GAMES:
                         dataPoint = analyzer.averagePercentageOfGames(outcome, dataPointStart, date, player);
                         break;
+                    case AVERAGE_NUMBER_OF_GAMES:
+                        dataPoint = analyzer.averageNumberOfGames(outcome, dataPointStart, date, intervalDays, player, opponent);
+                        break;
                     case MOST_GAMES:
                         dataPoint = new Double(analyzer.mostGames(outcome, dataPointStart, date, intervalDays, player, opponent));
                         break;
@@ -184,7 +187,7 @@ public class LineGraph
                     }
                 }
                 String format = "0" + (maxDecimalPlaces > 0 ? "." : "");
-                for (int i = 0; i < maxDecimalPlaces; i++)
+                for (int i = 0; i < maxDecimalPlaces && i < 2; i++)
                 {
                     format += "0";
                 }
