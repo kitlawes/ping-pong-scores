@@ -12,13 +12,13 @@ public class Main
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
         LineGraph lineGraph = new LineGraph(parser, analyzer);
         lineGraph.drawGraph(Statistic.NUMBER_OF_GAMES,
-                false,
+                true,
                 null,
                 null,
                 GameOutcome.ANY,
                 null,
-                new Player[]{Player.ANTONIO},
-                new Player[]{Player.KIT});
+                new Player[]{Player.ANTONIO, Player.KIT, Player.HUNOR, Player.JIPESH},
+                new Player[]{Player.ANY});
 
         if (true)
         {

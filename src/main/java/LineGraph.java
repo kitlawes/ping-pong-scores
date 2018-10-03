@@ -21,7 +21,7 @@ public class LineGraph
         Date latestDate = parser.getLatestDate();
         final List<Date> dates = parser.getDatesInRange(earliestDate, latestDate);
         Collections.sort(dates);
-        int dataAmount = 0;
+        List<String> legendKeys = new ArrayList<>();
         Double lowest = null;
         Double highest = null;
 
@@ -38,7 +38,7 @@ public class LineGraph
                 }
                 HashMap<Date, Double> opponentData = new HashMap<>();
                 playerData.put(opponent, opponentData);
-                dataAmount++;
+                legendKeys.add(player + "-" + opponent);
                 for (Date date : dates)
                 {
                     Date start = null;
@@ -87,17 +87,14 @@ public class LineGraph
             }
         }
 
-        final int finalDataAmount = dataAmount;
+        final List<String> finalLegendKeys = legendKeys;
+        final int finalDataAmount = legendKeys.size();
         final Double finalLowest = lowest;
         final Double finalHighest = highest;
         final int graphWidth = 500;
         final int graphHeight = 250;
         final int graphLeftOffset = 250;
         final int graphBottomOffset = 250;
-//        final int topInset = 31;
-//        final int bottomInset = 9;
-//        final int leftInset = 8;
-//        final int rightInset = 9;
         JFrame jFrame = new JFrame()
         {
             @Override
@@ -109,16 +106,28 @@ public class LineGraph
                 int topInset = insets.top;
                 int leftInset = insets.left;
 
+                List<Color> colours = new ArrayList<>();
+                for (int i = 0; i < finalDataAmount; i++)
+                {
+                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+                }
+
                 int dateAmount = dates.size();
                 int dataIndex = -1;
-                for (Map<Player, Map<Date, Double>> playerData : data.values())
+                for (Player player : players)
                 {
-                    for (Map<Date, Double> opponentData : playerData.values())
+                    Map<Player, Map<Date, Double>> playerData = data.get(player);
+                    for (Player opponent : opponents)
                     {
+                        if (!playerData.containsKey(opponent))
+                        {
+                            continue;
+                        }
+                        Map<Date, Double> opponentData = playerData.get(opponent);
                         dataIndex++;
-                        g.setColor(new Color((float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-                                (float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-                                (float) Math.max(0, Math.min(1, Math.abs(((dataIndex + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+                        g.setColor(colours.get(dataIndex));
                         int i = -1;
                         Double nextDataPoint = null;
                         while (nextDataPoint == null)
@@ -151,17 +160,14 @@ public class LineGraph
                 }
 
                 g.setColor(Color.BLACK);
-//                g.drawLine(leftInset, topInset, leftInset + graphLeftOffset + graphWidth - 1, topInset);
-//                g.drawLine(leftInset + graphLeftOffset + graphWidth - 1, topInset - 1, leftInset + graphLeftOffset + graphWidth - 1, topInset + graphHeight + graphBottomOffset - 1);
-//                g.drawLine(leftInset + graphLeftOffset + graphWidth - 1, topInset + graphHeight + graphBottomOffset - 1, leftInset, topInset + graphHeight + graphBottomOffset - 1);
-//                g.drawLine(leftInset, topInset + graphHeight + graphBottomOffset - 1, leftInset, topInset);
                 g.drawLine(leftInset + graphLeftOffset, topInset, leftInset + graphLeftOffset, topInset + graphHeight);
                 g.drawLine(leftInset + graphLeftOffset, topInset + graphHeight, leftInset + graphLeftOffset + graphWidth, topInset + graphHeight);
                 Graphics2D g2d = (Graphics2D) g;
-                for (int i = 0; i < dates.size(); i++)
+
+                for (int i = 0; i < dateAmount; i++)
                 {
                     g2d.rotate(Math.toRadians(90));
-                    if (i % 2 == 0)
+                    if (i % (dateAmount / 20) == 0)
                     {
                         g2d.drawString(dates.get(i).toString(),
                                 topInset + graphHeight + 20,
@@ -173,6 +179,35 @@ public class LineGraph
                             leftInset + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
                             topInset + graphHeight + 10);
                 }
+
+                for (double i = finalLowest; i < (finalHighest - finalLowest); i += (finalHighest - finalLowest) / 10)
+                {
+                    g.drawString(String.valueOf(i),
+                            leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(String.valueOf(i)),
+                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight));
+                    g.drawLine(leftInset + graphLeftOffset - 10,
+                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight),
+                            leftInset + graphLeftOffset,
+                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight));
+                }
+
+                for (int i = 0; i < finalDataAmount; i++)
+                {
+                    g.drawString(finalLegendKeys.get(i),
+                            leftInset + 10 + 10 + 10,
+                            topInset + graphHeight + 10 + 10 + 20 * i);
+                    g.setColor(colours.get(i));
+                    g.fillRect(leftInset + 10,
+                            topInset + graphHeight + 10 + 20 * i,
+                            10,
+                            10);
+                    g.setColor(Color.BLACK);
+                    g.drawRect(leftInset + 10,
+                            topInset + graphHeight + 10 + 20 * i,
+                            10,
+                            10);
+                }
+
             }
         };
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
