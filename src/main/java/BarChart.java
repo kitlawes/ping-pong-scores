@@ -78,44 +78,45 @@ public class BarChart
                         dataPoint = (Double) value;
                     }
                     g.setColor(colours.get(i));
-                    g.fillRect(leftInset + graphLeftOffset + (int) Math.round((double) i / finalDataAmount * graphWidth),
+                    g.fillRect(leftInset + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
                             topInset + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
-                            (int) Math.round((double) graphWidth / finalDataAmount),
+                            (int) Math.round(graphWidth / (finalDataAmount * 1.5 + 0.5)),
                             (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight));
                     g.setColor(Color.BLACK);
-                    g.drawRect(leftInset + graphLeftOffset + (int) Math.round((double) i / finalDataAmount * graphWidth),
+                    g.drawRect(leftInset + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
                             topInset + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
-                            (int) Math.round((double) graphWidth / finalDataAmount),
+                            (int) Math.round(graphWidth / (finalDataAmount * 1.5 + 0.5)),
                             (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight));
                 }
 
                 g.setColor(Color.BLACK);
                 g.drawLine(leftInset + graphLeftOffset, topInset, leftInset + graphLeftOffset, topInset + graphHeight);
                 g.drawLine(leftInset + graphLeftOffset, topInset + graphHeight, leftInset + graphLeftOffset + graphWidth, topInset + graphHeight);
-                Graphics2D g2d = (Graphics2D) g;
 
+                Graphics2D g2d = (Graphics2D) g;
                 for (int i = 0; i < finalDataAmount; i++)
                 {
                     g2d.rotate(Math.toRadians(90));
                     g2d.drawString(legendKeys.get(i).toString(),
                             topInset + graphHeight + 20,
-                            -(leftInset + graphLeftOffset + (int) Math.round((double) i / finalDataAmount * graphWidth)));
+                            -(leftInset + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth)));
                     g2d.rotate(Math.toRadians(-90));
-                    g.drawLine(leftInset + graphLeftOffset + (int) Math.round((double) i / finalDataAmount * graphWidth),
+                    g.drawLine(leftInset + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
                             topInset + graphHeight,
-                            leftInset + graphLeftOffset + (int) Math.round((double) i / finalDataAmount * graphWidth),
+                            leftInset + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
                             topInset + graphHeight + 10);
                 }
 
-                for (double i = finalLowest; i < (finalHighest - finalLowest); i += (finalHighest - finalLowest) / 10)
+                for (int i = 0; i < 10; i++)
                 {
-                    g.drawString(String.valueOf(i),
-                            leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(String.valueOf(i)),
-                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight));
+                    double value = (finalHighest - finalLowest) / 10 * i + finalLowest;
+                    g.drawString(String.valueOf(value),
+                            leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(String.valueOf(value)),
+                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
                     g.drawLine(leftInset + graphLeftOffset - 10,
-                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight),
+                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
                             leftInset + graphLeftOffset,
-                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight));
+                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
                 }
 
                 for (int i = 0; i < finalDataAmount; i++)

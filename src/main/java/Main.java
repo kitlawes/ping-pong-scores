@@ -14,32 +14,31 @@ public class Main
         final Date earliestDate = parser.getEarliestDate();
         final Date latestDate = parser.getLatestDate();
 
-        LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph(Statistic.PERCENTAGE_OF_GAMES,
-                null,
-                null,
-                GameOutcome.WIN,
-                null,
-                earliestDate,
-                latestDate,
-                new PlayerPair[]{PlayerPair.getPlayerPair("KIT-ANY"),
-                        PlayerPair.getPlayerPair("HUNOR-ANY")},
-                true);
-//        BarChart barChart = new BarChart(analyzer);
-//        barChart.drawGraph(Statistic.NUMBER_OF_GAMES,
+//        LineGraph lineGraph = new LineGraph(parser, analyzer);
+//        lineGraph.drawGraph(Statistic.PERCENTAGE_OF_GAMES,
 //                null,
 //                null,
+//                GameOutcome.WIN,
 //                null,
-//                GameOutcome.ANY,
 //                earliestDate,
 //                latestDate,
-//                null,
-//                new PlayerPair[]{PlayerPair.getPlayerPair("ANTONIO-KIT"),
-//                        PlayerPair.getPlayerPair("ANTONIO-HUNOR"),
-//                        PlayerPair.getPlayerPair("ANTONIO-JIPESH"),
-//                        PlayerPair.getPlayerPair("KIT-HUNOR"),
-//                        PlayerPair.getPlayerPair("KIT-JIPESH"),
-//                        PlayerPair.getPlayerPair("HUNOR-JIPESH")});
+//                new PlayerPair[]{PlayerPair.getPlayerPair("KIT-ANY"),
+//                        PlayerPair.getPlayerPair("HUNOR-ANY")},
+//                true);
+        BarChart barChart = new BarChart(analyzer);
+        barChart.drawGraph(Statistic.NUMBER_OF_GAMES,
+                null,
+                null,
+                null,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                null,
+                new PlayerPair[]{PlayerPair.getPlayerPair("ANTONIO-ANY"),
+                        PlayerPair.getPlayerPair("KIT-ANY"),
+                        PlayerPair.getPlayerPair("HUNOR-ANY"),
+                        PlayerPair.getPlayerPair("JIPESH-ANY"),
+                        PlayerPair.getPlayerPair("ANY-ANY")});
 
         if (true)
         {

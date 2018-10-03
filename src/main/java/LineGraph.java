@@ -140,8 +140,8 @@ public class LineGraph
                 g.setColor(Color.BLACK);
                 g.drawLine(leftInset + graphLeftOffset, topInset, leftInset + graphLeftOffset, topInset + graphHeight);
                 g.drawLine(leftInset + graphLeftOffset, topInset + graphHeight, leftInset + graphLeftOffset + graphWidth, topInset + graphHeight);
-                Graphics2D g2d = (Graphics2D) g;
 
+                Graphics2D g2d = (Graphics2D) g;
                 for (int i = 0; i < dateAmount - 1; i++)
                 {
                     g2d.rotate(Math.toRadians(90));
