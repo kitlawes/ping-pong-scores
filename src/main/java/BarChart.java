@@ -80,12 +80,16 @@ public class BarChart
                 int topInset = insets.top;
                 int leftInset = insets.left;
 
+                g.setColor(Color.WHITE);
+                g.fillRect(leftInset + graphLeftOffset, topInset, graphWidth, graphHeight);
+
                 List<Color> colours = new ArrayList<>();
                 for (int i = 0; i < finalDataAmount; i++)
                 {
-                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+//                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+                    colours.add(Color.GRAY);
                 }
 
                 for (int i = 0; i < finalDataAmount; i++)
@@ -105,10 +109,10 @@ public class BarChart
                         dataPoint = new Double(((Date) value).getTime());
                     }
                     g.setColor(colours.get(i));
-//                    g.fillRect(leftInset + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
-//                            topInset + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
-//                            (int) Math.round(graphWidth / (finalDataAmount * 1.5 + 0.5)),
-//                            (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight));
+                    g.fillRect(leftInset + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
+                            topInset + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
+                            (int) Math.round(graphWidth / (finalDataAmount * 1.5 + 0.5)),
+                            (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight));
                     g.setColor(Color.BLACK);
                     g.drawRect(leftInset + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
                             topInset + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),

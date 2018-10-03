@@ -94,12 +94,16 @@ public class LineGraph
                 int leftInset = insets.left;
                 int dataAmount = playerPairs.length;
 
+                g.setColor(Color.WHITE);
+                g.fillRect(leftInset + graphLeftOffset, topInset, graphWidth, graphHeight);
+
                 List<Color> colours = new ArrayList<>();
                 for (int i = 0; i < dataAmount; i++)
                 {
-                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+//                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+                    colours.add(Color.GRAY);
                 }
 
                 int dateAmount = dates.size();
