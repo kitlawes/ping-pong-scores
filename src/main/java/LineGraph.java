@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class LineGraph
     }
 
     public void drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, GameOutcome outcome,
-                          Integer intervalDays, Date start, Date end, final PlayerPair[] playerPairs, boolean cumulative)
+                          Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs, boolean cumulative)
     {
         final List<Date> dates = parser.getDatesInRange(start, end);
         Collections.sort(dates);
@@ -75,6 +77,12 @@ public class LineGraph
                 }
             }
         }
+        if (statistic == Statistic.NUMBER_OF_GAMES
+                || statistic == Statistic.INTERVALS
+                || statistic == Statistic.MOST_GAMES)
+        {
+            highest = Math.ceil(highest / 10) * 10;
+        }
 
         final Double finalLowest = lowest;
         final Double finalHighest = highest;
@@ -100,10 +108,10 @@ public class LineGraph
                 List<Color> colours = new ArrayList<>();
                 for (int i = 0; i < dataAmount; i++)
                 {
-//                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
-                    colours.add(Color.GRAY);
+                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+//                    colours.add(Color.GRAY);
                 }
 
                 int dateAmount = dates.size();
@@ -146,12 +154,13 @@ public class LineGraph
                 g.drawLine(leftInset + graphLeftOffset, topInset + graphHeight, leftInset + graphLeftOffset + graphWidth, topInset + graphHeight);
 
                 Graphics2D g2d = (Graphics2D) g;
+                SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("EEE MMM dd");
                 for (int i = 0; i < dateAmount - 1; i++)
                 {
                     g2d.rotate(Math.toRadians(90));
                     if (i % (dateAmount / 20) == 0)
                     {
-                        g2d.drawString(dates.get(i).toString(),
+                        g2d.drawString(simpleDateFormatter.format(dates.get(i)),
                                 topInset + graphHeight + 20,
                                 -(leftInset + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth)));
                     }
@@ -162,11 +171,29 @@ public class LineGraph
                             topInset + graphHeight + 10);
                 }
 
+                int maxDecimalPlaces = 0;
+                for (int i = 0; i < 10; i++)
+                {
+                    double value = Math.round(((finalHighest - finalLowest) / 10 * i + finalLowest) * Math.pow(10, 10)) / Math.pow(10, 10);
+                    for (int j = 1; j <= 10; j++)
+                    {
+                        if (value * Math.pow(10, j) % 1 > 0)
+                        {
+                            maxDecimalPlaces = Math.max(maxDecimalPlaces, j);
+                        }
+                    }
+                }
+                String format = "0" + (maxDecimalPlaces > 0 ? "." : "");
+                for (int i = 0; i < maxDecimalPlaces; i++)
+                {
+                    format += "0";
+                }
+                DecimalFormat decimalFormatter = new DecimalFormat(format);
                 for (int i = 0; i < 10; i++)
                 {
                     double value = (finalHighest - finalLowest) / 10 * i + finalLowest;
-                    g.drawString(String.valueOf(value),
-                            leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(String.valueOf(value)),
+                    g.drawString(decimalFormatter.format(value),
+                            leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(decimalFormatter.format(value)),
                             topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
                     g.drawLine(leftInset + graphLeftOffset - 10,
                             topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i),

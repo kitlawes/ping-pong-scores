@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -60,6 +62,17 @@ public class BarChart
                 highest = Math.max(highest, new Double(((Date) dataPoint).getTime()));
             }
         }
+        if (statistic == Statistic.PERCENTAGE_OF_GAMES
+                || statistic == Statistic.AVERAGE_PERCENTAGE_OF_GAMES)
+        {
+            highest = new Double(100);
+        }
+        if (statistic == Statistic.NUMBER_OF_GAMES
+                || statistic == Statistic.INTERVALS
+                || statistic == Statistic.MOST_GAMES)
+        {
+            highest = Math.ceil(highest / 10) * 10;
+        }
 
         final int finalDataAmount = legendKeys.size();
         final List<String> finalLegendKeys = legendKeys;
@@ -86,10 +99,10 @@ public class BarChart
                 List<Color> colours = new ArrayList<>();
                 for (int i = 0; i < finalDataAmount; i++)
                 {
-//                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
-                    colours.add(Color.GRAY);
+                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+//                    colours.add(Color.GRAY);
                 }
 
                 for (int i = 0; i < finalDataAmount; i++)
@@ -138,17 +151,36 @@ public class BarChart
                             topInset + graphHeight + 10);
                 }
 
+                int maxDecimalPlaces = 0;
+                for (int i = 0; i < 10; i++)
+                {
+                    double value = Math.round(((finalHighest - finalLowest) / 10 * i + finalLowest) * Math.pow(10, 10)) / Math.pow(10, 10);
+                    for (int j = 1; j <= 10; j++)
+                    {
+                        if (value * Math.pow(10, j) % 1 > 0)
+                        {
+                            maxDecimalPlaces = Math.max(maxDecimalPlaces, j);
+                        }
+                    }
+                }
+                String format = "0" + (maxDecimalPlaces > 0 ? "." : "");
+                for (int i = 0; i < maxDecimalPlaces; i++)
+                {
+                    format += "0";
+                }
+                DecimalFormat decimalFormatter = new DecimalFormat(format);
+                SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("EEE MMM dd");
                 for (int i = 0; i < 10; i++)
                 {
                     String label;
                     double value = (finalHighest - finalLowest) / 10 * i + finalLowest;
                     if (orderedPlayerPairs.get(0).getValue() instanceof Date)
                     {
-                        label = String.valueOf(new Date(Math.round(value)));
+                        label = simpleDateFormatter.format(new Date(Math.round(value)));
                     }
                     else
                     {
-                        label = String.valueOf(value);
+                        label = decimalFormatter.format(value);
                     }
                     g.drawString(label,
                             leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(label),
