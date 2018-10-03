@@ -165,16 +165,18 @@ public class LineGraph
 
                 Graphics2D g2d = (Graphics2D) g;
                 SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("EEE MMM dd");
+                int betweenLabels = (int) Math.round((double) dateAmount / 20);
+                betweenLabels = betweenLabels == 0 ? 1 : betweenLabels;
                 for (int i = 0; i < dateAmount - 1; i++)
                 {
-                    g2d.rotate(Math.toRadians(90));
-                    if (i % (dateAmount / 20) == 0)
+                    if (i % betweenLabels == 0)
                     {
+                        g2d.rotate(Math.toRadians(90));
                         g2d.drawString(simpleDateFormatter.format(dates.get(i)),
                                 topInset + margin + graphHeight + 20,
                                 -(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth) - 4));
+                        g2d.rotate(Math.toRadians(-90));
                     }
-                    g2d.rotate(Math.toRadians(-90));
                     g.drawLine(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
                             topInset + margin + graphHeight,
                             leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
