@@ -150,7 +150,7 @@ public class BarChart
                     g2d.rotate(Math.toRadians(90));
                     g2d.drawString(legendKeys.get(i).toString(),
                             topInset + margin + graphHeight + 20,
-                            -(leftInset + margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth)));
+                            -(leftInset + margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth) - 4));
                     g2d.rotate(Math.toRadians(-90));
                     g.drawLine(leftInset + margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
                             topInset + margin + graphHeight,
@@ -191,7 +191,7 @@ public class BarChart
                     }
                     g.drawString(label,
                             leftInset + margin + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(label),
-                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
+                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i) + 4);
                     g.drawLine(leftInset + margin + graphLeftOffset - 10,
                             topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
                             leftInset + margin + graphLeftOffset,

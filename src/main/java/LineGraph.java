@@ -172,7 +172,7 @@ public class LineGraph
                     {
                         g2d.drawString(simpleDateFormatter.format(dates.get(i)),
                                 topInset + margin + graphHeight + 20,
-                                -(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth)));
+                                -(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth) - 4));
                     }
                     g2d.rotate(Math.toRadians(-90));
                     g.drawLine(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
@@ -204,7 +204,7 @@ public class LineGraph
                     double value = (finalHighest - finalLowest) / 10 * i + finalLowest;
                     g.drawString(decimalFormatter.format(value),
                             leftInset + margin + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(decimalFormatter.format(value)),
-                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
+                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i) + 4);
                     g.drawLine(leftInset + margin + graphLeftOffset - 10,
                             topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
                             leftInset + margin + graphLeftOffset,
