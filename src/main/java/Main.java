@@ -15,19 +15,15 @@ public class Main
         final Date latestDate = parser.getLatestDate();
 
         LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph(Statistic.NUMBER_OF_GAMES,
+        lineGraph.drawGraph(Statistic.PERCENTAGE_OF_GAMES,
                 null,
                 null,
-                GameOutcome.ANY,
+                GameOutcome.WIN,
                 null,
                 earliestDate,
                 latestDate,
-                new PlayerPair[]{PlayerPair.getPlayerPair("ANTONIO-KIT"),
-                        PlayerPair.getPlayerPair("ANTONIO-HUNOR"),
-                        PlayerPair.getPlayerPair("ANTONIO-JIPESH"),
-                        PlayerPair.getPlayerPair("KIT-HUNOR"),
-                        PlayerPair.getPlayerPair("KIT-JIPESH"),
-                        PlayerPair.getPlayerPair("HUNOR-JIPESH")},
+                new PlayerPair[]{PlayerPair.getPlayerPair("KIT-ANY"),
+                        PlayerPair.getPlayerPair("HUNOR-ANY")},
                 true);
 //        BarChart barChart = new BarChart(analyzer);
 //        barChart.drawGraph(Statistic.NUMBER_OF_GAMES,

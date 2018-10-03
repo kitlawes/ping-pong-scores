@@ -142,7 +142,7 @@ public class LineGraph
                 g.drawLine(leftInset + graphLeftOffset, topInset + graphHeight, leftInset + graphLeftOffset + graphWidth, topInset + graphHeight);
                 Graphics2D g2d = (Graphics2D) g;
 
-                for (int i = 0; i < dateAmount; i++)
+                for (int i = 0; i < dateAmount - 1; i++)
                 {
                     g2d.rotate(Math.toRadians(90));
                     if (i % (dateAmount / 20) == 0)
@@ -158,15 +158,16 @@ public class LineGraph
                             topInset + graphHeight + 10);
                 }
 
-                for (double i = finalLowest; i < (finalHighest - finalLowest); i += (finalHighest - finalLowest) / 10)
+                for (int i = 0; i < 10; i++)
                 {
-                    g.drawString(String.valueOf(i),
-                            leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(String.valueOf(i)),
-                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight));
+                    double value = (finalHighest - finalLowest) / 10 * i + finalLowest;
+                    g.drawString(String.valueOf(value),
+                            leftInset + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(String.valueOf(value)),
+                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
                     g.drawLine(leftInset + graphLeftOffset - 10,
-                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight),
+                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
                             leftInset + graphLeftOffset,
-                            topInset + graphHeight - (int) Math.round(i / (finalHighest - finalLowest) * graphHeight));
+                            topInset + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
                 }
 
                 for (int i = 0; i < dataAmount; i++)
