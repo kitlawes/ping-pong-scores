@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.text.DecimalFormat;
@@ -14,8 +13,8 @@ public class Main
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
 
-        FileWriter writer = new FileWriter(parser, analyzer);
-        writer.writeFile();
+        ImageExporter exporter = new ImageExporter(parser, analyzer);
+        exporter.exportToImage();
 
         if (true)
         {

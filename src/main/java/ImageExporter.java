@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
-public class FileWriter
+public class ImageExporter
 {
     private ValueParser parser;
     private ScoresAnalyzer analyzer;
@@ -35,7 +35,7 @@ public class FileWriter
     private int fileWidth;
     private int fileHeight;
 
-    public FileWriter(ValueParser parser, ScoresAnalyzer analyzer)
+    public ImageExporter(ValueParser parser, ScoresAnalyzer analyzer)
     {
         this.parser = parser;
         this.analyzer = analyzer;
@@ -80,7 +80,7 @@ public class FileWriter
         fileHeight = textHeight * 3 * numberOfStatistics + (margin + graphHeight + graphBottomOffset) * numberOfStatistics + margin;
     }
 
-    public void writeFile()
+    public void exportToImage()
     {
         BufferedImage image = new BufferedImage(fileWidth, fileHeight, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = image.createGraphics();
@@ -1300,6 +1300,102 @@ public class FileWriter
                 latestDate,
                 5);
 
+        int gamesPlayed = 100;
+        while (drawStatistics(g2d,
+                false,
+                "players ordered by date of " + gamesPlayed + " games played",
+                Statistic.DATE_OF_NUMBER_OF_GAMES,
+                null,
+                null,
+                gamesPlayed,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1))
+        {
+            gamesPlayed += 100;
+        }
+
+        int gamesWon = 0;
+        while (drawStatistics(g2d,
+                false,
+                "players ordered by date of " + gamesWon + " games won",
+                Statistic.DATE_OF_NUMBER_OF_GAMES,
+                null,
+                null,
+                gamesWon,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1))
+        {
+            gamesWon += 100;
+        }
+
+        int gamesLost = 0;
+        while (drawStatistics(g2d,
+                false,
+                "players ordered by date of " + gamesLost + " games lost",
+                Statistic.DATE_OF_NUMBER_OF_GAMES,
+                null,
+                null,
+                gamesLost,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1))
+        {
+            gamesLost += 100;
+        }
+
+        gamesPlayed = 0;
+        while (drawStatistics(g2d,
+                false,
+                "pairs of players ordered by date of " + gamesPlayed + " games played",
+                Statistic.DATE_OF_NUMBER_OF_GAMES,
+                null,
+                null,
+                gamesPlayed,
+                GameOutcome.ANY,
+                earliestDate,
+                latestDate,
+                1))
+        {
+            gamesPlayed += 100;
+        }
+
+        gamesWon = 0;
+        while (drawStatistics(g2d,
+                false,
+                "pairs of players ordered by date of " + gamesWon + " games won",
+                Statistic.DATE_OF_NUMBER_OF_GAMES,
+                null,
+                null,
+                gamesWon,
+                GameOutcome.WIN,
+                earliestDate,
+                latestDate,
+                1))
+        {
+            gamesWon += 100;
+        }
+
+        gamesLost = 0;
+        while (drawStatistics(g2d,
+                false,
+                "pairs of players ordered by date of " + gamesLost + " games lost",
+                Statistic.DATE_OF_NUMBER_OF_GAMES,
+                null,
+                null,
+                gamesLost,
+                GameOutcome.LOSE,
+                earliestDate,
+                latestDate,
+                1))
+        {
+            gamesLost += 100;
+        }
+
         try
         {
             ImageIO.write(image, "png", new File("ping_pong_statistics.png"));
@@ -1312,22 +1408,31 @@ public class FileWriter
         jFrame.dispatchEvent(new WindowEvent(jFrame, WindowEvent.WINDOW_CLOSING));
     }
 
-    public void drawStatistics(Graphics2D g2d, boolean playerAgainstAny, String description, Statistic statistic,
-                               Intervals intervals, IntervalGames intervalGames, Integer numberOfGames,
-                               GameOutcome outcome, Date start, Date end, Integer intervalDays)
+    public <T> boolean drawStatistics(Graphics2D g2d, boolean playerAgainstAny, String description, Statistic statistic,
+                                      Intervals intervals, IntervalGames intervalGames, Integer numberOfGames,
+                                      GameOutcome outcome, Date start, Date end, Integer intervalDays)
     {
         System.out.println(description);
-        g2d.drawString(description, 10, textHeight);
-        g2d.translate(0, textHeight);
+        String statisticsText;
         PlayerPair[] playerPairs;
         if (playerAgainstAny)
         {
-            g2d.drawString(prettyPrint(analyzer.orderedPlayers(statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays)), 10, textHeight);
+            List<Map.Entry<Player, Object>> orderedPlayers = analyzer.orderedPlayers(statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
+            if (!orderedPlayers.isEmpty())
+            {
+                return false;
+            }
+            statisticsText = prettyPrint(orderedPlayers);
             playerPairs = PLAYER_ANY;
         }
         else
         {
-            g2d.drawString(prettyPrint(analyzer.orderedPairsOfPlayers(statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays)), 10, textHeight);
+            List<Map.Entry<PlayerPair, Object>> orderedPairsOfPlayers = analyzer.orderedPairsOfPlayers(statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
+            if (!orderedPairsOfPlayers.isEmpty())
+            {
+                return false;
+            }
+            statisticsText = prettyPrint(orderedPairsOfPlayers);
             if (outcome == GameOutcome.ANY)
             {
                 playerPairs = PLAYER_PLAYER_UNORDERED;
@@ -1337,6 +1442,9 @@ public class FileWriter
                 playerPairs = PLAYER_PLAYER_ORDERED;
             }
         }
+        g2d.drawString(description, 10, textHeight);
+        g2d.translate(0, textHeight);
+        g2d.drawString(statisticsText, 10, textHeight);
         g2d.translate(0, textHeight);
         g2d.drawString("bar chart", 10, textHeight);
         g2d.translate(0, textHeight);
@@ -1356,6 +1464,7 @@ public class FileWriter
         jFrame.getContentPane().getComponent(0).paint(g2d);
         jFrame.setVisible(false);
         g2d.translate(-(margin + graphLeftOffset + graphWidth) * 2, margin + graphHeight + graphBottomOffset + margin);
+        return true;
     }
 
     public <T> String prettyPrint(List<Map.Entry<T, Object>> orderedPlayersOrPlayerPairs)
