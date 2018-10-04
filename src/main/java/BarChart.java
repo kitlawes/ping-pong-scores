@@ -62,6 +62,13 @@ public class BarChart
                 highest = Math.max(highest, new Double(((Date) dataPoint).getTime()));
             }
         }
+        if ((statistic == Statistic.NUMBER_OF_GAMES
+                || statistic == Statistic.INTERVALS
+                || statistic == Statistic.MOST_GAMES)
+                && highest - lowest > 5)
+        {
+            highest = Math.ceil(highest / 10) * 10;
+        }
         if (statistic == Statistic.PERCENTAGE_OF_GAMES
                 || statistic == Statistic.AVERAGE_PERCENTAGE_OF_GAMES)
         {
@@ -152,12 +159,14 @@ public class BarChart
                 int maxDecimalPlaces = 0;
                 for (int i = 0; i < 10; i++)
                 {
-                    double value = Math.round(((finalHighest - finalLowest) / 10 * i + finalLowest) * Math.pow(10, 10)) / Math.pow(10, 10);
-                    for (int j = 1; j <= 10; j++)
+                    long value = Math.round(((finalHighest - finalLowest) / 10 * i + finalLowest) % 1 * Math.pow(10, 10));
+                    String string = String.valueOf(value);
+                    for (int j = string.length() - 1; j >= 0; j--)
                     {
-                        if (value * Math.pow(10, j) % 1 > 0)
+                        if (string.charAt(j) != '0')
                         {
-                            maxDecimalPlaces = Math.max(maxDecimalPlaces, j);
+                            maxDecimalPlaces = Math.max(maxDecimalPlaces, j + 1);
+                            break;
                         }
                     }
                 }
