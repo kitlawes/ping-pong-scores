@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.text.DecimalFormat;
@@ -13,49 +14,16 @@ public class Main
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
 
-        final Date earliestDate = parser.getEarliestDate();
-        final Date latestDate = parser.getLatestDate();
-
-        LineGraph lineGraph = new LineGraph(parser, analyzer);
-        lineGraph.drawGraph(Statistic.NUMBER_OF_GAMES,
-                null,
-                null,
-                GameOutcome.ANY,
-                earliestDate,
-                latestDate,
-                1,
-                new PlayerPair[]{PlayerPair.getPlayerPair("ANTONIO-ANY"),
-                        PlayerPair.getPlayerPair("KIT-ANY"),
-                        PlayerPair.getPlayerPair("HUNOR-ANY"),
-                        PlayerPair.getPlayerPair("JIPESH-ANY")},
-                true,
-                5);
-//        BarChart barChart = new BarChart(analyzer);
-//        barChart.drawGraph(Statistic.NUMBER_OF_GAMES,
-//                null,
-//                null,
-//                null,
-//                GameOutcome.WIN,
-//                earliestDate,
-//                latestDate,
-//                0,
-//                new PlayerPair[]{PlayerPair.getPlayerPair("ANTONIO-KIT"),
-//                        PlayerPair.getPlayerPair("ANTONIO-HUNOR"),
-//                        PlayerPair.getPlayerPair("ANTONIO-JIPESH"),
-//                        PlayerPair.getPlayerPair("KIT-ANTONIO"),
-//                        PlayerPair.getPlayerPair("KIT-HUNOR"),
-//                        PlayerPair.getPlayerPair("KIT-JIPESH"),
-//                        PlayerPair.getPlayerPair("HUNOR-ANTONIO"),
-//                        PlayerPair.getPlayerPair("HUNOR-KIT"),
-//                        PlayerPair.getPlayerPair("HUNOR-JIPESH"),
-//                        PlayerPair.getPlayerPair("JIPESH-ANTONIO"),
-//                        PlayerPair.getPlayerPair("JIPESH-HUNOR"),
-//                        PlayerPair.getPlayerPair("JIPESH-KIT")});
+        FileWriter writer = new FileWriter(parser, analyzer);
+        writer.writeFile();
 
         if (true)
         {
             return;
         }
+
+        final Date EARLIEST_DATE = parser.getEarliestDate();
+        final Date LATEST_DATE = parser.getLatestDate();
 
         System.out.println("players ordered by number of games played");
         prettyPrint(analyzer.orderedPlayers(
@@ -64,8 +32,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
         System.out.println("players ordered by number of games won");
         prettyPrint(analyzer.orderedPlayers(
@@ -74,8 +42,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
         System.out.println("players ordered by number of games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -84,8 +52,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
 
         System.out.println();
@@ -96,8 +64,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
         System.out.println("pairs of players ordered by number of games won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -106,8 +74,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
         System.out.println("pairs of players ordered by number of games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -116,8 +84,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
 
         System.out.println();
@@ -128,8 +96,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
         System.out.println("players ordered by percentage of games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -138,8 +106,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
 
         System.out.println();
@@ -150,8 +118,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
         System.out.println("pairs of players ordered by percentage of games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -160,8 +128,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
 
         System.out.println();
@@ -172,8 +140,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
         System.out.println("players ordered by average percentage of games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -182,8 +150,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 null));
 
         System.out.println();
@@ -194,8 +162,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by average number of games won in a day");
         prettyPrint(analyzer.orderedPlayers(
@@ -204,8 +172,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by average number of games lost in a day");
         prettyPrint(analyzer.orderedPlayers(
@@ -214,8 +182,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by average number of games played in a week");
         prettyPrint(analyzer.orderedPlayers(
@@ -224,8 +192,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by average number of games won in a week");
         prettyPrint(analyzer.orderedPlayers(
@@ -234,8 +202,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by average number of games lost in a week");
         prettyPrint(analyzer.orderedPlayers(
@@ -244,8 +212,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -256,8 +224,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players by average number of games won in a day");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -266,8 +234,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players by average number of games lost in a day");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -276,8 +244,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players by average number of games played in a week");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -286,8 +254,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players by average number of games won in a week");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -296,8 +264,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players by average number of games lost in a week");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -306,8 +274,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -318,8 +286,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most games won in a day");
         prettyPrint(analyzer.orderedPlayers(
@@ -328,8 +296,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most games lost in a day");
         prettyPrint(analyzer.orderedPlayers(
@@ -338,8 +306,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most games played in a week");
         prettyPrint(analyzer.orderedPlayers(
@@ -348,8 +316,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by most games won in a week");
         prettyPrint(analyzer.orderedPlayers(
@@ -358,8 +326,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by most games lost in a week");
         prettyPrint(analyzer.orderedPlayers(
@@ -368,8 +336,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -380,8 +348,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most games won in a day");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -390,8 +358,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most games lost in a day");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -400,8 +368,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most games played in a week");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -410,8 +378,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by most games won in a week");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -420,8 +388,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by most games lost in a week");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -430,8 +398,8 @@ public class Main
                 null,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -442,8 +410,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by days with at least one game won");
         prettyPrint(analyzer.orderedPlayers(
@@ -452,8 +420,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by days with at least one game lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -462,8 +430,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by weeks with at least one game played");
         prettyPrint(analyzer.orderedPlayers(
@@ -472,8 +440,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by weeks with at least one game won");
         prettyPrint(analyzer.orderedPlayers(
@@ -482,8 +450,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by weeks with at least one game lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -492,8 +460,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -504,8 +472,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by days with at least one game won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -514,8 +482,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by days with at least one game lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -524,8 +492,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by weeks with at least one game played");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -534,8 +502,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by weeks with at least one game won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -544,8 +512,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by weeks with at least one game lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -554,8 +522,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -566,8 +534,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by days without any games won");
         prettyPrint(analyzer.orderedPlayers(
@@ -576,8 +544,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by days without any games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -586,8 +554,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by weeks without any games played");
         prettyPrint(analyzer.orderedPlayers(
@@ -596,8 +564,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by weeks without any games won");
         prettyPrint(analyzer.orderedPlayers(
@@ -606,8 +574,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by weeks without any games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -616,8 +584,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -628,8 +596,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by days without any games won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -638,8 +606,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by days without any games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -648,8 +616,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by weeks without any games played");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -658,8 +626,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by weeks without any games won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -668,8 +636,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by weeks without any games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -678,8 +646,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -690,8 +658,8 @@ public class Main
                 IntervalGames.MORE_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by days with games won equal to games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -700,8 +668,8 @@ public class Main
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by days with games won less than games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -710,8 +678,8 @@ public class Main
                 IntervalGames.LESS_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by weeks with games won greater than games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -720,8 +688,8 @@ public class Main
                 IntervalGames.MORE_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by weeks with games won equal to games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -730,8 +698,8 @@ public class Main
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by weeks with games won less than games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -740,8 +708,8 @@ public class Main
                 IntervalGames.LESS_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -752,8 +720,8 @@ public class Main
                 IntervalGames.MORE_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by days with games won equal to games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -762,8 +730,8 @@ public class Main
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by days with games won less than games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -772,8 +740,8 @@ public class Main
                 IntervalGames.LESS_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by weeks with games won greater than games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -782,8 +750,8 @@ public class Main
                 IntervalGames.MORE_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by weeks with games won equal to games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -792,8 +760,8 @@ public class Main
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by weeks with games won less than games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -802,8 +770,8 @@ public class Main
                 IntervalGames.LESS_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -814,8 +782,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive days with at least one game won");
         prettyPrint(analyzer.orderedPlayers(
@@ -824,8 +792,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive days with at least one game lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -834,8 +802,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive weeks with at least one game played");
         prettyPrint(analyzer.orderedPlayers(
@@ -844,8 +812,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by most consecutive weeks with at least one game won");
         prettyPrint(analyzer.orderedPlayers(
@@ -854,8 +822,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by most consecutive weeks with at least one game lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -864,8 +832,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -876,8 +844,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive days with at least one game won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -886,8 +854,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive days with at least one game lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -896,8 +864,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive weeks with at least one game played");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -906,8 +874,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks with at least one game won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -916,8 +884,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks with at least one game lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -926,8 +894,8 @@ public class Main
                 IntervalGames.AT_LEAST_ONE,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -938,8 +906,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive days without any games won");
         prettyPrint(analyzer.orderedPlayers(
@@ -948,8 +916,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive days without any games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -958,8 +926,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive weeks without any games played");
         prettyPrint(analyzer.orderedPlayers(
@@ -968,8 +936,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by most consecutive weeks without any games won");
         prettyPrint(analyzer.orderedPlayers(
@@ -978,8 +946,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by most consecutive weeks without any games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -988,8 +956,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -1000,8 +968,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive days without any games won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1010,8 +978,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive days without any games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1020,8 +988,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive weeks without any games played");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1030,8 +998,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.ANY,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks without any games won");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1040,8 +1008,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks without any games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1050,8 +1018,8 @@ public class Main
                 IntervalGames.WITHOUT_ANY,
                 null,
                 GameOutcome.LOSE,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -1062,8 +1030,8 @@ public class Main
                 IntervalGames.MORE_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive days with games won equal to games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -1072,8 +1040,8 @@ public class Main
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive days with games won less than games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -1082,8 +1050,8 @@ public class Main
                 IntervalGames.LESS_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("players ordered by most consecutive weeks with games won greater than games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -1092,8 +1060,8 @@ public class Main
                 IntervalGames.MORE_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by most consecutive weeks with games won equal to games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -1102,8 +1070,8 @@ public class Main
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("players ordered by most consecutive weeks with games won less than games lost");
         prettyPrint(analyzer.orderedPlayers(
@@ -1112,8 +1080,8 @@ public class Main
                 IntervalGames.LESS_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -1124,8 +1092,8 @@ public class Main
                 IntervalGames.MORE_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive days with games won equal to games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1134,8 +1102,8 @@ public class Main
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive days with games won less than games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1144,8 +1112,8 @@ public class Main
                 IntervalGames.LESS_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 1));
         System.out.println("pairs of players ordered by most consecutive weeks with games won greater than games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1154,8 +1122,8 @@ public class Main
                 IntervalGames.MORE_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks with games won equal to games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1164,8 +1132,8 @@ public class Main
                 IntervalGames.EQUALLY_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
         System.out.println("pairs of players ordered by most consecutive weeks with games won less than games lost");
         prettyPrint(analyzer.orderedPairsOfPlayers(
@@ -1174,8 +1142,8 @@ public class Main
                 IntervalGames.LESS_FREQUENT,
                 null,
                 GameOutcome.WIN,
-                earliestDate,
-                latestDate,
+                EARLIEST_DATE,
+                LATEST_DATE,
                 5));
 
         System.out.println();
@@ -1189,8 +1157,8 @@ public class Main
                     null,
                     gamesPlayed,
                     GameOutcome.ANY,
-                    earliestDate,
-                    latestDate,
+                    EARLIEST_DATE,
+                    LATEST_DATE,
                     1);
             if (!orderedPlayers.isEmpty())
             {
@@ -1214,8 +1182,8 @@ public class Main
                     null,
                     gamesWon,
                     GameOutcome.WIN,
-                    earliestDate,
-                    latestDate,
+                    EARLIEST_DATE,
+                    LATEST_DATE,
                     1);
             if (!orderedPlayers.isEmpty())
             {
@@ -1239,8 +1207,8 @@ public class Main
                     null,
                     gamesLost,
                     GameOutcome.LOSE,
-                    earliestDate,
-                    latestDate,
+                    EARLIEST_DATE,
+                    LATEST_DATE,
                     1);
             if (!orderedPlayers.isEmpty())
             {
@@ -1264,8 +1232,8 @@ public class Main
                     null,
                     gamesPlayed,
                     GameOutcome.ANY,
-                    earliestDate,
-                    latestDate,
+                    EARLIEST_DATE,
+                    LATEST_DATE,
                     1);
             if (!orderedPairsOfPlayers.isEmpty())
             {
@@ -1289,8 +1257,8 @@ public class Main
                     null,
                     gamesWon,
                     GameOutcome.WIN,
-                    earliestDate,
-                    latestDate,
+                    EARLIEST_DATE,
+                    LATEST_DATE,
                     1);
             if (!orderedPairsOfPlayers.isEmpty())
             {
@@ -1314,8 +1282,8 @@ public class Main
                     null,
                     gamesLost,
                     GameOutcome.LOSE,
-                    earliestDate,
-                    latestDate,
+                    EARLIEST_DATE,
+                    LATEST_DATE,
                     1);
             if (!orderedPairsOfPlayers.isEmpty())
             {

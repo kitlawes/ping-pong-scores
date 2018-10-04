@@ -1,5 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,9 +21,9 @@ public class LineGraph
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, GameOutcome outcome,
-                          Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs, boolean cumulative,
-                          int movingAverageInterval)
+    public JFrame drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, GameOutcome outcome,
+                            Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs, boolean cumulative,
+                            int movingAverageInterval)
     {
         final List<Date> dates = parser.getDatesInRange(start, end);
         Collections.sort(dates);
@@ -39,7 +44,6 @@ public class LineGraph
                 Player opponent = playerPair.getOpponent();
                 for (int j = Math.max(i - (movingAverageInterval - 1) / 2, 0); j <= Math.min(i + (movingAverageInterval - 1) / 2, dates.size() - 1); j++)
                 {
-                    dataPointAmount++;
                     Date movingDate = dates.get(j);
                     Date dataPointStart;
                     if (cumulative)
@@ -56,10 +60,26 @@ public class LineGraph
                             dataPointTotal += new Double(analyzer.numberOfGames(outcome, dataPointStart, movingDate, player, opponent));
                             break;
                         case PERCENTAGE_OF_GAMES:
-                            dataPointTotal += analyzer.percentageOfGames(outcome, dataPointStart, movingDate, player, opponent);
+                            Double dataPoint = analyzer.percentageOfGames(outcome, dataPointStart, movingDate, player, opponent);
+                            if (dataPoint != null)
+                            {
+                                dataPointTotal += dataPoint;
+                            }
+                            else
+                            {
+                                continue;
+                            }
                             break;
                         case AVERAGE_PERCENTAGE_OF_GAMES:
-                            dataPointTotal += analyzer.averagePercentageOfGames(outcome, dataPointStart, movingDate, player);
+                            dataPoint = analyzer.averagePercentageOfGames(outcome, dataPointStart, movingDate, player);
+                            if (dataPoint != null)
+                            {
+                                dataPointTotal += dataPoint;
+                            }
+                            else
+                            {
+                                continue;
+                            }
                             break;
                         case AVERAGE_NUMBER_OF_GAMES:
                             dataPointTotal += analyzer.averageNumberOfGames(outcome, dataPointStart, movingDate, intervalDays, player, opponent);
@@ -71,6 +91,11 @@ public class LineGraph
                             dataPointTotal += new Double(analyzer.numberOfIntervals(intervals, intervalGames, outcome, dataPointStart, movingDate, intervalDays, player, opponent));
                             break;
                     }
+                    dataPointAmount++;
+                }
+                if (dataPointAmount == 0)
+                {
+                    continue;
                 }
                 Double dataPoint = dataPointTotal / dataPointAmount;
                 playerPairData.put(date, dataPoint);
@@ -89,12 +114,6 @@ public class LineGraph
                 }
             }
         }
-        if (statistic == Statistic.NUMBER_OF_GAMES
-                || statistic == Statistic.INTERVALS
-                || statistic == Statistic.MOST_GAMES)
-        {
-            highest = Math.ceil(highest / 10) * 10;
-        }
 
         final Double finalLowest = lowest;
         final Double finalHighest = highest;
@@ -103,28 +122,26 @@ public class LineGraph
         final int graphHeight = 250;
         final int graphLeftOffset = 250;
         final int graphBottomOffset = 250;
-        JFrame jFrame = new JFrame()
+        JFrame jFrame = new JFrame();
+        JPanel jPanel = new JPanel()
         {
             @Override
             public void paint(Graphics g)
             {
                 super.paint(g);
 
-                Insets insets = getInsets();
-                int topInset = insets.top;
-                int leftInset = insets.left;
                 int dataAmount = playerPairs.length;
 
                 g.setColor(Color.WHITE);
-                g.fillRect(leftInset + margin + graphLeftOffset, topInset + margin, graphWidth, graphHeight);
+                g.fillRect(margin + graphLeftOffset, margin, graphWidth, graphHeight);
 
                 List<Color> colours = new ArrayList<>();
                 for (int i = 0; i < dataAmount; i++)
                 {
-//                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
-                    colours.add(Color.GRAY);
+                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+//                    colours.add(Color.GRAY);
                 }
 
                 int dateAmount = dates.size();
@@ -154,23 +171,23 @@ public class LineGraph
                             }
                             nextDataPoint = playerPairData.get(dates.get(k));
                         }
-                        g.drawLine(leftInset + margin + graphLeftOffset + (int) Math.round((double) j / (dateAmount - 1) * graphWidth),
-                                topInset + margin + (int) Math.round((finalHighest - currentDataPoint) / (finalHighest - finalLowest) * graphHeight),
-                                leftInset + margin + graphLeftOffset + (int) Math.round((double) k / (dateAmount - 1) * graphWidth),
-                                topInset + margin + (int) Math.round((finalHighest - nextDataPoint) / (finalHighest - finalLowest) * graphHeight));
+                        g.drawLine(margin + graphLeftOffset + (int) Math.round((double) j / (dateAmount - 1) * graphWidth),
+                                margin + (int) Math.round((finalHighest - currentDataPoint) / (finalHighest - finalLowest) * graphHeight),
+                                margin + graphLeftOffset + (int) Math.round((double) k / (dateAmount - 1) * graphWidth),
+                                margin + (int) Math.round((finalHighest - nextDataPoint) / (finalHighest - finalLowest) * graphHeight));
                         j = k;
                     }
                 }
 
                 g.setColor(Color.BLACK);
-                g.drawLine(leftInset + margin + graphLeftOffset,
-                        topInset + margin,
-                        leftInset + margin + graphLeftOffset,
-                        topInset + margin + graphHeight);
-                g.drawLine(leftInset + margin + graphLeftOffset,
-                        topInset + margin + graphHeight,
-                        leftInset + margin + graphLeftOffset + graphWidth,
-                        topInset + margin + graphHeight);
+                g.drawLine(margin + graphLeftOffset,
+                        margin,
+                        margin + graphLeftOffset,
+                        margin + graphHeight);
+                g.drawLine(margin + graphLeftOffset,
+                        margin + graphHeight,
+                        margin + graphLeftOffset + graphWidth,
+                        margin + graphHeight);
 
                 Graphics2D g2d = (Graphics2D) g;
                 SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("EEE MMM dd");
@@ -182,14 +199,14 @@ public class LineGraph
                     {
                         g2d.rotate(Math.toRadians(90));
                         g2d.drawString(simpleDateFormatter.format(dates.get(i)),
-                                topInset + margin + graphHeight + 20,
-                                -(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth) - 4));
+                                margin + graphHeight + 20,
+                                -(margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth) - 4));
                         g2d.rotate(Math.toRadians(-90));
                     }
-                    g.drawLine(leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
-                            topInset + margin + graphHeight,
-                            leftInset + margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
-                            topInset + margin + graphHeight + 10);
+                    g.drawLine(margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
+                            margin + graphHeight,
+                            margin + graphLeftOffset + (int) Math.round((double) i / (dateAmount - 1) * graphWidth),
+                            margin + graphHeight + 10);
                 }
 
                 int maxDecimalPlaces = 0;
@@ -214,33 +231,34 @@ public class LineGraph
                 {
                     double value = (finalHighest - finalLowest) / 10 * i + finalLowest;
                     g.drawString(decimalFormatter.format(value),
-                            leftInset + margin + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(decimalFormatter.format(value)),
-                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i) + 4);
-                    g.drawLine(leftInset + margin + graphLeftOffset - 10,
-                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
-                            leftInset + margin + graphLeftOffset,
-                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
+                            margin + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(decimalFormatter.format(value)),
+                            margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i) + 4);
+                    g.drawLine(margin + graphLeftOffset - 10,
+                            margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
+                            margin + graphLeftOffset,
+                            margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
                 }
 
                 for (int i = 0; i < dataAmount; i++)
                 {
                     g.drawString(playerPairs[i].toString(),
-                            leftInset + margin + 10 + 10,
-                            topInset + margin + graphHeight + 10 + 10 + 20 * i);
+                            margin + 10 + 10,
+                            margin + graphHeight + 10 + 10 + 20 * i);
                     g.setColor(colours.get(i));
-                    g.fillRect(leftInset + margin,
-                            topInset + margin + graphHeight + 10 + 20 * i,
+                    g.fillRect(margin,
+                            margin + graphHeight + 10 + 20 * i,
                             10,
                             10);
                     g.setColor(Color.BLACK);
-                    g.drawRect(leftInset + margin,
-                            topInset + margin + graphHeight + 10 + 20 * i,
+                    g.drawRect(margin,
+                            margin + graphHeight + 10 + 20 * i,
                             10,
                             10);
                 }
 
             }
         };
+        jFrame.add(jPanel);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
         Insets insets = jFrame.getInsets();
@@ -248,5 +266,6 @@ public class LineGraph
                 100,
                 insets.left + margin + graphLeftOffset + graphWidth + margin + insets.right,
                 insets.top + margin + graphHeight + graphBottomOffset + margin + insets.bottom);
+        return jFrame;
     }
 }

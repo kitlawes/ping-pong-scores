@@ -14,8 +14,8 @@ public class BarChart
         this.analyzer = analyzer;
     }
 
-    public void drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, Integer numberOfGames,
-                          GameOutcome outcome, Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs)
+    public JFrame drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, Integer numberOfGames,
+                            GameOutcome outcome, Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs)
     {
         final List<Map.Entry<PlayerPair, Object>> orderedPlayerPairs = analyzer.orderedPlayersOrPlayerPairs(Arrays.asList(playerPairs), statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
         final List<String> legendKeys = new ArrayList<>();
@@ -67,12 +67,6 @@ public class BarChart
         {
             highest = new Double(100);
         }
-        if (statistic == Statistic.NUMBER_OF_GAMES
-                || statistic == Statistic.INTERVALS
-                || statistic == Statistic.MOST_GAMES)
-        {
-            highest = Math.ceil(highest / 10) * 10;
-        }
 
         final int finalDataAmount = legendKeys.size();
         final List<String> finalLegendKeys = legendKeys;
@@ -83,27 +77,24 @@ public class BarChart
         final int graphHeight = 250;
         final int graphLeftOffset = 250;
         final int graphBottomOffset = 250;
-        JFrame jFrame = new JFrame()
+        JFrame jFrame = new JFrame();
+        JPanel jPanel = new JPanel()
         {
             @Override
             public void paint(Graphics g)
             {
                 super.paint(g);
 
-                Insets insets = getInsets();
-                int topInset = insets.top;
-                int leftInset = insets.left;
-
                 g.setColor(Color.WHITE);
-                g.fillRect(leftInset + margin + graphLeftOffset, topInset + margin, graphWidth, graphHeight);
+                g.fillRect(margin + graphLeftOffset, margin, graphWidth, graphHeight);
 
                 List<Color> colours = new ArrayList<>();
                 for (int i = 0; i < finalDataAmount; i++)
                 {
-//                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
-                    colours.add(Color.GRAY);
+                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+//                    colours.add(Color.GRAY);
                 }
 
                 for (int i = 0; i < finalDataAmount; i++)
@@ -123,39 +114,39 @@ public class BarChart
                         dataPoint = new Double(((Date) value).getTime());
                     }
                     g.setColor(colours.get(i));
-                    g.fillRect(leftInset + margin + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
-                            topInset + margin + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
+                    g.fillRect(margin + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
+                            margin + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
                             (int) Math.round(graphWidth / (finalDataAmount * 1.5 + 0.5)),
                             (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight));
                     g.setColor(Color.BLACK);
-                    g.drawRect(leftInset + margin + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
-                            topInset + margin + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
+                    g.drawRect(margin + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
+                            margin + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
                             (int) Math.round(graphWidth / (finalDataAmount * 1.5 + 0.5)),
                             (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight));
                 }
 
                 g.setColor(Color.BLACK);
-                g.drawLine(leftInset + margin + graphLeftOffset,
-                        topInset + margin,
-                        leftInset + margin + graphLeftOffset,
-                        topInset + margin + graphHeight);
-                g.drawLine(leftInset + margin + graphLeftOffset,
-                        topInset + margin + graphHeight,
-                        leftInset + margin + graphLeftOffset + graphWidth,
-                        topInset + margin + graphHeight);
+                g.drawLine(margin + graphLeftOffset,
+                        margin,
+                        margin + graphLeftOffset,
+                        margin + graphHeight);
+                g.drawLine(margin + graphLeftOffset,
+                        margin + graphHeight,
+                        margin + graphLeftOffset + graphWidth,
+                        margin + graphHeight);
 
                 Graphics2D g2d = (Graphics2D) g;
                 for (int i = 0; i < finalDataAmount; i++)
                 {
                     g2d.rotate(Math.toRadians(90));
                     g2d.drawString(legendKeys.get(i).toString(),
-                            topInset + margin + graphHeight + 20,
-                            -(leftInset + margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth) - 4));
+                            margin + graphHeight + 20,
+                            -(margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth) - 4));
                     g2d.rotate(Math.toRadians(-90));
-                    g.drawLine(leftInset + margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
-                            topInset + margin + graphHeight,
-                            leftInset + margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
-                            topInset + margin + graphHeight + 10);
+                    g.drawLine(margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
+                            margin + graphHeight,
+                            margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
+                            margin + graphHeight + 10);
                 }
 
                 int maxDecimalPlaces = 0;
@@ -190,33 +181,34 @@ public class BarChart
                         label = decimalFormatter.format(value);
                     }
                     g.drawString(label,
-                            leftInset + margin + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(label),
-                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i) + 4);
-                    g.drawLine(leftInset + margin + graphLeftOffset - 10,
-                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
-                            leftInset + margin + graphLeftOffset,
-                            topInset + margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
+                            margin + graphLeftOffset - 20 - g.getFontMetrics().stringWidth(label),
+                            margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i) + 4);
+                    g.drawLine(margin + graphLeftOffset - 10,
+                            margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i),
+                            margin + graphLeftOffset,
+                            margin + graphHeight - (int) Math.round((double) graphHeight / 10 * i));
                 }
 
                 for (int i = 0; i < finalDataAmount; i++)
                 {
                     g.drawString(finalLegendKeys.get(i),
-                            leftInset + margin + 10 + 10,
-                            topInset + margin + graphHeight + 10 + 10 + 20 * i);
+                            margin + 10 + 10,
+                            margin + graphHeight + 10 + 10 + 20 * i);
                     g.setColor(colours.get(i));
-                    g.fillRect(leftInset + margin,
-                            topInset + margin + graphHeight + 10 + 20 * i,
+                    g.fillRect(margin,
+                            margin + graphHeight + 10 + 20 * i,
                             10,
                             10);
                     g.setColor(Color.BLACK);
-                    g.drawRect(leftInset + margin,
-                            topInset + margin + graphHeight + 10 + 20 * i,
+                    g.drawRect(margin,
+                            margin + graphHeight + 10 + 20 * i,
                             10,
                             10);
                 }
 
             }
         };
+        jFrame.add(jPanel);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
         Insets insets = jFrame.getInsets();
@@ -224,5 +216,6 @@ public class BarChart
                 100,
                 insets.left + margin + graphLeftOffset + graphWidth + margin + insets.right,
                 insets.top + margin + graphHeight + graphBottomOffset + margin + insets.bottom);
+        return jFrame;
     }
 }
