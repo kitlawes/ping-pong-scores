@@ -17,7 +17,8 @@ public class LineGraph
     }
 
     public void drawGraph(Statistic statistic, Intervals intervals, IntervalGames intervalGames, GameOutcome outcome,
-                          Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs, boolean cumulative)
+                          Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs, boolean cumulative,
+                          int movingAverageInterval)
     {
         final List<Date> dates = parser.getDatesInRange(start, end);
         Collections.sort(dates);
@@ -29,41 +30,49 @@ public class LineGraph
         {
             Map<Date, Double> playerPairData = new HashMap<>();
             data.put(playerPair, playerPairData);
-            for (Date date : dates)
+            for (int i = 0; i < dates.size(); i++)
             {
-                Date dataPointStart;
-                if (cumulative)
-                {
-                    dataPointStart = start;
-                }
-                else
-                {
-                    dataPointStart = date;
-                }
-                Double dataPoint = null;
+                Date date = dates.get(i);
+                Double dataPointTotal = new Double(0);
+                int dataPointAmount = 0;
                 Player player = playerPair.getPlayer();
                 Player opponent = playerPair.getOpponent();
-                switch (statistic)
+                for (int j = Math.max(i - (movingAverageInterval - 1) / 2, 0); j <= Math.min(i + (movingAverageInterval - 1) / 2, dates.size() - 1); j++)
                 {
-                    case NUMBER_OF_GAMES:
-                        dataPoint = new Double(analyzer.numberOfGames(outcome, dataPointStart, date, player, opponent));
-                        break;
-                    case PERCENTAGE_OF_GAMES:
-                        dataPoint = analyzer.percentageOfGames(outcome, dataPointStart, date, player, opponent);
-                        break;
-                    case AVERAGE_PERCENTAGE_OF_GAMES:
-                        dataPoint = analyzer.averagePercentageOfGames(outcome, dataPointStart, date, player);
-                        break;
-                    case AVERAGE_NUMBER_OF_GAMES:
-                        dataPoint = analyzer.averageNumberOfGames(outcome, dataPointStart, date, intervalDays, player, opponent);
-                        break;
-                    case MOST_GAMES:
-                        dataPoint = new Double(analyzer.mostGames(outcome, dataPointStart, date, intervalDays, player, opponent));
-                        break;
-                    case INTERVALS:
-                        dataPoint = new Double(analyzer.numberOfIntervals(intervals, intervalGames, outcome, dataPointStart, date, intervalDays, player, opponent));
-                        break;
+                    dataPointAmount++;
+                    Date movingDate = dates.get(j);
+                    Date dataPointStart;
+                    if (cumulative)
+                    {
+                        dataPointStart = start;
+                    }
+                    else
+                    {
+                        dataPointStart = movingDate;
+                    }
+                    switch (statistic)
+                    {
+                        case NUMBER_OF_GAMES:
+                            dataPointTotal += new Double(analyzer.numberOfGames(outcome, dataPointStart, movingDate, player, opponent));
+                            break;
+                        case PERCENTAGE_OF_GAMES:
+                            dataPointTotal += analyzer.percentageOfGames(outcome, dataPointStart, movingDate, player, opponent);
+                            break;
+                        case AVERAGE_PERCENTAGE_OF_GAMES:
+                            dataPointTotal += analyzer.averagePercentageOfGames(outcome, dataPointStart, movingDate, player);
+                            break;
+                        case AVERAGE_NUMBER_OF_GAMES:
+                            dataPointTotal += analyzer.averageNumberOfGames(outcome, dataPointStart, movingDate, intervalDays, player, opponent);
+                            break;
+                        case MOST_GAMES:
+                            dataPointTotal += new Double(analyzer.mostGames(outcome, dataPointStart, movingDate, intervalDays, player, opponent));
+                            break;
+                        case INTERVALS:
+                            dataPointTotal += new Double(analyzer.numberOfIntervals(intervals, intervalGames, outcome, dataPointStart, movingDate, intervalDays, player, opponent));
+                            break;
+                    }
                 }
+                Double dataPoint = dataPointTotal / dataPointAmount;
                 playerPairData.put(date, dataPoint);
                 if (lowest == null)
                 {
@@ -112,10 +121,10 @@ public class LineGraph
                 List<Color> colours = new ArrayList<>();
                 for (int i = 0; i < dataAmount; i++)
                 {
-                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
-//                    colours.add(Color.GRAY);
+//                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+//                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
+                    colours.add(Color.GRAY);
                 }
 
                 int dateAmount = dates.size();
