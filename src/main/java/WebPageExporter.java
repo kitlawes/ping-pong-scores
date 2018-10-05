@@ -78,7 +78,7 @@ public class WebPageExporter
 
     public void exportToWebPage()
     {
-        File directory = new File("web_page");
+        File directory = new File("ping_pong_statistics");
         if (!directory.exists())
         {
             directory.mkdir();
@@ -86,7 +86,7 @@ public class WebPageExporter
         PrintWriter writer = null;
         try
         {
-            writer = new PrintWriter("web_page/ping_pong_statistics.html", "UTF-8");
+            writer = new PrintWriter("ping_pong_statistics/ping_pong_statistics.html", "UTF-8");
         }
         catch (FileNotFoundException e)
         {
@@ -1628,7 +1628,7 @@ public class WebPageExporter
         statisticsIndex++;
         try
         {
-            ImageIO.write(image, "png", new File("web_page/graphs_" + statisticsIndex + ".png"));
+            ImageIO.write(image, "png", new File("ping_pong_statistics/graphs_" + statisticsIndex + ".png"));
         }
         catch (IOException e)
         {
