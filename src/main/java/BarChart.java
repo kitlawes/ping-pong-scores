@@ -18,12 +18,10 @@ public class BarChart
                             GameOutcome outcome, Date start, Date end, Integer intervalDays, final PlayerPair[] playerPairs)
     {
         final List<Map.Entry<PlayerPair, Object>> orderedPlayerPairs = analyzer.orderedPlayersOrPlayerPairs(Arrays.asList(playerPairs), statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays);
-        final List<String> legendKeys = new ArrayList<>();
         Double lowest = null;
         Double highest = null;
         for (Map.Entry<PlayerPair, Object> orderedPlayerPair : orderedPlayerPairs)
         {
-            legendKeys.add(orderedPlayerPair.getKey().getPlayer() + "-" + orderedPlayerPair.getKey().getOpponent());
             Object dataPoint = orderedPlayerPair.getValue();
             if (dataPoint instanceof Integer)
             {
@@ -77,8 +75,7 @@ public class BarChart
             highest = new Double(100);
         }
 
-        final int finalDataAmount = legendKeys.size();
-        final List<String> finalLegendKeys = legendKeys;
+        final int finalDataAmount = orderedPlayerPairs.size();
         final Double finalLowest = lowest;
         final Double finalHighest = highest;
         final int margin = 10;
@@ -97,13 +94,13 @@ public class BarChart
                 g.setColor(Color.WHITE);
                 g.fillRect(margin + graphLeftOffset, margin, graphWidth, graphHeight);
 
-                List<Color> colours = new ArrayList<>();
-                for (int i = 0; i < finalDataAmount; i++)
+                Map<PlayerPair, Color> colours = new HashMap<>();
+                for (int i = 0; i < playerPairs.length; i++)
                 {
-                    colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
-                            (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / finalDataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
-//                    colours.add(Color.GRAY);
+                    colours.put(playerPairs[i],
+                            new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / playerPairs.length + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
+                                    (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / playerPairs.length + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
+                                    (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / playerPairs.length + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
                 }
 
                 for (int i = 0; i < finalDataAmount; i++)
@@ -122,7 +119,7 @@ public class BarChart
                     {
                         dataPoint = new Double(((Date) value).getTime());
                     }
-                    g.setColor(colours.get(i));
+                    g.setColor(colours.get(orderedPlayerPairs.get(i).getKey()));
                     g.fillRect(margin + graphLeftOffset + (int) Math.round((i * 1.5 + 0.5) / (finalDataAmount * 1.5 + 0.5) * graphWidth),
                             margin + graphHeight - (int) Math.round((dataPoint - finalLowest) / (finalHighest - finalLowest) * graphHeight),
                             (int) Math.round(graphWidth / (finalDataAmount * 1.5 + 0.5)),
@@ -148,7 +145,7 @@ public class BarChart
                 for (int i = 0; i < finalDataAmount; i++)
                 {
                     g2d.rotate(Math.toRadians(90));
-                    g2d.drawString(legendKeys.get(i).toString(),
+                    g2d.drawString(orderedPlayerPairs.get(i).getKey().toString(),
                             margin + graphHeight + 20,
                             -(margin + graphLeftOffset + (int) Math.round((i * 1.5 + 1) / (finalDataAmount * 1.5 + 0.5) * graphWidth) - 4));
                     g2d.rotate(Math.toRadians(-90));
@@ -205,10 +202,10 @@ public class BarChart
 
                 for (int i = 0; i < finalDataAmount; i++)
                 {
-                    g.drawString(finalLegendKeys.get(i),
+                    g.drawString(orderedPlayerPairs.get(i).getKey().toString(),
                             margin + 10 + 10,
                             margin + graphHeight + 10 + 10 + 20 * i);
-                    g.setColor(colours.get(i));
+                    g.setColor(colours.get(orderedPlayerPairs.get(i).getKey()));
                     g.fillRect(margin,
                             margin + graphHeight + 10 + 20 * i,
                             10,

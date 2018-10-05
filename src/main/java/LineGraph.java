@@ -150,7 +150,6 @@ public class LineGraph
                     colours.add(new Color((float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 0 / 3) % 1 * 3 - 1.5) - 0.25)),
                             (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 1 / 3) % 1 * 3 - 1.5) - 0.25)),
                             (float) Math.max(0, Math.min(1, Math.abs(((i + 0.5) / dataAmount + (double) 2 / 3) % 1 * 3 - 1.5) - 0.25))));
-//                    colours.add(Color.GRAY);
                 }
 
                 int dateAmount = dates.size();
