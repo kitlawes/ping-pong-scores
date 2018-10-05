@@ -3,16 +3,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
-public class ImageExporter
+public class WebPageExporter
 {
-    private ValueParser parser;
     private ScoresAnalyzer analyzer;
     private BarChart barChart;
     private LineGraph lineGraph;
@@ -50,13 +52,12 @@ public class ImageExporter
     private int graphHeight;
     private int graphLeftOffset;
     private int graphBottomOffset;
-    private int numberOfStatistics;
-    private int fileWidth;
-    private int fileHeight;
+    private int statisticsIndex;
+    private int imageWidth;
+    private int imageHeight;
 
-    public ImageExporter(ValueParser parser, ScoresAnalyzer analyzer)
+    public WebPageExporter(ValueParser parser, ScoresAnalyzer analyzer)
     {
-        this.parser = parser;
         this.analyzer = analyzer;
         barChart = new BarChart(analyzer);
         lineGraph = new LineGraph(parser, analyzer);
@@ -70,20 +71,33 @@ public class ImageExporter
         graphHeight = 250;
         graphLeftOffset = 250;
         graphBottomOffset = 250;
-        fileWidth = (margin + graphLeftOffset + graphWidth) * 3 + margin;
-        fileHeight = textHeight * 3 * numberOfStatistics + (margin + graphHeight + graphBottomOffset) * numberOfStatistics + margin;
-        numberOfStatistics = 143;
+        imageWidth = (margin + graphLeftOffset + graphWidth) * 3 + margin;
+        imageHeight = textHeight * 3 + margin + graphHeight + graphBottomOffset + margin;
+        statisticsIndex = 0;
     }
 
-    public void exportToImage()
+    public void exportToWebPage()
     {
-        BufferedImage image = new BufferedImage(fileWidth, fileHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = image.createGraphics();
-        g2d.setColor(new Color(238, 238, 238));
-        g2d.fillRect(0, 0, fileWidth, fileHeight);
-        g2d.setColor(Color.BLACK);
+        File directory = new File("web_page");
+        if (!directory.exists())
+        {
+            directory.mkdir();
+        }
+        PrintWriter writer = null;
+        try
+        {
+            writer = new PrintWriter("web_page/ping_pong_statistics.html", "UTF-8");
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "number of games played",
                 Statistic.NUMBER_OF_GAMES,
                 null,
@@ -95,7 +109,7 @@ public class ImageExporter
                 null,
                 ANY_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by number of games played",
                 Statistic.NUMBER_OF_GAMES,
                 null,
@@ -106,7 +120,7 @@ public class ImageExporter
                 latestDate,
                 null,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by number of games won",
                 Statistic.NUMBER_OF_GAMES,
                 null,
@@ -117,7 +131,7 @@ public class ImageExporter
                 latestDate,
                 null,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by number of games lost",
                 Statistic.NUMBER_OF_GAMES,
                 null,
@@ -129,7 +143,7 @@ public class ImageExporter
                 null,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by number of games played",
                 Statistic.NUMBER_OF_GAMES,
                 null,
@@ -140,7 +154,7 @@ public class ImageExporter
                 latestDate,
                 null,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by number of games won",
                 Statistic.NUMBER_OF_GAMES,
                 null,
@@ -151,7 +165,7 @@ public class ImageExporter
                 latestDate,
                 null,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by number of games lost",
                 Statistic.NUMBER_OF_GAMES,
                 null,
@@ -163,7 +177,7 @@ public class ImageExporter
                 null,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by percentage of games won",
                 Statistic.PERCENTAGE_OF_GAMES,
                 null,
@@ -174,7 +188,7 @@ public class ImageExporter
                 latestDate,
                 null,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by percentage of games lost",
                 Statistic.PERCENTAGE_OF_GAMES,
                 null,
@@ -186,7 +200,7 @@ public class ImageExporter
                 null,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by percentage of games won",
                 Statistic.PERCENTAGE_OF_GAMES,
                 null,
@@ -197,7 +211,7 @@ public class ImageExporter
                 latestDate,
                 null,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by percentage of games lost",
                 Statistic.PERCENTAGE_OF_GAMES,
                 null,
@@ -209,7 +223,7 @@ public class ImageExporter
                 null,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by average percentage of games won",
                 Statistic.AVERAGE_PERCENTAGE_OF_GAMES,
                 null,
@@ -220,7 +234,7 @@ public class ImageExporter
                 latestDate,
                 null,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by average percentage of games lost",
                 Statistic.AVERAGE_PERCENTAGE_OF_GAMES,
                 null,
@@ -232,7 +246,7 @@ public class ImageExporter
                 null,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "average number of games played in a day",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -243,7 +257,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 ANY_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "average number of games played in a week",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -255,7 +269,7 @@ public class ImageExporter
                 5,
                 ANY_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by average number of games played in a day",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -266,7 +280,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by average number of games won in a day",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -277,7 +291,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by average number of games lost in a day",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -288,7 +302,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by average number of games played in a week",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -299,7 +313,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by average number of games won in a week",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -310,7 +324,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by average number of games lost in a week",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -322,7 +336,7 @@ public class ImageExporter
                 5,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by average number of games played in a day",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -333,7 +347,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players by average number of games won in a day",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -344,7 +358,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players by average number of games lost in a day",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -355,7 +369,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players by average number of games played in a week",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -366,7 +380,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players by average number of games won in a week",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -377,7 +391,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players by average number of games lost in a week",
                 Statistic.AVERAGE_NUMBER_OF_GAMES,
                 null,
@@ -389,7 +403,7 @@ public class ImageExporter
                 5,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "most games played in a day",
                 Statistic.MOST_GAMES,
                 null,
@@ -400,7 +414,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 ANY_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "most games played in a week",
                 Statistic.MOST_GAMES,
                 null,
@@ -412,7 +426,7 @@ public class ImageExporter
                 5,
                 ANY_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most games played in a day",
                 Statistic.MOST_GAMES,
                 null,
@@ -423,7 +437,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most games won in a day",
                 Statistic.MOST_GAMES,
                 null,
@@ -434,7 +448,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most games lost in a day",
                 Statistic.MOST_GAMES,
                 null,
@@ -445,7 +459,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most games played in a week",
                 Statistic.MOST_GAMES,
                 null,
@@ -456,7 +470,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most games won in a week",
                 Statistic.MOST_GAMES,
                 null,
@@ -467,7 +481,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most games lost in a week",
                 Statistic.MOST_GAMES,
                 null,
@@ -479,7 +493,7 @@ public class ImageExporter
                 5,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most games played in a day",
                 Statistic.MOST_GAMES,
                 null,
@@ -490,7 +504,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most games won in a day",
                 Statistic.MOST_GAMES,
                 null,
@@ -501,7 +515,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most games lost in a day",
                 Statistic.MOST_GAMES,
                 null,
@@ -512,7 +526,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most games played in a week",
                 Statistic.MOST_GAMES,
                 null,
@@ -523,7 +537,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most games won in a week",
                 Statistic.MOST_GAMES,
                 null,
@@ -534,7 +548,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most games lost in a week",
                 Statistic.MOST_GAMES,
                 null,
@@ -546,7 +560,7 @@ public class ImageExporter
                 5,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "days with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -557,7 +571,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 ANY_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "weeks with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -569,7 +583,7 @@ public class ImageExporter
                 5,
                 ANY_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -580,7 +594,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days with at least one game won",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -591,7 +605,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days with at least one game lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -602,7 +616,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -613,7 +627,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks with at least one game won",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -624,7 +638,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks with at least one game lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -636,7 +650,7 @@ public class ImageExporter
                 5,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -647,7 +661,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days with at least one game won",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -658,7 +672,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days with at least one game lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -669,7 +683,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -680,7 +694,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks with at least one game won",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -691,7 +705,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks with at least one game lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -703,7 +717,7 @@ public class ImageExporter
                 5,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "days without any games played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -714,7 +728,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 ANY_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "weeks without any games played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -726,7 +740,7 @@ public class ImageExporter
                 5,
                 ANY_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days without any games played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -737,7 +751,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days without any games won",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -748,7 +762,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days without any games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -759,7 +773,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks without any games played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -770,7 +784,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks without any games won",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -781,7 +795,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks without any games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -793,7 +807,7 @@ public class ImageExporter
                 5,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days without any games played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -804,7 +818,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days without any games won",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -815,7 +829,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days without any games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -826,7 +840,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks without any games played",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -837,7 +851,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks without any games won",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -848,7 +862,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks without any games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -860,7 +874,7 @@ public class ImageExporter
                 5,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days with games won greater than games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -871,7 +885,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days with games won equal to games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -882,7 +896,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by days with games won less than games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -893,7 +907,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks with games won greater than games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -904,7 +918,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks with games won equal to games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -915,7 +929,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by weeks with games won less than games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -927,7 +941,7 @@ public class ImageExporter
                 5,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days with games won greater than games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -938,7 +952,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days with games won equal to games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -949,7 +963,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by days with games won less than games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -960,7 +974,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks with games won greater than games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -971,7 +985,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks with games won equal to games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -982,7 +996,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by weeks with games won less than games lost",
                 Statistic.INTERVALS,
                 Intervals.ANY,
@@ -994,7 +1008,7 @@ public class ImageExporter
                 5,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "most consecutive days with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1006,7 +1020,7 @@ public class ImageExporter
                 1,
                 ANY_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1017,7 +1031,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days with at least one game won",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1028,7 +1042,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days with at least one game lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1039,7 +1053,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1050,7 +1064,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks with at least one game won",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1061,7 +1075,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks with at least one game lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1073,7 +1087,7 @@ public class ImageExporter
                 5,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1084,7 +1098,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days with at least one game won",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1095,7 +1109,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days with at least one game lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1106,7 +1120,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks with at least one game played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1117,7 +1131,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks with at least one game won",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1128,7 +1142,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks with at least one game lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1140,7 +1154,7 @@ public class ImageExporter
                 5,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "most consecutive days without any games played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1152,7 +1166,7 @@ public class ImageExporter
                 1,
                 ANY_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days without any games played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1163,7 +1177,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days without any games won",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1174,7 +1188,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days without any games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1185,7 +1199,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks without any games played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1196,7 +1210,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks without any games won",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1207,7 +1221,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks without any games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1219,7 +1233,7 @@ public class ImageExporter
                 5,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days without any games played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1230,7 +1244,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days without any games won",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1241,7 +1255,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days without any games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1252,7 +1266,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks without any games played",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1263,7 +1277,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_UNORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks without any games won",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1274,7 +1288,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks without any games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1286,7 +1300,7 @@ public class ImageExporter
                 5,
                 PLAYER_PLAYER_ORDERED);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days with games won greater than games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1297,7 +1311,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days with games won equal to games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1308,7 +1322,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive days with games won less than games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1319,7 +1333,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks with games won greater than games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1330,7 +1344,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks with games won equal to games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1341,7 +1355,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_ANY);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "players ordered by most consecutive weeks with games won less than games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1353,7 +1367,7 @@ public class ImageExporter
                 5,
                 PLAYER_ANY);
 
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days with games won greater than games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1364,7 +1378,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days with games won equal to games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1375,7 +1389,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive days with games won less than games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1386,7 +1400,7 @@ public class ImageExporter
                 latestDate,
                 1,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks with games won greater than games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1397,7 +1411,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks with games won equal to games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1408,7 +1422,7 @@ public class ImageExporter
                 latestDate,
                 5,
                 PLAYER_PLAYER_ORDERED);
-        drawStatistics(g2d,
+        exportStatistics(writer,
                 "pairs of players ordered by most consecutive weeks with games won less than games lost",
                 Statistic.INTERVALS,
                 Intervals.MOST_CONSECUTIVE,
@@ -1421,7 +1435,7 @@ public class ImageExporter
                 PLAYER_PLAYER_ORDERED);
 
         int gamesPlayed = 100;
-        while (drawStatistics(g2d,
+        while (exportStatistics(writer,
                 "date of " + gamesPlayed + " games played",
                 Statistic.DATE_OF_NUMBER_OF_GAMES,
                 null,
@@ -1437,7 +1451,7 @@ public class ImageExporter
         }
 
         gamesPlayed = 100;
-        while (drawStatistics(g2d,
+        while (exportStatistics(writer,
                 "players ordered by date of " + gamesPlayed + " games played",
                 Statistic.DATE_OF_NUMBER_OF_GAMES,
                 null,
@@ -1453,7 +1467,7 @@ public class ImageExporter
         }
 
         int gamesWon = 100;
-        while (drawStatistics(g2d,
+        while (exportStatistics(writer,
                 "players ordered by date of " + gamesWon + " games won",
                 Statistic.DATE_OF_NUMBER_OF_GAMES,
                 null,
@@ -1469,7 +1483,7 @@ public class ImageExporter
         }
 
         int gamesLost = 100;
-        while (drawStatistics(g2d,
+        while (exportStatistics(writer,
                 "players ordered by date of " + gamesLost + " games lost",
                 Statistic.DATE_OF_NUMBER_OF_GAMES,
                 null,
@@ -1485,7 +1499,7 @@ public class ImageExporter
         }
 
         gamesPlayed = 100;
-        while (drawStatistics(g2d,
+        while (exportStatistics(writer,
                 "pairs of players ordered by date of " + gamesPlayed + " games played",
                 Statistic.DATE_OF_NUMBER_OF_GAMES,
                 null,
@@ -1501,7 +1515,7 @@ public class ImageExporter
         }
 
         gamesWon = 100;
-        while (drawStatistics(g2d,
+        while (exportStatistics(writer,
                 "pairs of players ordered by date of " + gamesWon + " games won",
                 Statistic.DATE_OF_NUMBER_OF_GAMES,
                 null,
@@ -1517,7 +1531,7 @@ public class ImageExporter
         }
 
         gamesLost = 100;
-        while (drawStatistics(g2d,
+        while (exportStatistics(writer,
                 "pairs of players ordered by date of " + gamesLost + " games lost",
                 Statistic.DATE_OF_NUMBER_OF_GAMES,
                 null,
@@ -1532,14 +1546,7 @@ public class ImageExporter
             gamesLost += 100;
         }
 
-        try
-        {
-            ImageIO.write(image, "png", new File("ping_pong_statistics.png"));
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        writer.close();
 
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -1547,11 +1554,17 @@ public class ImageExporter
         jFrame.dispatchEvent(new WindowEvent(jFrame, WindowEvent.WINDOW_CLOSING));
     }
 
-    public <T> boolean drawStatistics(Graphics2D g2d, String description, Statistic statistic, Intervals intervals,
-                                      IntervalGames intervalGames, Integer numberOfGames, GameOutcome outcome,
-                                      Date start, Date end, Integer intervalDays, PlayerPair[] playerPairs)
+    public boolean exportStatistics(PrintWriter writer, String description, Statistic statistic, Intervals intervals,
+                                    IntervalGames intervalGames, Integer numberOfGames, GameOutcome outcome,
+                                    Date start, Date end, Integer intervalDays, PlayerPair[] playerPairs)
     {
         System.out.println(description);
+
+        BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = image.createGraphics();
+        g2d.setColor(new Color(238, 238, 238));
+        g2d.fillRect(0, 0, imageWidth, imageHeight);
+        g2d.setColor(Color.BLACK);
 
         String statisticsText = null;
         if (playerPairs == ANY_ANY)
@@ -1611,6 +1624,17 @@ public class ImageExporter
         jFrame.getContentPane().getComponent(0).paint(g2d);
         jFrame.setVisible(false);
         g2d.translate(-(margin + graphLeftOffset + graphWidth) * 2, margin + graphHeight + graphBottomOffset + margin);
+
+        statisticsIndex++;
+        try
+        {
+            ImageIO.write(image, "png", new File("web_page/graphs_" + statisticsIndex + ".png"));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        writer.write("<img src=\"graphs_" + statisticsIndex + ".png\">\n");
 
         return true;
     }

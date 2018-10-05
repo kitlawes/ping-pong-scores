@@ -13,8 +13,8 @@ public class Main
         ValueParser parser = new ValueParser(values);
         ScoresAnalyzer analyzer = new ScoresAnalyzer(parser);
 
-        ImageExporter exporter = new ImageExporter(parser, analyzer);
-        exporter.exportToImage();
+        WebPageExporter exporter = new WebPageExporter(parser, analyzer);
+        exporter.exportToWebPage();
 
         if (true)
         {
