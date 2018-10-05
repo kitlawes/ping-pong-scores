@@ -63,10 +63,12 @@ public class BarChart
             }
         }
         if ((statistic == Statistic.NUMBER_OF_GAMES
-                || statistic == Statistic.INTERVALS
-                || statistic == Statistic.MOST_GAMES)
+                || statistic == Statistic.MOST_GAMES
+                || statistic == Statistic.AVERAGE_NUMBER_OF_GAMES
+                || statistic == Statistic.INTERVALS)
                 && highest - lowest > 5)
         {
+            lowest = Math.floor(lowest / 10) * 10;
             highest = Math.ceil(highest / 10) * 10;
         }
         if (statistic == Statistic.PERCENTAGE_OF_GAMES
@@ -157,16 +159,19 @@ public class BarChart
                 }
 
                 int maxDecimalPlaces = 0;
-                for (int i = 0; i < 10; i++)
+                if (!(orderedPlayerPairs.get(0).getValue() instanceof Date))
                 {
-                    long value = Math.round(((finalHighest - finalLowest) / 10 * i + finalLowest) % 1 * Math.pow(10, 10));
-                    String string = String.valueOf(value);
-                    for (int j = string.length() - 1; j >= 0; j--)
+                    for (int i = 0; i < 10; i++)
                     {
-                        if (string.charAt(j) != '0')
+                        long value = Math.round(((finalHighest - finalLowest) / 10 * i + finalLowest) % 1 * Math.pow(10, 10));
+                        String string = String.valueOf(value);
+                        for (int j = string.length() - 1; j >= 0; j--)
                         {
-                            maxDecimalPlaces = Math.max(maxDecimalPlaces, j + 1);
-                            break;
+                            if (string.charAt(j) != '0')
+                            {
+                                maxDecimalPlaces = Math.max(maxDecimalPlaces, j + 1);
+                                break;
+                            }
                         }
                     }
                 }

@@ -225,6 +225,30 @@ public class ScoresAnalyzer
         return null;
     }
 
+    public Object statistic(Statistic statistic, Intervals intervals, IntervalGames intervalGames,
+                            Integer numberOfGames, GameOutcome outcome, Date start, Date end, Integer intervalDays,
+                            Player player, Player opponent)
+    {
+        switch (statistic)
+        {
+            case NUMBER_OF_GAMES:
+                return numberOfGames(outcome, start, end, player, opponent);
+            case PERCENTAGE_OF_GAMES:
+                return percentageOfGames(outcome, start, end, player, opponent);
+            case AVERAGE_PERCENTAGE_OF_GAMES:
+                return averagePercentageOfGames(outcome, start, end, player);
+            case AVERAGE_NUMBER_OF_GAMES:
+                return averageNumberOfGames(outcome, start, end, intervalDays, player, opponent);
+            case MOST_GAMES:
+                return mostGames(outcome, start, end, intervalDays, player, opponent);
+            case INTERVALS:
+                return numberOfIntervals(intervals, intervalGames, outcome, start, end, intervalDays, player, opponent);
+            case DATE_OF_NUMBER_OF_GAMES:
+                return dateOfNumberOfGames(numberOfGames, outcome, start, end, player, opponent);
+        }
+        return null;
+    }
+
     public List<Map.Entry<Player, Object>> orderedPlayers(Statistic statistic, Intervals intervals,
                                                           IntervalGames intervalGames, Integer numberOfGames,
                                                           GameOutcome outcome, Date start, Date end,
@@ -284,33 +308,10 @@ public class ScoresAnalyzer
                 player = ((PlayerPair) playerOrPlayerPair).getPlayer();
                 opponent = ((PlayerPair) playerOrPlayerPair).getOpponent();
             }
-            switch (statistic)
+            Object value = statistic(statistic, intervals, intervalGames, numberOfGames, outcome, start, end, intervalDays, player, opponent);
+            if (value != null)
             {
-                case NUMBER_OF_GAMES:
-                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, numberOfGames(outcome, start, end, player, opponent));
-                    break;
-                case PERCENTAGE_OF_GAMES:
-                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, percentageOfGames(outcome, start, end, player, opponent));
-                    break;
-                case AVERAGE_PERCENTAGE_OF_GAMES:
-                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, averagePercentageOfGames(outcome, start, end, player));
-                    break;
-                case AVERAGE_NUMBER_OF_GAMES:
-                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, averageNumberOfGames(outcome, start, end, intervalDays, player, opponent));
-                    break;
-                case MOST_GAMES:
-                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, mostGames(outcome, start, end, intervalDays, player, opponent));
-                    break;
-                case INTERVALS:
-                    orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, numberOfIntervals(intervals, intervalGames, outcome, start, end, intervalDays, player, opponent));
-                    break;
-                case DATE_OF_NUMBER_OF_GAMES:
-                    Date date = dateOfNumberOfGames(numberOfGames, outcome, start, end, player, opponent);
-                    if (date != null)
-                    {
-                        orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, date);
-                    }
-                    break;
+                orderedPlayersOrPlayerPairs.put(playerOrPlayerPair, value);
             }
         }
 

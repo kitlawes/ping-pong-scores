@@ -115,10 +115,12 @@ public class LineGraph
             }
         }
         if ((statistic == Statistic.NUMBER_OF_GAMES
-                || statistic == Statistic.INTERVALS
-                || statistic == Statistic.MOST_GAMES)
+                || statistic == Statistic.MOST_GAMES
+                || statistic == Statistic.AVERAGE_NUMBER_OF_GAMES
+                || statistic == Statistic.INTERVALS)
                 && highest - lowest > 5)
         {
+            lowest = Math.floor(lowest / 10) * 10;
             highest = Math.ceil(highest / 10) * 10;
         }
 
